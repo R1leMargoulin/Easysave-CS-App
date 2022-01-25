@@ -6,9 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Model\" />
-    <Folder Include="ViewModel\" />
-    <Folder Include="Views\" />
+    <Compile Remove="ViewModel\**" />
+    <Compile Remove="Views\**" />
+    <EmbeddedResource Remove="ViewModel\**" />
+    <EmbeddedResource Remove="Views\**" />
+    <None Remove="ViewModel\**" />
+    <None Remove="Views\**" />
   </ItemGroup>
 
 </Project>
