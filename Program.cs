@@ -6,7 +6,11 @@ namespace EasySave
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Model model = new Model();
+            Controller control = new Controller(model);
+            View view = new View(model, control);
+
+            view.Start();
         }
     }
 }
