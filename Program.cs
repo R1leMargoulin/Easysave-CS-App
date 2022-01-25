@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EasySave.Model;
+using System;
 
 namespace EasySave
 {
@@ -6,7 +7,9 @@ namespace EasySave
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Backup backup = new Backup();
+
+            backup.DirectoryCopy( @"C:\Users\vgoudeau\Documents\Documentation", @"C:\Users\vgoudeau\Documents\tt\Documentation");
         }
     }
 }
