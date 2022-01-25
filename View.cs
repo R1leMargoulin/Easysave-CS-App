@@ -19,10 +19,9 @@ namespace EasySave
         }
         public void affichage()
         {
-            int a = 0;
             switch (model.GetMenuView())
             {
-                case 0:
+                case 0: // Affichage accueil
                     if(model.GetLanguage() == "fr")
                     {
                         Console.WriteLine
@@ -51,8 +50,87 @@ namespace EasySave
                         "7 - close the app\n"
                         );
                     }
+                    int choice = Convert.ToInt32(Console.ReadLine());
+                    if (choice == 1 || choice == 2 || choice == 3 || choice == 4 || choice == 5 || choice == 6 || choice == 7)
+                    {
+                        ChangeViewMenuInput(choice);
+                    }
+
                     break;
+
+                case 1: //Affichage mode 1
+                        if (model.GetLanguage() == "fr")
+                        {
+                            Console.WriteLine("Entrez un nom pour la sauvegarde");
+                        }
+                        if (model.GetLanguage() == "en")
+                        {
+                            Console.WriteLine("Type a name for your save");
+                        }
+                        String nomSave = Console.ReadLine();
+                        if (model.GetLanguage() == "fr")
+                        {
+                            Console.WriteLine("Entrez le chemin de la ressource a sauvegarder");
+                        }
+                        if (model.GetLanguage() == "en")
+                        {
+                            Console.WriteLine("Type the path of the element you want to save");
+                        }
+                        String sourcePath = Console.ReadLine();
+
+                        if (model.GetLanguage() == "fr")
+                        {
+                            Console.WriteLine("Entrez le chemin  de l'emplacement de la sauvegarde");
+                        }
+                        if (model.GetLanguage() == "en")
+                        {
+                            Console.WriteLine("Type the path to save in");
+                        }
+                    String savePath = Console.ReadLine();
+                        if (model.GetLanguage() == "fr")
+                        {
+                            Console.WriteLine
+                                (
+                                    "Entrez un chiffre ppour choisir type d'enregistrement:\n" +
+                                    "1 - complet (on resauvegarde tout l'élément)" +
+                                    "2 - différentiel (sauvegarde seulement les changements lorsqu'il y en a)"
+                                );
+                        }
+                        if (model.GetLanguage() == "en")
+                        {
+                            Console.WriteLine
+                                (
+                                    "Type the number to choose a type of saving:\n" +
+                                    "1 - complete (saving of all of the element)" +
+                                    "2 - diffential (saving of changes only if they exists)"
+                                );
+                        }
+                    int choixType = Convert.ToInt32(Console.ReadLine());
+                        if(choixType == 1)
+                        {
+                            int b = 2; //remplacer par le change du SaveWorkModel
+                        }
+                        if (choixType == 2)
+                        {
+                            int b = 2; //remplacer par le change du SaveWorkModel
+                        }
+                        ChangeViewMenuInput(0);
+                        affichage();
+                    
+                    if (model.GetLanguage() == "en")
+                    {
+                        Console.WriteLine("");
+                    }
+                        break;
+                    
             }
+        }
+
+        public void ChangeViewMenuInput(int a)
+        {
+            Console.Clear();
+            model.SetMenuView(a);
+            affichage();
         }
     }
 }

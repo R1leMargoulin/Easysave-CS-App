@@ -19,6 +19,10 @@ namespace EasySave
         {
             return menuView;
         }
+        public void SetMenuView(int a)
+        {
+            menuView = a;
+        }
         public String GetLanguage()
         {
             return language;
