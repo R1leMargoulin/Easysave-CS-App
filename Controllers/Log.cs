@@ -1,5 +1,5 @@
-﻿using System;
-using System.IO;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
@@ -17,6 +17,8 @@ namespace EasySave.Controllers
         private long Sizelog { get; set; }
         private double Durationlog { get; set; }
         private DateTime DateTimelog { get; set; }
+
+        public string logformat;
 
 
         private class LogDailyData
@@ -63,6 +65,39 @@ namespace EasySave.Controllers
                                 }
                             }
                         }
+                }
+                switch (logformat)
+                {
+                    case "json":
+                        {
+                            if(!File.Exists($"{Pathlog}.json"))
+                            {
+                                File.Create($"{Pathlog}.json");
+                            }
+
+                            string LOGJSONData = File.ReadAllText($"{Pathlog}.json");
+                            
+                            List<LogDailyData> datainjson = JsonConvert.DeserializeObject<List<LogDailyData>>(LOGJSONData) ?? new List<LogDailyData>();
+
+                            datainjson.Add(new LogDailyData());
+
+
+                        }       
+                        break;
+
+                    case "xml":
+                        {
+                            if (!File.Exists($"{Pathlog}.xml"))
+                            {
+                                File.Create($"{Pathlog}.xml");
+                            }
+                        }
+                        break ;
+
+
+                        
+
+                        
                 }
             }
             catch (Exception exception)
