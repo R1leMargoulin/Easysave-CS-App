@@ -14,15 +14,15 @@ namespace EasySave.Model
         public BackupType BackupType { get; set; }
 
 
-        public void DirectoryCopy(string source, string targetDirectory)
+        public void DirectoryCopy()
         {
-            var sourceDirectory = new DirectoryInfo(source);
+            var sourceDirectory = new DirectoryInfo(DirectorySource);
 
           foreach (FileInfo file in sourceDirectory.GetFiles())
             {
                 
-                Directory.CreateDirectory(targetDirectory);   
-                var path = Path.Combine(targetDirectory, file.Name);
+                Directory.CreateDirectory(DirectoryTarget);   
+                var path = Path.Combine(DirectoryTarget, file.Name);
                 
                 file.CopyTo(path, true);
             }

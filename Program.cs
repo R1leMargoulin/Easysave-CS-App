@@ -9,10 +9,7 @@ namespace EasySave
         {
             Backup backup = new Backup();
 
-            backup.DirectoryCopy(@"C:\JSON", @"C:\JSON\Test");
-
-
-
+            backup.DirectoryCopy( @"C:\Users\vgoudeau\Documents\Documentation", @"C:\Users\vgoudeau\Documents\tt\Documentation");
         }
     }
 }
