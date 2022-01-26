@@ -14,5 +14,13 @@ namespace EasySave.Controllers
         {
             BackupList.Add(backup);
         }
+
+        public void ExecuteBackup()
+        {
+
+            Backup backup = BackupList[BackupList.Count - 1];
+            backup.DirectoryCopy();
+
+        }
     }
 }
