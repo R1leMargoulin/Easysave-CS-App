@@ -3,13 +3,15 @@ using System.IO;
 using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
+using System.Xml.XPath;
+using System.Xml;
 
 namespace EasySave.Controllers
 {
     public class LogDaily
     {
         private string Pathlog { get; set; }
-        private string Namelog { get; set; }
+        private string Namelog { get; set; }    
         private string Sourcelog { get; set; }
         private string Targetlog { get; set; }
         private long Sizelog { get; set; }
@@ -42,6 +44,26 @@ namespace EasySave.Controllers
             {
                 Directory.CreateDirectory("./logs");
 
+                switch (xxxxxxxxxxxx.LogFilesFormat)
+                {
+                    case "xml";
+                        {
+                            if (!File.Exists($"{Pathlog}.xml"))
+                            {
+                                XmlWriterSettings xmlSettings = new XmlWriterSettings
+                                {
+                                    Indent = true,
+                                };
+
+                                using XmlWriter xml = XmlWriter.Create($"{Pathlog}.xml", xmlSettings);
+                                {
+                                    xml.WriteStartElement($"Logs_{DateTime.Now:dd-MM-yyyy}");
+                                    xml.WriteStartElement(Namelog);
+                                    xml.WriteElementString("Sourcelog", logfilesource)
+                                }
+                            }
+                        }
+                }
             }
             catch (Exception exception)
             {
