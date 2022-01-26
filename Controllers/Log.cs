@@ -2,9 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Newtonsoft.Json;
 using System.Xml.XPath;
 using System.Xml;
+using System.IO;
 
 namespace EasySave.Controllers
 {
@@ -46,9 +46,9 @@ namespace EasySave.Controllers
             {
                 Directory.CreateDirectory("./logs");
 
-                switch (xxxxxxxxxxxx.LogFilesFormat)
+                switch (logformat)
                 {
-                    case "xml";
+                    case "xml":
                         {
                             if (!File.Exists($"{Pathlog}.xml"))
                             {
@@ -60,11 +60,42 @@ namespace EasySave.Controllers
                                 using XmlWriter xml = XmlWriter.Create($"{Pathlog}.xml", xmlSettings);
                                 {
                                     xml.WriteStartElement($"Logs_{DateTime.Now:dd-MM-yyyy}");
+
                                     xml.WriteStartElement(Namelog);
-                                    xml.WriteElementString("Sourcelog", logfilesource)
+                                    xml.WriteElementString("SourceFile", Sourcelog);
+                                    xml.WriteElementString("DestinationFile", Targetlog);
+                                    xml.WriteElementString("DestinationPath", Targetlog.Substring(0, Targetlog.LastIndexOf("\\")));
+                                    xml.WriteElementString("Size",Sizelog.ToString());
+                                    xml.WriteElementString("TransferTime", Durationlog.ToString());
+                                    xml.WriteElementString("Time",DateTimelog.ToString());
+                                    xml.WriteEndElement();  
                                 }
                             }
+                            else
+                            {
+                                XmlDocument xmlDocument= new XmlDocument();
+                                xmlDocument.Load($"{Pathlog}.xml");
+
+                                XPathNavigator navigator = xmlDocument.CreateNavigator();
+                                navigator.MoveToChild($"Logs_{DateTime.Now:dd-MM-yyyy}","");
+
+                                using (XmlWriter xml = navigator.AppendChild())
+                                {
+                                    xml.WriteStartElement(Namelog);
+                                    xml.WriteElementString("SourceFile", Sourcelog);
+                                    xml.WriteElementString("DestinationFile", Targetlog);
+                                    xml.WriteElementString("DestinationPath", Targetlog.Substring(0, Targetlog.LastIndexOf("\\")));
+                                    xml.WriteElementString("Size", Sizelog.ToString());
+                                    xml.WriteElementString("TransferTime", Durationlog.ToString());
+                                    xml.WriteElementString("Time", DateTimelog.ToString());
+                                    xml.WriteEndElement();
+
+                                }
+
+                                xmlDocument.Save($"{Pathlog}.xml");
+                            }
                         }
+                        break;
                 }
                 switch (logformat)
                 {
