@@ -1,0 +1,92 @@
+﻿using System;
+using System.IO;
+using System.Collections.Generic;
+using System.Text;
+using Newtonsoft.Json;
+
+namespace EasySave.Controllers
+{
+    public class LogDaily
+    {
+        private string Pathlog { get; set; }
+        private string Namelog { get; set; }
+        private string Sourcelog { get; set; }
+        private string Targetlog { get; set; }
+        private long Sizelog { get; set; }
+        private double Durationlog { get; set; }
+        private DateTime DateTimelog { get; set; }
+
+
+        private class LogDailyData
+        {
+            public string Name;
+            public string FileSource;
+            public string FileTarget;
+            public string destPath;
+            public long Filesize;
+            public double FileTransferTime;
+            public string time;
+        }
+
+        public LogDaily(string logname, string logfilesource, string logfiletarget, long logsize, double logduration)
+        {
+            Namelog = logname;
+            Sourcelog = logfilesource;
+            Targetlog = logfiletarget;
+            Sizelog = logsize;
+            Durationlog = logduration;
+            DateTimelog = DateTime.Now;
+            Pathlog = $"./LogPath/Logs_{DateTime.Now:dd-MM-yyyy}";
+            
+            try
+            {
+                Directory.CreateDirectory("./logs");
+
+            }
+            catch (Exception exception)
+            {
+                //Console.WriteLine(exception);
+            }
+        }
+
+
+
+
+    }
+
+    public class LogState
+    {
+        private string Pathlog { get; set; }
+        private string Namelog { get; set; }
+        private string Sourcelog { get; set; }
+        private string Targetlog { get; set; }
+        private long Sizelog { get; set; }
+        private double Durationlog { get; set; }
+        private DateTime DateTimelog { get; set; }
+
+        private class LogStateData
+        {
+            public string Name;
+            public string SourceFilePath;
+            public string TargetFilePath;
+            public string State;
+            public int TotalFilesToCopy;
+            public long TotalFilesSize;
+            public int NbFilesLeftToDo;
+            public long FilesSizeLeftToDo;
+            public int Progression;
+        }
+
+        public LogState(string logname, string logfilesource, string logfiletarget, long logsize, double logduration)
+        {
+            Namelog = logname;
+            Sourcelog = logfilesource;
+            Targetlog = logfiletarget;
+            Sizelog = logsize;
+            Durationlog = logduration;
+            DateTimelog = DateTime.Now;
+            Pathlog = $"./LogPath/Logs_{DateTime.Now:dd-MM-yyyy}";
+        }
+
+    }
+}
