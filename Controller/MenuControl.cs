@@ -43,7 +43,9 @@ namespace EasySave.Controller
                               //menu.Clear();
                         menu.Print
                         (
-                        "Veuillez entrer un chiffre correspondant aux propositions: \n \n \n" +
+                        "==========================================================\n" +
+                        "\t Welcome in EasySave \n \n" +
+                        "Veuillez entrer un chiffre correspondant aux propositions: \n \n" +
                         "[1] - créer une sauvegarde\n" +
                         "[2] - éxecuter une sauvegarde\n" +
                         "[3] - Montrer les détails d'une sauvegarde\n" +
@@ -51,7 +53,8 @@ namespace EasySave.Controller
                         "[5] - Modifier une sauvegarde\n" +
                         "[6] - Changer la langue\n" +
                         "[7] - Changer le format des logs\n" +
-                        "[8] - Fermer l'application\n"
+                        "[8] - Fermer l'application\n"+
+                        "\n=========================================================="
                         );
 
 
@@ -241,7 +244,9 @@ namespace EasySave.Controller
                     case "0": // Affichage accueil
                         menu.Print
                         (
-                        "Please, Enter a number corresponding to the menu: \n \n \n" +
+                        "=================================================\n" +
+                        "\t Welcome in EasySave \n \n"+
+                        "Please, Enter a number corresponding to the menu: \n \n" +
                         "[1] - create a save\n" +
                         "[2] - execute a save\n" +
                         "[3] - show a save details\n" +
@@ -249,7 +254,9 @@ namespace EasySave.Controller
                         "[5] - modify a save\n" +
                         "[6] - change language settings\n" +
                         "[7] - change lof format\n" +
-                        "[8] - close the app\n"
+                        "[8] - close the app\n"+
+                        "\n================================================"
+
                         );
 
                         //int choice = Convert.ToInt32(menu.Ask());
@@ -281,8 +288,8 @@ namespace EasySave.Controller
                         menu.Print
                             (
                                 "Type the number to choose a type of saving:\n" +
-                                "1 - complete (saving of all of the element)\n" +
-                                "2 - diffential (saving of changes only if they exists)"
+                                "[1] - complete (saving of all of the element)\n" +
+                                "[2] - diffential (saving of changes only if they exists)"
                             );
                         int choixType = Convert.ToInt32(menu.Ask());
 
@@ -387,7 +394,7 @@ namespace EasySave.Controller
                     case "8":
                         if (model.language == "en")
                         {
-                            menu.Print("Are you sure that you want to exit from the app?\n\n1 - yes\n2 - no\n");
+                            menu.Print("Are you sure that you want to exit from the app?\n\n[1] - yes\n[2] - no\n");
                         }
                         string ExitChoice = menu.Ask();
 
@@ -435,6 +442,20 @@ namespace EasySave.Controller
             menu.Print("Imput error");
             Console.ForegroundColor = ConsoleColor.Gray;
         }
+        public void DisplaySuccessFr()
+        {
+            //Change foreground color
+            Console.ForegroundColor = ConsoleColor.Green;
+            menu.Print("Succès de l'operation");
+            Console.ForegroundColor = ConsoleColor.Gray;
+        }
+        public void DisplaySuccessEN()
+        {
+            //Change foreground color
+            Console.ForegroundColor = ConsoleColor.Green;
+            menu.Print("Operation is a Succes");
+            Console.ForegroundColor = ConsoleColor.Gray;
+        }
 
         public void ChangeViewMenuInput(string a, Erreur inferreur = Erreur.NoErreur)
         {
@@ -449,7 +470,16 @@ namespace EasySave.Controller
             {
                 DisplayErrorEN();   
             }
-                model.SetMenuView(a);
+            if (inferreur == Erreur.SuccesFR)
+            {
+                DisplaySuccessFr();
+            }
+
+            if (inferreur == Erreur.SuccesEN)
+            {
+                DisplaySuccessEN();
+            }
+            model.SetMenuView(a);
                 Affichage();
             
         }

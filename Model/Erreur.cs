@@ -5,6 +5,9 @@ namespace EasySave.Model
     {
         NoErreur,
         InputErrorFR,
-        InputErrorEN
+        InputErrorEN,
+        SuccesFR,
+        SuccesEN
+
     }
 }
