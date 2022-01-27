@@ -9,7 +9,7 @@ namespace EasySave.Controllers
     {
         public List<Backup> BackupList { get; set; }
 
-        public List<Backup> BackupList { get; set; }
+        
 
         public void AddBackup(Backup backup)
         {
