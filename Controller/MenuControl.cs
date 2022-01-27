@@ -59,7 +59,7 @@ namespace EasySave.Controller
 
 
                         //int choice = Convert.ToInt32(menu.Ask());
-                        string choice = menu.Ask();
+                        string choice = menu.Ask("Veuillez entrer un chiffre correspondant aux propositions:");
                         if (choice == "1" || choice == "2" || choice == "3" || choice == "4" || choice == "5" || choice == "6" || choice == "7" || choice == "8")
                         {
                             ChangeViewMenuInput(choice);
@@ -76,13 +76,13 @@ namespace EasySave.Controller
                     case "1": //View of mode 1, creating of a new save
 
                         menu.Print("Entrez un nom pour la sauvegarde"); //stringmenu 1.1
-                        String nomSave = menu.Ask();
+                        String nomSave = menu.Ask("Entrez un nom pour la sauvegarde");
 
                         menu.Print("Entrez le chemin de la ressource a sauvegarder"); //stringmenu 1.2                 
-                        String sourcePath = menu.Ask();
+                        String sourcePath = menu.Ask("Entrez le chemin de la ressource a sauvegarder");
 
                         menu.Print("Entrez le chemin de l'emplacement de la sauvegarde"); //stringmenu 1.3
-                        String savePath = menu.Ask();
+                        String savePath = menu.Ask("Entrez le chemin de l'emplacement de la sauvegarde");
 
                         menu.Print
                             (
@@ -90,7 +90,7 @@ namespace EasySave.Controller
                                 "1 - complet (on resauvegarde tout l'élément)\n" +
                                 "2 - différentiel (sauvegarde seulement les changements lorsqu'il y en a)"
                             ); //stringmenu 1.4
-                        string choixType = menu.Ask();
+                        string choixType = menu.Ask("Entrez un chiffre pour choisir type d'enregistrement:");
 
 
                         if (choixType == "1")
@@ -113,7 +113,7 @@ namespace EasySave.Controller
                         menu.Print("\n_n_n quelle sauvegarde voulez vous executer?"); //Stringmenu 2.2
 
 
-                        int ExecSaveChoice = Convert.ToInt32(menu.Ask());
+                        int ExecSaveChoice = Convert.ToInt32(menu.Ask("quelle sauvegarde voulez vous executer ? "));
 
                         //aremplacer ce vide par l'ajout de l'appel de la méthode du controlleur pour executer la sauvegarde
 
@@ -126,11 +126,11 @@ namespace EasySave.Controller
                         menu.Print("1 - test1 \n2 - test2");//aremplacer par la lecture des saves dans un fichier ou je ne sais quoi
                         menu.Print("\n de quelle sauvegarde voulez vous les informations?"); //stringmenu 3.1
 
-                        int InfoSaveChoice = Convert.ToInt32(menu.Ask());
+                        int InfoSaveChoice = Convert.ToInt32(menu.Ask("quelle sauvegarde voulez vous les informations?"));
 
                         menu.Print("informatiooooooooooooooooooons");//aremplacer par l'ajout de l'appel de la méthode du controlleur pour afficher les infos de la sauvegarde
 
-                        menu.Ask();
+                        menu.Ask("test");
                         ChangeViewMenuInput("0");
                         Affichage();
 
@@ -141,7 +141,7 @@ namespace EasySave.Controller
                         menu.Print("1 - test1 \n2 - test2");//aremplacer par la lecture des saves dans un fichier ou je ne sais quoi
                         menu.Print("\n quelle sauvegarde voulez vous supprimer?"); //stringmenu 4.1
 
-                        int DeleteSaveChoice = Convert.ToInt32(menu.Ask());
+                        int DeleteSaveChoice = Convert.ToInt32(menu.Ask("quelle sauvegarde voulez vous supprimer?"));
 
                         //aremplacer par l'ajout de l'appel de la méthode du controlleur pour afficher les infos de la sauvegarde
 
@@ -155,13 +155,13 @@ namespace EasySave.Controller
                         menu.Print("1 - test1 \n2 - test2");//aremplacer par la lecture des saves dans un fichier ou je ne sais quoi
                         menu.Print("\n quelle sauvegarde voulez vous modifier?"); //stringmenu 5.1
 
-                        int modifySaveChoice = Convert.ToInt32(menu.Ask());
+                        int modifySaveChoice = Convert.ToInt32(menu.Ask("quelle sauvegarde voulez vous modifier"));
 
                         menu.Print("Que voulez vous modifier dans la sauvegarde ?"); //stringmenu 5.2
                         menu.Print("1 - Nom de la sauvegarde \n2 - Chemin de la ressource a sauvegarder\n3 - chemin de l'emplacement de la sauvegarde\n4 - Type de sauvegarde\n"); //stringmenu 5.3
 
 
-                        int whatToModifyChoice = Convert.ToInt32(menu.Ask());
+                        int whatToModifyChoice = Convert.ToInt32(menu.Ask("Que voulez vous modifier dans la sauvegarde ?"));
                         //aremplacer par l'ajout de l'appel de la méthode du controlleur pour modifier la sauvegarde selon ce qu'on va choisir de modifier
 
                         ChangeViewMenuInput("0");
@@ -177,7 +177,7 @@ namespace EasySave.Controller
                             menu.Print(Convert.ToString(languageCounter) + " " + language);
                             languageCounter++;
                         }
-                        int languageChoice = Convert.ToInt32(menu.Ask());
+                        int languageChoice = Convert.ToInt32(menu.Ask("Saisie"));
                         model.SetLanguage(model.GetLanguageList()[languageChoice - 1]);//select of the right language into the list in the model class
                         ChangeViewMenuInput("0");
                         Affichage();
@@ -201,7 +201,7 @@ namespace EasySave.Controller
                     case "8":
                         menu.Print("Etes vous sur de vouloir quitter l'application?\n\n1 - oui\n2 - non\n"); //stringmenu 8.1
 
-                        string ExitChoice = menu.Ask();
+                        string ExitChoice = menu.Ask("Seletion");
 
                         if (ExitChoice == "1")
                         {
@@ -260,7 +260,7 @@ namespace EasySave.Controller
                         );
 
                         //int choice = Convert.ToInt32(menu.Ask());
-                        string choice = menu.Ask();
+                        string choice = menu.Ask("");
                         if (choice == "1" || choice == "2" || choice == "3" || choice == "4" || choice == "5" || choice == "6" || choice == "7" || choice == "8")
                         {
                             ChangeViewMenuInput(choice);
@@ -277,13 +277,13 @@ namespace EasySave.Controller
                     case "1": //View of mode 1, creating of a new save
 
                         menu.Print("Type a name for your save");
-                        String nomSave = menu.Ask();
+                        String nomSave = menu.Ask("");
 
                         menu.Print("Type the path of the element you want to save");
-                        String sourcePath = menu.Ask();
+                        String sourcePath = menu.Ask("");
 
                         menu.Print("Type the path to save in");
-                        String savePath = menu.Ask();
+                        String savePath = menu.Ask("");
 
                         menu.Print
                             (
@@ -291,7 +291,7 @@ namespace EasySave.Controller
                                 "[1] - complete (saving of all of the element)\n" +
                                 "[2] - diffential (saving of changes only if they exists)"
                             );
-                        int choixType = Convert.ToInt32(menu.Ask());
+                        int choixType = Convert.ToInt32(menu.Ask(""));
 
                         if (choixType == 1)
                         {
@@ -310,7 +310,7 @@ namespace EasySave.Controller
                         menu.Print("Display of available saves");
                         menu.Print("1 - test1 \n2 - test2");//aremplacer par la lecture des saves dans un fichier ou je ne sais quoi
                         menu.Print("\n\n\n wich save dou you want to execute?");
-                        int ExecSaveChoice = Convert.ToInt32(menu.Ask());
+                        int ExecSaveChoice = Convert.ToInt32(menu.Ask(""));
 
                         //aremplacer ce vide par l'ajout de l'appel de la méthode du controlleur pour executer la sauvegarde
 
@@ -323,11 +323,11 @@ namespace EasySave.Controller
                         menu.Print("1 - test1 \n2 - test2");//aremplacer par la lecture des saves dans un fichier ou je ne sais quoi
                         menu.Print("\n from wich save would you want informations?");
 
-                        int InfoSaveChoice = Convert.ToInt32(menu.Ask());
+                        int InfoSaveChoice = Convert.ToInt32(menu.Ask(""));
 
                         menu.Print("informatiooooooooooooooooooons");//aremplacer par l'ajout de l'appel de la méthode du controlleur pour afficher les infos de la sauvegarde
 
-                        menu.Ask();
+                        menu.Ask("");
                         ChangeViewMenuInput("0");
                         Affichage();
 
@@ -338,7 +338,7 @@ namespace EasySave.Controller
                         menu.Print("1 - test1 \n2 - test2");//aremplacer par la lecture des saves dans un fichier ou je ne sais quoi
                         menu.Print("\n wich save would you want to delete?");
 
-                        int DeleteSaveChoice = Convert.ToInt32(menu.Ask());
+                        int DeleteSaveChoice = Convert.ToInt32(menu.Ask(""));
 
                         //aremplacer par l'ajout de l'appel de la méthode du controlleur pour afficher les infos de la sauvegarde
 
@@ -351,11 +351,11 @@ namespace EasySave.Controller
                         menu.Print("Display of available saves");
                         menu.Print("1 - test1 \n2 - test2");//aremplacer par la lecture des saves dans un fichier ou je ne sais quoi
                         menu.Print("\n wich save would you want to delete?");
-                        int modifySaveChoice = Convert.ToInt32(menu.Ask());
+                        int modifySaveChoice = Convert.ToInt32(menu.Ask(""));
 
                         menu.Print("What would you want to modify in this save?");
                         menu.Print("1 - Name of the save\n2 - path of the element to save\n3 - path to save in\n4 - Type of the save\n");
-                        int whatToModifyChoice = Convert.ToInt32(menu.Ask());
+                        int whatToModifyChoice = Convert.ToInt32(menu.Ask(""));
                         //aremplacer par l'ajout de l'appel de la méthode du controlleur pour modifier la sauvegarde selon ce qu'on va choisir de modifier
 
                         ChangeViewMenuInput("0");
@@ -371,7 +371,7 @@ namespace EasySave.Controller
                             menu.Print(Convert.ToString(languageCounter) + " " + language);
                             languageCounter++;
                         }
-                        int languageChoice = Convert.ToInt32(menu.Ask());
+                        int languageChoice = Convert.ToInt32(menu.Ask(""));
                         model.SetLanguage(model.GetLanguageList()[languageChoice - 1]);//select of the right language into the list in the model class
                         ChangeViewMenuInput("0");
                         Affichage();
@@ -396,7 +396,7 @@ namespace EasySave.Controller
                         {
                             menu.Print("Are you sure that you want to exit from the app?\n\n[1] - yes\n[2] - no\n");
                         }
-                        string ExitChoice = menu.Ask();
+                        string ExitChoice = menu.Ask("");
 
                         if (ExitChoice == "1")
                         {

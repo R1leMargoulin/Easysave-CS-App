@@ -18,11 +18,18 @@ namespace EasySave.View
         {
             Console.WriteLine(contenu);
         }
-        public String Ask()
+        public String Ask(string contenudemande)
         {
+            Console.Write(contenudemande);
             String ret = Console.ReadLine();
             return ret;
         }
+        public String AskOnly()
+        {
+            String rat = Console.ReadLine();
+            return rat;
+        }
+
 
         public void Clear()
         {
