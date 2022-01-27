@@ -1,4 +1,7 @@
 ﻿using System;
+using EasySave.Model;
+using EasySave.Controller;
+using EasySave.View;
 
 namespace EasySave
 {
@@ -6,7 +9,10 @@ namespace EasySave
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            MenuModel model = new MenuModel();
+            ViewMenu view = new ViewMenu(model);
+            MenuControl control = new MenuControl(model, view);
+            control.Start();
         }
     }
 }
