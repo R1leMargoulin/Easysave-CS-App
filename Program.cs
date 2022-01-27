@@ -11,7 +11,7 @@ namespace EasySave
         {
 
             MenuModel model = new MenuModel();
-            Menu view = new Menu(model);
+            ViewMenu view = new ViewMenu(model);
             MenuControl control = new MenuControl(model, view);
 
             control.Start();

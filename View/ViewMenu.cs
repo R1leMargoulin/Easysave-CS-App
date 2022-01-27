@@ -6,10 +6,10 @@ using EasySave.Controller;
 
 namespace EasySave.View
 {
-    class Menu
+    class ViewMenu
     {
         MenuModel model;
-        public Menu(MenuModel mdl)
+        public ViewMenu(MenuModel mdl)
         {
             model = mdl;
         }

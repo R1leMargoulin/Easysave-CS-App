@@ -6,14 +6,15 @@ namespace EasySave.Model
 {
     public class MenuModel
     {
-        private String language;
-        private List<string> languageList;
+        public string language;
+        public List<string> languageList; 
         private int menuView;
+        
 
         public MenuModel()
         {
-            languageList = new List<string> { "fr", "en"};
-            language = "fr";
+            languageList = new List<string> { Language.fr.ToString(), Language.en.ToString()};
+            language = Convert.ToString(Language.fr);
             menuView = 0;
         }
 
@@ -25,10 +26,11 @@ namespace EasySave.Model
         {
             menuView = a;
         }
-        public String GetLanguage()
-        {
-            return language;
-        }
+        //public String GetLanguage()
+        //{
+        //    return language;
+        //}
+
         public void SetLanguage(string lang)
         {
             language = lang;
@@ -37,7 +39,7 @@ namespace EasySave.Model
 
         public List<String> GetLanguageList()
         {
-            return languageList;
+           return languageList;
         }
     }
 }

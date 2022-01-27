@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace EasySave.Model
 {
-    internal class Language
+    public enum Language
     {
-
+        fr,
+        en
     }
 }

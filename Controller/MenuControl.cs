@@ -9,8 +9,8 @@ namespace EasySave.Controller
     class MenuControl
     {
         private MenuModel model;
-        private Menu menu;
-        public MenuControl(MenuModel mdl, Menu view)
+        private ViewMenu menu;
+        public MenuControl(MenuModel mdl, ViewMenu view)
         {
             menu = view;
             model = mdl;
@@ -23,11 +23,11 @@ namespace EasySave.Controller
 
         public void Affichage()
         {
-            if(model.GetLanguage() == "fr")
+            if(model.language == "fr")
             {
                 AffichageFr();
             }
-            else if (model.GetLanguage() == "en")
+            else if (model.language == "en")
             {
                 AffichageEn();
             }
@@ -54,7 +54,7 @@ namespace EasySave.Controller
 
 
                     int choice = Convert.ToInt32(menu.Ask());
-                    if (choice == 1 || choice == 2 || choice == 3 || choice == 4 || choice == 5 || choice == 6 || choice == 7)
+                    if (choice == 1 || choice == 2 || choice == 3 || choice == 4 || choice == 5 || choice == 6 || choice == 7 || choice == 8)
                     {
                         ChangeViewMenuInput(choice);
                     }
@@ -223,7 +223,7 @@ namespace EasySave.Controller
                         "[8] - close the app\n"
                         );
                     int choice = Convert.ToInt32(menu.Ask());
-                    if (choice == 1 || choice == 2 || choice == 3 || choice == 4 || choice == 5 || choice == 6 || choice == 7)
+                    if (choice == 1 || choice == 2 || choice == 3 || choice == 4 || choice == 5 || choice == 6 || choice == 7 || choice == 8)
                     {
                         ChangeViewMenuInput(choice);
                     }
@@ -348,7 +348,7 @@ namespace EasySave.Controller
                 //    break;
 
                 case 8:
-                    if (model.GetLanguage() == "en")
+                    if (model.language == "en")
                     {
                         menu.Print("Are you sure that you want to exit from the app?\n\n1 - yes\n2 - no\n");
                     }
