@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EasySave
+namespace EasySave.Model
 {
-    class Model
+    public class MenuModel
     {
         private String language;
         private List<string> languageList;
         private int menuView;
 
-        public Model()
+        public MenuModel()
         {
             languageList = new List<string> { "fr", "en"};
             language = "fr";
