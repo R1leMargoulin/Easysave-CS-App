@@ -18,6 +18,16 @@ namespace EasySave.View
         {
             Console.WriteLine(a);
         }
+        public String Ask()
+        {
+            String ret = Console.ReadLine();
+            return ret;
+        }
+
+        public void Clear()
+        {
+            Console.Clear();
+        }
         
     }
 }
