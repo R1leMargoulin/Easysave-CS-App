@@ -42,18 +42,19 @@ namespace EasySave.Controller
                         menu.Print
                         (
                         "Veuillez entrer un chiffre correspondant aux propositions: \n \n \n" +
-                        "1 - créer une sauvegarde\n" +
-                        "2 - éxecuter une sauvegarde\n" +
-                        "3 - Montrer les détails d'une sauvegarde\n" +
-                        "4 - Supprimer une sauvegarde\n" +
-                        "5 - Modifier une sauvegarde\n" +
-                        "6 - Changer la langue\n" +
-                        "7 - Fermer l'application\n"
+                        "[1] - créer une sauvegarde\n" +
+                        "[2] - éxecuter une sauvegarde\n" +
+                        "[3] - Montrer les détails d'une sauvegarde\n" +
+                        "[4] - Supprimer une sauvegarde\n" +
+                        "[5] - Modifier une sauvegarde\n" +
+                        "[6] - Changer la langue\n" +
+                        "[7] - Changer le format des logs\n" +
+                        "[8] - Fermer l'application\n"
                         );
 
 
                     int choice = Convert.ToInt32(Console.ReadLine());
-                    if (choice == 1 || choice == 2 || choice == 3 || choice == 4 || choice == 5 || choice == 6 || choice == 7)
+                    if (choice == 1 || choice == 2 || choice == 3 || choice == 4 || choice == 5 || choice == 6 || choice == 7 || choice == 8)
                     {
                         ChangeViewMenuInput(choice);
                     }
@@ -169,8 +170,24 @@ namespace EasySave.Controller
                     ChangeViewMenuInput(0);
                     Affichage();
                     break;
-                case 7:
-                    menu.Print("Etes vous sur de vouloir quitter l'application?\n\n1 - oui\n2 - non\n"); //stringmenu 7.1
+
+                //case 7:
+                //    menu.Print("Quel format de log voulez vous selectionner?");//stringmenu 7.1
+                //    int languageCounter = 1;
+                //    foreach (String language in model.GetLanguageList())
+                //    {
+                //        menu.Print(Convert.ToString(languageCounter) + " " + language);
+                //        languageCounter++;
+                //    }
+                //    int languageChoice = Convert.ToInt32(Console.ReadLine());
+                //    model.SetLanguage(model.GetLanguageList()[languageChoice - 1]);//select of the right language into the list in the model class
+                //    ChangeViewMenuInput(0);
+                //    Affichage();
+                //    break;
+
+
+                case 8:
+                    menu.Print("Etes vous sur de vouloir quitter l'application?\n\n1 - oui\n2 - non\n"); //stringmenu 8.1
 
                     int ExitChoice = Convert.ToInt32(Console.ReadLine());
 
@@ -196,16 +213,17 @@ namespace EasySave.Controller
                         menu.Print
                         (
                         "Please, Enter a number corresponding to the menu: \n \n \n" +
-                        "1 - create a save\n" +
-                        "2 - execute a save\n" +
-                        "3 - show a save details\n" +
-                        "4 - delete a save\n" +
-                        "5 - modify a save\n" +
-                        "6 - change language settings\n" +
-                        "7 - close the app\n"
+                        "[1] - create a save\n" +
+                        "[2] - execute a save\n" +
+                        "[3] - show a save details\n" +
+                        "[4] - delete a save\n" +
+                        "[5] - modify a save\n" +
+                        "[6] - change language settings\n" +
+                        "[7] - change lof format\n" +
+                        "[8] - close the app\n"
                         );
                     int choice = Convert.ToInt32(Console.ReadLine());
-                    if (choice == 1 || choice == 2 || choice == 3 || choice == 4 || choice == 5 || choice == 6 || choice == 7)
+                    if (choice == 1 || choice == 2 || choice == 3 || choice == 4 || choice == 5 || choice == 6 || choice == 7 || choice == 8)
                     {
                         ChangeViewMenuInput(choice);
                     }
@@ -314,7 +332,22 @@ namespace EasySave.Controller
                     ChangeViewMenuInput(0);
                     Affichage();
                     break;
-                case 7:
+
+                //case 7:
+                //    menu.Print("wich language would you want to display?");
+                //    int languageCounter = 1;
+                //    foreach (String language in model.GetLanguageList()) //foreach languages available, we will display.
+                //    {
+                //        menu.Print(Convert.ToString(languageCounter) + " " + language);
+                //        languageCounter++;
+                //    }
+                //    int languageChoice = Convert.ToInt32(Console.ReadLine());
+                //    model.SetLanguage(model.GetLanguageList()[languageChoice - 1]);//select of the right language into the list in the model class
+                //    ChangeViewMenuInput(0);
+                //    Affichage();
+                //    break;
+
+                case 8:
                     if (model.GetLanguage() == "en")
                     {
                         menu.Print("Are you sure that you want to exit from the app?\n\n1 - yes\n2 - no\n");
