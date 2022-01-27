@@ -19,7 +19,7 @@ namespace EasySave.Controllers
         {
 
             Backup backup = BackupList[BackupList.Count - 1];
-            backup.DirectoryCopy();
+           // backup.DirectoryCopy();
 
         }
     }

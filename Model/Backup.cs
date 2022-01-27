@@ -7,24 +7,26 @@ namespace EasySave.Model
 {
     public class Backup
     {
-
+        
         public string Name { get; set; }
         public string DirectorySource { get; set; } 
         public string DirectoryTarget { get; set; } 
         public BackupType BackupType { get; set; }
 
 
-        public void DirectoryCopy()
+        public void DirectoryCopy(string source, string target)
         {
-            var sourceDirectory = new DirectoryInfo(DirectorySource);
+          
+            var sourceDirectory = new DirectoryInfo(source);
 
           foreach (FileInfo file in sourceDirectory.GetFiles())
             {
                 
-                Directory.CreateDirectory(DirectoryTarget);   
-                var path = Path.Combine(DirectoryTarget, file.Name);
+                Directory.CreateDirectory(target);   
+                var path = Path.Combine(target, file.Name);
                 
                 file.CopyTo(path, true);
+                new LogDaily(Name, file.FullName, path, 4, 5);
             }
         }
 

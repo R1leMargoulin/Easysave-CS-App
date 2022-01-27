@@ -6,12 +6,12 @@ using System.Xml.XPath;
 using System.Xml;
 using System.IO;
 
-namespace EasySave.Controllers
+namespace EasySave.Model
 {
     public class LogDaily
     {
         private string Pathlog { get; set; }
-        private string Namelog { get; set; }    
+        private string Namelog { get; set; }
         private string Sourcelog { get; set; }
         private string Targetlog { get; set; }
         private long Sizelog { get; set; }
@@ -21,7 +21,7 @@ namespace EasySave.Controllers
         public string logformat;
 
 
-        private class LogDailyData
+        public class LogDailyData
         {
             public string Name;
             public string FileSource;
@@ -41,106 +41,55 @@ namespace EasySave.Controllers
             Durationlog = logduration;
             DateTimelog = DateTime.Now;
             Pathlog = $"./LogPath/Logs_{DateTime.Now:dd-MM-yyyy}";
-            
-            try
+
+            Directory.CreateDirectory("./LogPath");
+
+
+            string path = $"{Pathlog}.json";
+            if (!File.Exists($"{Pathlog}.json"))
             {
-                Directory.CreateDirectory("./logs");
-
-                switch (logformat)
-                {
-                    case "xml":
-                        {
-                            if (!File.Exists($"{Pathlog}.xml"))
-                            {
-                                XmlWriterSettings xmlSettings = new XmlWriterSettings
-                                {
-                                    Indent = true,
-                                };
-
-                                using XmlWriter xml = XmlWriter.Create($"{Pathlog}.xml", xmlSettings);
-                                {
-                                    xml.WriteStartElement($"Logs_{DateTime.Now:dd-MM-yyyy}");
-
-                                    xml.WriteStartElement(Namelog);
-                                    xml.WriteElementString("SourceFile", Sourcelog);
-                                    xml.WriteElementString("DestinationFile", Targetlog);
-                                    xml.WriteElementString("DestinationPath", Targetlog.Substring(0, Targetlog.LastIndexOf("\\")));
-                                    xml.WriteElementString("Size",Sizelog.ToString());
-                                    xml.WriteElementString("TransferTime", Durationlog.ToString());
-                                    xml.WriteElementString("Time",DateTimelog.ToString());
-                                    xml.WriteEndElement();  
-                                }
-                            }
-                            else
-                            {
-                                XmlDocument xmlDocument= new XmlDocument();
-                                xmlDocument.Load($"{Pathlog}.xml");
-
-                                XPathNavigator navigator = xmlDocument.CreateNavigator();
-                                navigator.MoveToChild($"Logs_{DateTime.Now:dd-MM-yyyy}","");
-
-                                using (XmlWriter xml = navigator.AppendChild())
-                                {
-                                    xml.WriteStartElement(Namelog);
-                                    xml.WriteElementString("SourceFile", Sourcelog);
-                                    xml.WriteElementString("DestinationFile", Targetlog);
-                                    xml.WriteElementString("DestinationPath", Targetlog.Substring(0, Targetlog.LastIndexOf("\\")));
-                                    xml.WriteElementString("Size", Sizelog.ToString());
-                                    xml.WriteElementString("TransferTime", Durationlog.ToString());
-                                    xml.WriteElementString("Time", DateTimelog.ToString());
-                                    xml.WriteEndElement();
-
-                                }
-
-                                xmlDocument.Save($"{Pathlog}.xml");
-                            }
-                        }
-                        break;
-                }
-                switch (logformat)
-                {
-                    case "json":
-                        {
-                            if(!File.Exists($"{Pathlog}.json"))
-                            {
-                                File.Create($"{Pathlog}.json");
-                            }
-
-                            string LOGJSONData = File.ReadAllText($"{Pathlog}.json");
-                            
-                            List<LogDailyData> datainjson = JsonConvert.DeserializeObject<List<LogDailyData>>(LOGJSONData) ?? new List<LogDailyData>();
-
-                            datainjson.Add(new LogDailyData());
-
-
-                        }       
-                        break;
-
-                    case "xml":
-                        {
-                            if (!File.Exists($"{Pathlog}.xml"))
-                            {
-                                File.Create($"{Pathlog}.xml");
-                            }
-                        }
-                        break ;
-
-
-                        
-
-                        
-                }
+                StreamWriter file = File.AppendText($"{Pathlog}.json");
+                file.Close();
             }
-            catch (Exception exception)
+
+
+            string LOGJSONData = File.ReadAllText(path);
+
+            List<LogDailyData> logDailyData = JsonConvert.DeserializeObject<List<LogDailyData>>(LOGJSONData) ?? new List<LogDailyData>();
+
+            logDailyData.Add(new LogDailyData()
             {
-                //Console.WriteLine(exception);
-            }
+                destPath = Sourcelog,
+                Filesize = Sizelog,
+                time = DateTimelog.ToString(),
+                FileSource = Sourcelog,
+                FileTarget = Targetlog,
+                FileTransferTime = Durationlog,
+                Name = Namelog
+
+            });
+
+            string ObjectJsonData = JsonConvert.SerializeObject(logDailyData, Newtonsoft.Json.Formatting.Indented);
+
+            File.WriteAllText(path, ObjectJsonData);
+
+
+
+
+
+
         }
-
-
-
-
     }
+
+
+
+
+
+
+
+
+
+
 
     public class LogState
     {
@@ -178,3 +127,4 @@ namespace EasySave.Controllers
 
     }
 }
+

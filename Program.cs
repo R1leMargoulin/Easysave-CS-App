@@ -8,8 +8,8 @@ namespace EasySave
         static void Main(string[] args)
         {
             Backup backup = new Backup();
-
-            backup.DirectoryCopy();
+           
+            backup.DirectoryCopy(@"C:\Users\Utilisateur\Documents\cesi\Stage A2", @"C:\Users\Utilisateur\Documents\test");
         }
     }
 }
