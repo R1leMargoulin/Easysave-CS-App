@@ -4,7 +4,8 @@ using System.Text;
 
 namespace EasySave.Model
 {
-    public class BackupType
+    public enum BackupType
     {
+        Complet = 1
     }
 }

@@ -1,5 +1,7 @@
-﻿using EasySave.Model;
-using System;
+﻿using System;
+using EasySave.Model;
+using EasySave.Controllers;
+using EasySave.View;
 
 namespace EasySave
 {
@@ -7,9 +9,13 @@ namespace EasySave
     {
         static void Main(string[] args)
         {
-            Backup backup = new Backup();
 
-            backup.DirectoryCopy( @"C:\Users\vgoudeau\Documents\Documentation", @"C:\Users\vgoudeau\Documents\tt\Documentation");
+            MenuModel model = new MenuModel();
+            ViewMenu view = new ViewMenu(model);
+            BackupControllers backupControllers = new BackupControllers();
+            MenuControl control = new MenuControl(model, view);
+
+            control.Start();
         }
     }
 }
