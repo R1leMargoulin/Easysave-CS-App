@@ -71,6 +71,17 @@ namespace EasySave.Model
 
             string ObjectJsonData = JsonConvert.SerializeObject(logDailyData, Newtonsoft.Json.Formatting.Indented);
 
+                                xmlDocument.Save($"{Pathlog}.xml");
+                            }
+                        }
+                        break;
+
+                    case "json":
+                        {
+                            if(!File.Exists($"{Pathlog}.json"))
+                            {
+                                File.Create($"{Pathlog}.json");
+                            }
             File.WriteAllText(path, ObjectJsonData);
 
 
