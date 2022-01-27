@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
 
 namespace EasySave.Model
 {
@@ -13,8 +15,10 @@ namespace EasySave.Model
 
         public MenuModel()
         {
+            string jsonSettings = File.ReadAllText(@"Settings.json");
+            Settings settings = JsonSerializer.Deserialize<Settings>(jsonSettings);
+            language = settings.setting_language;
             languageList = new List<string> { Language.fr.ToString(), Language.en.ToString()};
-            language = Convert.ToString(Language.fr);
             menuView = "0";
         }
 
@@ -34,6 +38,7 @@ namespace EasySave.Model
         public void SetLanguage(string lang)
         {
             language = lang;
+            SettingUpdate();
            
         }
 
@@ -41,5 +46,16 @@ namespace EasySave.Model
         {
            return languageList;
         }
+
+        public void SettingUpdate()
+        {
+            string jsonSettings = File.ReadAllText(@"Settings.json");
+            Settings settings = JsonSerializer.Deserialize<Settings>(jsonSettings);
+            settings.setting_language = language;
+
+            jsonSettings = JsonSerializer.Serialize(settings);
+            File.WriteAllText(@"Settings.json", jsonSettings);
+        }
+
     }
 }
