@@ -8,21 +8,21 @@ namespace EasySave.Model
     {
         public string language;
         public List<string> languageList; 
-        private int menuView;
+        private string menuView;
         
 
         public MenuModel()
         {
             languageList = new List<string> { Language.fr.ToString(), Language.en.ToString()};
             language = Convert.ToString(Language.fr);
-            menuView = 0;
+            menuView = "0";
         }
 
-        public int GetMenuView()
+        public string GetMenuView()
         {
             return menuView;
         }
-        public void SetMenuView(int a)
+        public void SetMenuView(string a)
         {
             menuView = a;
         }

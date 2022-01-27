@@ -14,9 +14,9 @@ namespace EasySave.View
             model = mdl;
         }
 
-        public void Print(String a)
+        public void Print(String contenu)
         {
-            Console.WriteLine(a);
+            Console.WriteLine(contenu);
         }
         public String Ask()
         {
