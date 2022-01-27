@@ -131,7 +131,7 @@ namespace EasySave.Controllers
                     Affichage();
 
                     break;
-                case 3:
+                case 3: //Display Backup Informations
                         menu.Print("Affichage des sauvegardes disponibles"); //stringmenu Displaysave
 
                     var enableBackups = controllerbackup.DisplayAllBackup(this.controllerbackup.BackupList);
@@ -139,9 +139,9 @@ namespace EasySave.Controllers
                     menu.Print(enableBackups);
                     menu.Print("\n de quelle sauvegarde voulez vous les informations?"); //stringmenu 3.1
 
-                    int InfoSaveChoice = Convert.ToInt32(menu.Ask());
-
-                    menu.Print("informatiooooooooooooooooooons");//aremplacer par l'ajout de l'appel de la méthode du controlleur pour afficher les infos de la sauvegarde
+                    int Infoindex = Convert.ToInt32(menu.Ask());
+                    Backup backup3 = controllerbackup.BackupList[Infoindex - 1];
+                    menu.Print("Nom :" + backup3.Name + "\n" + "Source : " + backup3.DirectorySource + "\n" + backup3.DirectoryTarget);//aremplacer par l'ajout de l'appel de la méthode du controlleur pour afficher les infos de la sauvegarde
 
                     menu.Ask();
                     ChangeViewMenuInput(0);
