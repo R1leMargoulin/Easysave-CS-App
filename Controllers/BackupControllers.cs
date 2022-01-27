@@ -19,8 +19,13 @@ namespace EasySave.Controllers
 
         public void AddBackup(Backup backup)
         {
+            int index = BackupList.Count();
+            if(index < 5)
+            {
+
+           
             BackupList.Add(backup);
-            SaveBackup();
+            SaveBackup(); }
         }
 
         public void DeleteBackup(int index)

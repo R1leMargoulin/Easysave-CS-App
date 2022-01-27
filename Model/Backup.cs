@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Text;
 
@@ -21,10 +22,13 @@ namespace EasySave.Model
           foreach (FileInfo file in sourceDirectory.GetFiles())
             {
                 
-                Directory.CreateDirectory(targetDirectory);   
+                Directory.CreateDirectory(targetDirectory);
+                Stopwatch stopwatch = Stopwatch.StartNew();
                 var path = Path.Combine(targetDirectory, file.Name);
                 
                 file.CopyTo(path, true);
+                new LogDaily(Name, file.FullName, path, file.Length / 1000 , stopwatch.ElapsedMilliseconds);
+                stopwatch.Stop();
             }
         }
 
