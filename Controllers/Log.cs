@@ -96,9 +96,7 @@ namespace EasySave.Controllers
                             }
                         }
                         break;
-                }
-                switch (logformat)
-                {
+
                     case "json":
                         {
                             if(!File.Exists($"{Pathlog}.json"))
@@ -116,14 +114,6 @@ namespace EasySave.Controllers
                         }       
                         break;
 
-                    case "xml":
-                        {
-                            if (!File.Exists($"{Pathlog}.xml"))
-                            {
-                                File.Create($"{Pathlog}.xml");
-                            }
-                        }
-                        break ;
 
 
                         
