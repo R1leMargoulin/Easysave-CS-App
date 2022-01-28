@@ -29,18 +29,18 @@ namespace EasySave.Model
                 {
                     foreach(var item in targetFile)
                     {
+                     
                         if(file.Name == item.Name)
                         {
-
-                      
-                                 if(file.LastWriteTime != item.LastWriteTime)
+                            if(file.LastWriteTime != item.LastWriteTime)
                             {
-                            Stopwatch stopwatch = Stopwatch.StartNew();
-                            var path = Path.Combine(targetDirectory, file.Name);
-                               
-                            file.CopyTo(path, true);
-                            new LogDaily(Name, file.FullName, path, file.Length / 1000, stopwatch.ElapsedMilliseconds);
-                            stopwatch.Stop();
+                                Stopwatch stopwatch = Stopwatch.StartNew();
+                                var path = Path.Combine(targetDirectory, file.Name);
+                                item.Delete();
+                                file.CopyTo(path, true);
+                                new LogDaily(Name, file.FullName, path, file.Length / 1000, stopwatch.ElapsedMilliseconds);
+                                new LogState(Name, file.FullName, path, file.Length / 1000, stopwatch.ElapsedMilliseconds, targetFile.Length -1 , "Active", 0, targetFile.Length);
+                                stopwatch.Stop();
                              } 
                         }
                     }
@@ -48,23 +48,32 @@ namespace EasySave.Model
 
 
             }
-            if(BackupType == BackupType.Complet)
-            {
+        if(BackupType == BackupType.Complet)
+          {
 
-           
-          foreach (FileInfo file in sourceDirectory.GetFiles())
-            {
+                var totalfiles = sourceDirectory.GetFiles().Length;
+                var totalfileslefttodo = sourceDirectory.GetFiles().Length;
                 
+                
+                
+            foreach (FileInfo file in sourceDirectory.GetFiles())
+             {
+                   
                 Directory.CreateDirectory(targetDirectory);
                 Stopwatch stopwatch = Stopwatch.StartNew();
                 var path = Path.Combine(targetDirectory, file.Name);
-                
-                file.CopyTo(path, true);
-                new LogDaily(Name, file.FullName, path, file.Length / 1000 , stopwatch.ElapsedMilliseconds);
-                stopwatch.Stop();
-            } 
             
-            }
+                file.CopyTo(path, true);
+                    totalfileslefttodo--;
+                new LogDaily(Name, file.FullName, path, file.Length / 1000 , stopwatch.ElapsedMilliseconds);
+                new LogState(Name, file.FullName, path, file.Length / 1000, stopwatch.ElapsedMilliseconds, totalfileslefttodo, "Active", 0, totalfiles);
+                   
+                   
+                stopwatch.Stop();
+             }
+
+                new LogState(Name, "", "", 0, 0, 0, "END", 0, 0);
+          }
         }
 
         public List<FileInfo> GetFiles(DirectoryInfo directorySource, List<FileInfo> files, string directoryTarget)

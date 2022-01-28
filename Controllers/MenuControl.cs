@@ -55,13 +55,12 @@ namespace EasySave.Controllers
                         "[4] - Supprimer une sauvegarde\n" +
                         "[5] - Modifier une sauvegarde\n" +
                         "[6] - Changer la langue\n" +
-                        "[7] - Changer le format des logs\n" +
-                        "[8] - Fermer l'application\n"
+                        "[7] - Fermer l'application\n"
                         );
 
 
                     int choice = Convert.ToInt32(menu.Ask());
-                    if (choice == 1 || choice == 2 || choice == 3 || choice == 4 || choice == 5 || choice == 6 || choice == 7 || choice == 8)
+                    if (choice == 1 || choice == 2 || choice == 3 || choice == 4 || choice == 5 || choice == 6 || choice == 7)
                     {
                         ChangeViewMenuInput(choice);
                     }
@@ -111,23 +110,10 @@ namespace EasySave.Controllers
                 case 2: // display of mode 2, executing a save
                     
                     menu.Print("Affichage des sauvegardes disponibles"); //stringmenu 2.1
-                    
-                    var enableBackup = controllerbackup.DisplayAllBackup(this.controllerbackup.BackupList);
-                    
-                        menu.Print(enableBackup);
-                    
-                 
-                        menu.Print("\n quelle sauvegarde voulez vous executer?"); //Stringmenu 2.2
-                    
-
-                    int ExecSaveindex = Convert.ToInt32(menu.Ask());
-                    Backup backup1 = controllerbackup.BackupList[ExecSaveindex - 1];
-                    backup1.DirectoryCopy(backup1.DirectorySource, backup1.DirectoryTarget);
-
-
-
-                    //aremplacer ce vide par l'ajout de l'appel de la méthode du controlleur pour executer la sauvegarde
-
+                    menu.Print(GetAllBackup());
+                    menu.Print("\n quelle sauvegarde voulez vous executer?"); //Stringmenu 2.2
+                    int Executeindex = Convert.ToInt32(menu.Ask());
+                    ListBackup(Executeindex).DirectoryCopy(ListBackup(Executeindex).DirectorySource, ListBackup(Executeindex).DirectoryTarget);
                     ChangeViewMenuInput(0);
                     Affichage();
 
@@ -135,14 +121,11 @@ namespace EasySave.Controllers
                 case 3: //Display Backup Informations
                         menu.Print("Affichage des sauvegardes disponibles"); //stringmenu Displaysave
 
-                    var enableBackups = controllerbackup.DisplayAllBackup(this.controllerbackup.BackupList);
-
-                    menu.Print(enableBackups);
+                    menu.Print(GetAllBackup());
                     menu.Print("\n de quelle sauvegarde voulez vous les informations?"); //stringmenu 3.1
-
-                    int Infoindex = Convert.ToInt32(menu.Ask());
-                    Backup backup3 = controllerbackup.BackupList[Infoindex - 1];
-                    menu.Print("Nom :" + backup3.Name + "\n" + "Source : " + backup3.DirectorySource + "\n" + backup3.DirectoryTarget);//aremplacer par l'ajout de l'appel de la méthode du controlleur pour afficher les infos de la sauvegarde
+                    int Displayindex = Convert.ToInt32(menu.Ask());
+                    ListBackup(Displayindex);
+                    menu.Print("Nom :" + ListBackup(Displayindex).Name + "\n" + "Répertoire Source : " + ListBackup(Displayindex).DirectorySource + "\n" + "Répertoire cible : " + ListBackup(Displayindex).DirectoryTarget + "\n" + "Type : " + ListBackup(Displayindex).BackupType);
 
                     menu.Ask();
                     ChangeViewMenuInput(0);
@@ -151,20 +134,12 @@ namespace EasySave.Controllers
                     break;
 
                 case 4:
-                        menu.Print("Affichage des sauvegardes disponibles"); //stringmenu Displaysave
-                    var enableBackupss = controllerbackup.DisplayAllBackup(this.controllerbackup.BackupList);
 
-                    menu.Print(enableBackupss);
-                   
-
-                   
-                    menu.Print("\n quelle sauvegarde voulez vous supprimer?"); //stringmenu 4.1
-
+                    menu.Print("Affichage des sauvegardes disponibles"); 
+                    menu.Print(GetAllBackup());          
+                    menu.Print("\n quelle sauvegarde voulez vous supprimer?"); 
                     var deleteindex = Convert.ToInt32(menu.Ask());
                     controllerbackup.DeleteBackup(deleteindex);
-
-                    //aremplacer par l'ajout de l'appel de la méthode du controlleur pour afficher les infos de la sauvegarde
-
                     ChangeViewMenuInput(0);
                     Affichage();
 
@@ -172,10 +147,8 @@ namespace EasySave.Controllers
 
                 case 5://Update
                         menu.Print("Affichage des sauvegardes disponibles"); //stringmenu DisplaySave
-                    var enableBackupsss = controllerbackup.DisplayAllBackup(this.controllerbackup.BackupList);
 
-                    menu.Print(enableBackupsss);
-
+                    menu.Print(GetAllBackup());
                     menu.Print("\n quelle sauvegarde voulez vous modifier?"); //stringmenu 5.1
                     
                     int updateIndex = Convert.ToInt32(menu.Ask());
@@ -185,33 +158,32 @@ namespace EasySave.Controllers
 
 
                     int whatToModifyChoice = Convert.ToInt32(menu.Ask());
-
-                    if(whatToModifyChoice == 1)
+                    ListBackup(updateIndex);
+                    if (whatToModifyChoice == 1)
                     {
-                        Backup backup2 = controllerbackup.BackupList[updateIndex - 1];
-                        backup2.Name = menu.Ask();
-                        controllerbackup.UpdateBackup(updateIndex, backup2);
+                        menu.Print("Entrez le nouveau nom \n");
+                        ListBackup(updateIndex).Name = menu.Ask();
+                        controllerbackup.UpdateBackup(updateIndex, ListBackup(updateIndex));
                     }
                     if (whatToModifyChoice == 2)
                     {
-                        Backup backup2 = controllerbackup.BackupList[updateIndex - 1];
-                        backup2.DirectorySource = menu.Ask();
-                        controllerbackup.UpdateBackup(updateIndex, backup2);
+                        menu.Print("Entrez le nouveau répertoire source \n");
+                        ListBackup(updateIndex).DirectorySource = menu.Ask();
+                        controllerbackup.UpdateBackup(updateIndex, ListBackup(updateIndex));
                     }
                     if (whatToModifyChoice == 3)
                     {
-                        Backup backup2 = controllerbackup.BackupList[updateIndex - 1];
-                        backup2.DirectoryTarget = menu.Ask();
-                        controllerbackup.UpdateBackup(updateIndex, backup2);
+                        menu.Print("Entrez le nouveau répertoire cible \n");
+                        ListBackup(updateIndex).DirectoryTarget = menu.Ask();
+                        controllerbackup.UpdateBackup(updateIndex, ListBackup(updateIndex));
                     }
-                    //if (whatToModifyChoice == 4)
-                    //{
-                    //    Backup backup2 = controllerbackup.BackupList[updateIndex - 1];
-                    //    backup2.BackupType = Convert.ToInt32(menu.Ask());
-                    //    controllerbackup.UpdateBackup(updateIndex, backup2);
-                    //}
-                    //aremplacer par l'ajout de l'appel de la méthode du controlleur pour modifier la sauvegarde selon ce qu'on va choisir de modifier
-
+                    if (whatToModifyChoice == 4)
+                    {
+                        menu.Print("Entrez le nouveau type de sauvegarde \n");
+                        ListBackup(updateIndex).BackupType = (BackupType)Convert.ToInt32(menu.Ask());
+                        controllerbackup.UpdateBackup(updateIndex, ListBackup(updateIndex));
+                    }
+                    
                     ChangeViewMenuInput(0);
                     Affichage();
 
@@ -231,22 +203,7 @@ namespace EasySave.Controllers
                     Affichage();
                     break;
 
-                //case 7:
-                //    menu.Print("Quel format de log voulez vous selectionner?");//stringmenu 7.1
-                //    int languageCounter = 1;
-                //    foreach (String language in model.GetLanguageList())
-                //    {
-                //        menu.Print(Convert.ToString(languageCounter) + " " + language);
-                //        languageCounter++;
-                //    }
-                //    int languageChoice = Convert.ToInt32(Console.ReadLine());
-                //    model.SetLanguage(model.GetLanguageList()[languageChoice - 1]);//select of the right language into the list in the model class
-                //    ChangeViewMenuInput(0);
-                //    Affichage();
-                //    break;
-
-
-                case 8:
+                case 7:
                     menu.Print("Etes vous sur de vouloir quitter l'application?\n\n1 - oui\n2 - non\n"); //stringmenu 8.1
 
                     int ExitChoice = Convert.ToInt32(menu.Ask());
@@ -267,6 +224,7 @@ namespace EasySave.Controllers
 
         public void AffichageEn()
         {
+            Backup backup = new Backup();
             switch (model.GetMenuView())
             {
                 case 0: // Affichage accueil
@@ -278,12 +236,11 @@ namespace EasySave.Controllers
                         "[3] - show a save details\n" +
                         "[4] - delete a save\n" +
                         "[5] - modify a save\n" +
-                        "[6] - change language settings\n" +
-                        "[7] - change lof format\n" +
-                        "[8] - close the app\n"
+                        "[6] - change language settings\n" +                     
+                        "[7] - close the app\n"
                         );
                     int choice = Convert.ToInt32(menu.Ask());
-                    if (choice == 1 || choice == 2 || choice == 3 || choice == 4 || choice == 5 || choice == 6 || choice == 7 || choice == 8)
+                    if (choice == 1 || choice == 2 || choice == 3 || choice == 4 || choice == 5 || choice == 6 || choice == 7)
                     {
                         ChangeViewMenuInput(choice);
                     }
@@ -293,13 +250,16 @@ namespace EasySave.Controllers
                 case 1: //View of mode 1, creating of a new save
                     
                     menu.Print("Type a name for your save");
-                    String nomSave = menu.Ask();
+                    var nomSave = menu.Ask();
+                    backup.Name = nomSave;
 
                     menu.Print("Type the path of the element you want to save");
-                    String sourcePath = menu.Ask();
+                    var sourcePath = menu.Ask();
+                    backup.DirectorySource = sourcePath;
 
                     menu.Print("Type the path to save in");
-                    String savePath = menu.Ask();
+                    var savePath = menu.Ask();
+                    backup.DirectoryTarget = savePath;
 
                     menu.Print
                         (
@@ -311,38 +271,37 @@ namespace EasySave.Controllers
 
                     if (choixType == 1)
                     {
-                        int b = 2; //aremplacer par le change du SaveWorkModel
+                        backup.BackupType = BackupType.Complet;
+                        controllerbackup.AddBackup(backup);
                     }
                     if (choixType == 2)
                     {
-                        int b = 2; //aremplacer par le change du SaveWorkModel
+                        backup.BackupType = BackupType.Differentielle;
+                        controllerbackup.AddBackup(backup);
                     }
                     ChangeViewMenuInput(0);
                     Affichage();
                     break;
 
+                   
                 case 2: // display of mode 2, executing a save
  
                     menu.Print("Display of available saves");
-                    menu.Print("1 - test1 \n2 - test2");//aremplacer par la lecture des saves dans un fichier ou je ne sais quoi
+                    menu.Print(GetAllBackup());
                     menu.Print("\n\n\n wich save dou you want to execute?");
-                    int ExecSaveChoice = Convert.ToInt32(menu.Ask());
-
-                    //aremplacer ce vide par l'ajout de l'appel de la méthode du controlleur pour executer la sauvegarde
-
+                    int Exeindex = Convert.ToInt32(menu.Ask());
+                    ListBackup(Exeindex).DirectoryCopy(ListBackup(Exeindex).DirectorySource, ListBackup(Exeindex).DirectoryTarget);
                     ChangeViewMenuInput(0);
                     Affichage();
 
                     break;
                 case 3:
                     menu.Print("Display of available saves");
-                    menu.Print("1 - test1 \n2 - test2");//aremplacer par la lecture des saves dans un fichier ou je ne sais quoi
+                    menu.Print(GetAllBackup());
                     menu.Print("\n from wich save would you want informations?");
-                    
-                    int InfoSaveChoice = Convert.ToInt32(menu.Ask());
-
-                    menu.Print("informatiooooooooooooooooooons");//aremplacer par l'ajout de l'appel de la méthode du controlleur pour afficher les infos de la sauvegarde
-
+                    int Showindex = Convert.ToInt32(menu.Ask());
+                    ListBackup(Showindex);
+                    menu.Print("Nom :" + ListBackup(Showindex).Name + "\n" + "Source Directory : " + ListBackup(Showindex).DirectorySource + "\n" + "Target Directory : " + ListBackup(Showindex).DirectoryTarget + "\n" + "Type : " + ListBackup(Showindex).BackupType);
                     menu.Ask();
                     ChangeViewMenuInput(0);
                     Affichage();
@@ -351,13 +310,10 @@ namespace EasySave.Controllers
 
                 case 4:
                     menu.Print("Display of available saves");
-                    menu.Print("1 - test1 \n2 - test2");//aremplacer par la lecture des saves dans un fichier ou je ne sais quoi
+                    menu.Print(GetAllBackup());
                     menu.Print("\n wich save would you want to delete?");
-                    
-                    int DeleteSaveChoice = Convert.ToInt32(menu.Ask());
-
-                    //aremplacer par l'ajout de l'appel de la méthode du controlleur pour afficher les infos de la sauvegarde
-
+                    var deleteindex = Convert.ToInt32(menu.Ask());
+                    controllerbackup.DeleteBackup(deleteindex);
                     ChangeViewMenuInput(0);
                     Affichage();
 
@@ -365,17 +321,42 @@ namespace EasySave.Controllers
 
                 case 5:
                     menu.Print("Display of available saves");
-                    menu.Print("1 - test1 \n2 - test2");//aremplacer par la lecture des saves dans un fichier ou je ne sais quoi
+                    menu.Print(GetAllBackup());
                     menu.Print("\n wich save would you want to delete?");
-                    int modifySaveChoice = Convert.ToInt32(menu.Ask());
+                    int updateIndex = Convert.ToInt32(menu.Ask());
 
                     menu.Print("What would you want to modify in this save?");
                     menu.Print("1 - Name of the save\n2 - path of the element to save\n3 - path to save in\n4 - Type of the save\n");
                     int whatToModifyChoice = Convert.ToInt32(menu.Ask());
-                    //aremplacer par l'ajout de l'appel de la méthode du controlleur pour modifier la sauvegarde selon ce qu'on va choisir de modifier
+                    ListBackup(updateIndex);
+                    if (whatToModifyChoice == 1)
+                    {
+                        menu.Print("Enter the new name \n");
+                        ListBackup(updateIndex).Name = menu.Ask();
+                        controllerbackup.UpdateBackup(updateIndex, ListBackup(updateIndex));
+                    }
+                    if (whatToModifyChoice == 2)
+                    {
+                        menu.Print("Enter the new source directory \n");
+                        ListBackup(updateIndex).DirectorySource = menu.Ask();
+                        controllerbackup.UpdateBackup(updateIndex, ListBackup(updateIndex));
+                    }
+                    if (whatToModifyChoice == 3)
+                    {
+                        menu.Print("Enter the new target directory \n");
+                        ListBackup(updateIndex).DirectoryTarget = menu.Ask();
+                        controllerbackup.UpdateBackup(updateIndex, ListBackup(updateIndex));
+                    }
+                    if (whatToModifyChoice == 4)
+                    {
+                        menu.Print("Enter the new Backup type \n");
+                        ListBackup(updateIndex).BackupType = (BackupType)Convert.ToInt32(menu.Ask());
+                        controllerbackup.UpdateBackup(updateIndex, ListBackup(updateIndex));
+                    }
 
                     ChangeViewMenuInput(0);
                     Affichage();
+
 
                     break;
 
@@ -428,6 +409,22 @@ namespace EasySave.Controllers
             }
         }
 
+        public string GetAllBackup()
+        {
+            var enableBackup = controllerbackup.DisplayAllBackup(this.controllerbackup.BackupList);
+
+            return enableBackup;
+        }
+
+       
+
+
+            public Backup ListBackup(int index)
+        {
+            
+            Backup backup = controllerbackup.BackupList[index - 1];
+            return backup;
+        }
 
         public void ChangeViewMenuInput(int a)
         {

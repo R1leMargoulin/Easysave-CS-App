@@ -74,10 +74,12 @@ namespace EasySave.Controllers
         {
 
             string content = "";
+            int i = 1;
 
             foreach(var item in list)
             {
-                content += item.Name + "\n";
+                content += $"[{i}]" + " " + item.Name + "\n";
+                i++;
             }
 
             return content;
