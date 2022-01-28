@@ -21,7 +21,7 @@ namespace EasySave.Controller
             Affichage();
         }
 
-        public void Affichage()
+        public void Affichage() //choix de la méthode en fonction de la langue 
         {
             if(model.language == "fr")
             {
@@ -436,7 +436,7 @@ namespace EasySave.Controller
             Console.ForegroundColor = ConsoleColor.Gray;
         }
 
-        public void ChangeViewMenuInput(string a, Erreur inferreur = Erreur.NoErreur)
+        public void ChangeViewMenuInput(string a, Erreur inferreur = Erreur.NoErreur) //changing menu attribute and recall the display method
         {
             menu.Clear();
 

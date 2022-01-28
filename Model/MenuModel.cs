@@ -16,7 +16,7 @@ namespace EasySave.Model
         public MenuModel()
         {
             string jsonSettings = File.ReadAllText(@"Settings.json");
-            Settings settings = JsonSerializer.Deserialize<Settings>(jsonSettings);
+            Settings settings = JsonSerializer.Deserialize<Settings>(jsonSettings); //reprise des parametres mis dans le fichier settings.json
             language = settings.setting_language;
             languageList = new List<string> { Language.fr.ToString(), Language.en.ToString()};
             menuView = "0";
@@ -38,7 +38,7 @@ namespace EasySave.Model
         public void SetLanguage(string lang)
         {
             language = lang;
-            SettingUpdate();
+            SettingUpdate(); //to save our language setting even if we close the app
            
         }
 
@@ -49,10 +49,13 @@ namespace EasySave.Model
 
         public void SettingUpdate()
         {
+            //on a first hand, we read the file and change only what we want to change in it
+            //(this will be usefull if we want to easily add settings content)
             string jsonSettings = File.ReadAllText(@"Settings.json");
             Settings settings = JsonSerializer.Deserialize<Settings>(jsonSettings);
             settings.setting_language = language;
 
+            //then, on another hand, we save our file settings
             jsonSettings = JsonSerializer.Serialize(settings);
             File.WriteAllText(@"Settings.json", jsonSettings);
         }
