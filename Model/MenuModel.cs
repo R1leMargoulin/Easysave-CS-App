@@ -15,9 +15,10 @@ namespace EasySave.Model
 
         public MenuModel()
         {
-            string jsonSettings = File.ReadAllText(@"Settings.json");
-            Settings settings = JsonSerializer.Deserialize<Settings>(jsonSettings); //reprise des parametres mis dans le fichier settings.json
-            language = settings.setting_language;
+            //string jsonSettings = File.ReadAllText(@"Settings.json");
+            // Settings settings = JsonSerializer.Deserialize<Settings>(jsonSettings); //reprise des parametres mis dans le fichier settings.json
+            // language = settings.setting_language;
+            language = Convert.ToString(Language.fr);
             languageList = new List<string> { Language.fr.ToString(), Language.en.ToString()};
             menuView = "0";
         }
