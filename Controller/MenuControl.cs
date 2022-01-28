@@ -199,7 +199,7 @@ namespace EasySave.Controller
             }
             catch (Exception)
             {
-                InputException("0");
+                ChangeViewMenuInput("0", PopUpMessage.InputError);
             }
             }
         
@@ -231,7 +231,6 @@ namespace EasySave.Controller
                         }
                         else
                         {
-                            //DisplayErrorEN();
                             ChangeViewMenuInput("0", PopUpMessage.InputError);
 
                         }
@@ -351,11 +350,12 @@ namespace EasySave.Controller
             }
             catch (Exception)
             {
+                ChangeViewMenuInput("0", PopUpMessage.InputError);
             }
         }
 
         //Display function for an imput error in french
-        public void DisplayErrorFr()
+        public void DisplayErrorFR()
         {
             Console.ForegroundColor = ConsoleColor.Red;//Change foreground color
             menu.Print("Erreur de saisie");
@@ -371,7 +371,7 @@ namespace EasySave.Controller
         }
 
         //Display function for a success message in french
-        public void DisplaySuccessFr()
+        public void DisplaySuccessFR()
         {
             Console.ForegroundColor = ConsoleColor.Green;//Change foreground color
             menu.Print("Succès de l'operation");
@@ -401,7 +401,7 @@ namespace EasySave.Controller
 
             if (inferreur == PopUpMessage.InputError && model.language == "fr" )
             {
-               DisplayErrorFr();
+               DisplayErrorFR();
             }
 
             if (inferreur == PopUpMessage.InputError && model.language == "en")
@@ -410,7 +410,7 @@ namespace EasySave.Controller
             }
             if (inferreur == PopUpMessage.Success && model.language == "fr")
             {
-                DisplaySuccessFr();
+                DisplaySuccessFR();
             }
 
             if (inferreur == PopUpMessage.Success && model.language == "en")
@@ -446,26 +446,8 @@ namespace EasySave.Controller
             }
             catch (Exception)
             {
-                InputException("7");
+                ChangeViewMenuInput("7",PopUpMessage.InputError);
             }
-        }
-
-
-        private void InputException(string choiseview)
-        {
-                if (model.language == "fr")
-                { 
-                    ChangeViewMenuInput(choiseview, PopUpMessage.InputError); 
-                }
-                if (model.language == "en")
-                {
-                    ChangeViewMenuInput(choiseview, PopUpMessage.InputError);
-                }
-                else
-                {
-                DisplayAppError();
-                }
-            }
-        
+        }       
         }
 }
