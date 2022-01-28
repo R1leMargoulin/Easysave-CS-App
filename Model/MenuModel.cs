@@ -35,7 +35,7 @@ namespace EasySave.Model
         public void SetLanguage(string lang)
         {
             language = lang;
-            SettingUpdate(); //to save our language setting even if we close the app
+           // SettingUpdate(); //to save our language setting even if we close the app
            
         }
 
