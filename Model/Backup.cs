@@ -19,6 +19,39 @@ namespace EasySave.Model
         {
             var sourceDirectory = new DirectoryInfo(source);
 
+            if(BackupType == BackupType.Differentielle)
+            {
+                var target = new DirectoryInfo(DirectoryTarget);
+                FileInfo[] targetFile = target.GetFiles();
+               sourceDirectory.GetFiles();
+             
+                foreach (var file in sourceDirectory.GetFiles())
+                {
+                    foreach(var item in targetFile)
+                    {
+                        if(file.Name == item.Name)
+                        {
+
+                      
+                                 if(file.LastWriteTime != item.LastWriteTime)
+                            {
+                            Stopwatch stopwatch = Stopwatch.StartNew();
+                            var path = Path.Combine(targetDirectory, file.Name);
+                               
+                            file.CopyTo(path, true);
+                            new LogDaily(Name, file.FullName, path, file.Length / 1000, stopwatch.ElapsedMilliseconds);
+                            stopwatch.Stop();
+                             } 
+                        }
+                    }
+                }
+
+
+            }
+            if(BackupType == BackupType.Complet)
+            {
+
+           
           foreach (FileInfo file in sourceDirectory.GetFiles())
             {
                 
@@ -29,20 +62,22 @@ namespace EasySave.Model
                 file.CopyTo(path, true);
                 new LogDaily(Name, file.FullName, path, file.Length / 1000 , stopwatch.ElapsedMilliseconds);
                 stopwatch.Stop();
+            } 
+            
             }
         }
 
-        //public List<FileInfo> GetFiles(DirectoryInfo directorySource, List<FileInfo> files, string directoryTarget)
-        //{
-        //    FileInfo[] fileInfos = directorySource.GetFiles(directorySource.FullName);   
+        public List<FileInfo> GetFiles(DirectoryInfo directorySource, List<FileInfo> files, string directoryTarget)
+        {
+            FileInfo[] fileInfos = directorySource.GetFiles(directorySource.FullName);   
 
-        //    foreach (FileInfo file in fileInfos)
-        //    {
-        //        files.Add(file);
-        //    }
+            foreach (FileInfo file in fileInfos)
+            {
+                files.Add(file);
+          }
 
-        //    return files;
-        //}
+            return files;
+        }
 
 
     }

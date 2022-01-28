@@ -100,7 +100,8 @@ namespace EasySave.Controllers
                     }
                     if (choixType == 2)
                     {
-                        
+                        backup.BackupType = BackupType.Differentielle;
+                        controllerbackup.AddBackup(backup); //aremplacer par le change du SaveWorkModel
                     }
 
                     ChangeViewMenuInput(0);

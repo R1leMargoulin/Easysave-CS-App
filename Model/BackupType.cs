@@ -6,6 +6,7 @@ namespace EasySave.Model
 {
     public enum BackupType
     {
-        Complet = 1
+        Complet = 1,
+        Differentielle = 2
     }
 }
