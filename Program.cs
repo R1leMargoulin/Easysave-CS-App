@@ -1,6 +1,6 @@
 ﻿using System;
 using EasySave.Model;
-using EasySave.Controller;
+using EasySave.Controllers;
 using EasySave.View;
 
 namespace EasySave
@@ -12,6 +12,7 @@ namespace EasySave
 
             MenuModel model = new MenuModel();
             ViewMenu view = new ViewMenu(model);
+            BackupControllers backupControllers = new BackupControllers();
             MenuControl control = new MenuControl(model, view);
 
             control.Start();

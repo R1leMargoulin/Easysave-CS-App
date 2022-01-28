@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
 
 namespace EasySave.Model
 {
@@ -8,38 +10,51 @@ namespace EasySave.Model
     {
         public string language;
         public List<string> languageList; 
-        private int menuView;
+        private string menuView;
         
 
         public MenuModel()
         {
+            string jsonSettings = File.ReadAllText(@"Settings.json");
+            Settings settings = JsonSerializer.Deserialize<Settings>(jsonSettings); //reprise des parametres mis dans le fichier settings.json
+            language = settings.setting_language;
             languageList = new List<string> { Language.fr.ToString(), Language.en.ToString()};
-            language = Convert.ToString(Language.fr);
-            menuView = 0;
+            menuView = "0";
         }
 
-        public int GetMenuView()
+        public string GetMenuView()
         {
             return menuView;
         }
-        public void SetMenuView(int a)
+        public void SetMenuView(string a)
         {
             menuView = a;
         }
-        //public String GetLanguage()
-        //{
-        //    return language;
-        //}
 
         public void SetLanguage(string lang)
         {
             language = lang;
+            SettingUpdate(); //to save our language setting even if we close the app
            
         }
 
         public List<String> GetLanguageList()
         {
-           return languageList;
+            return languageList;
         }
+
+        public void SettingUpdate()
+        {
+            //on a first hand, we read the file and change only what we want to change in it
+            //(this will be usefull if we want to easily add settings content)
+            string jsonSettings = File.ReadAllText(@"Settings.json");
+            Settings settings = JsonSerializer.Deserialize<Settings>(jsonSettings);
+            settings.setting_language = language;
+
+            //then, on another hand, we save our file settings
+            jsonSettings = JsonSerializer.Serialize(settings);
+            File.WriteAllText(@"Settings.json", jsonSettings);
+        }
+
     }
 }

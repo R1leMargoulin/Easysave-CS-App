@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using EasySave.Model;
-using EasySave.Controller;
+
 
 namespace EasySave.View
 {
@@ -14,20 +12,32 @@ namespace EasySave.View
             model = mdl;
         }
 
-        public void Print(String a)
+        // Display function from a string
+        public void Print(string contenu)
         {
-            Console.WriteLine(a);
+            Console.WriteLine(contenu);
         }
-        public String Ask()
+
+        //Retrieves function of the content entered in the console, also dispaly a message from a string
+        public string Ask(string contenudemande)
         {
-            String ret = Console.ReadLine();
+            Console.Write(contenudemande);
+            string ret = Console.ReadLine();
             return ret;
         }
 
+        //Retrieves function of the content entered in the console, without any display
+        public string AskOnly()
+        {
+            string rat = Console.ReadLine();
+            return rat;
+        }
+
+        //Clear function, delete all the content in display in the console
         public void Clear()
         {
             Console.Clear();
         }
-        
+
     }
 }
