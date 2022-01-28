@@ -43,18 +43,18 @@ namespace EasySave.Controller
                               //menu.Clear();
                         menu.Print
                         (
-                        "==========================================================\n" +
-                        "\t Welcome in EasySave \n \n" +
-                        "Veuillez entrer un chiffre correspondant aux propositions: \n \n" +
-                        "[1] - créer une sauvegarde\n" +
-                        "[2] - éxecuter une sauvegarde\n" +
-                        "[3] - Montrer les détails d'une sauvegarde\n" +
-                        "[4] - Supprimer une sauvegarde\n" +
-                        "[5] - Modifier une sauvegarde\n" +
-                        "[6] - Changer la langue\n" +
-                        "[7] - Changer le format des logs\n" +
-                        "[8] - Fermer l'application\n"+
-                        "\n=========================================================="
+                        "===========================================================\n" +
+                        "\n\t Welcome in EasySave \n" +
+                        "\n" +
+                        " [1] - créer une sauvegarde\n" +
+                        " [2] - éxecuter une sauvegarde\n" +
+                        " [3] - Montrer les détails d'une sauvegarde\n" +
+                        " [4] - Supprimer une sauvegarde\n" +
+                        " [5] - Modifier une sauvegarde\n" +
+                        " [6] - Changer la langue\n" +
+                        " [7] - Changer le format des logs\n" +
+                        " [8] - Fermer l'application\n"+
+                        "\n==========================================================="
                         );
 
 
@@ -244,23 +244,23 @@ namespace EasySave.Controller
                     case "0": // Affichage accueil
                         menu.Print
                         (
-                        "=================================================\n" +
-                        "\t Welcome in EasySave \n \n"+
-                        "Please, Enter a number corresponding to the menu: \n \n" +
-                        "[1] - create a save\n" +
-                        "[2] - execute a save\n" +
-                        "[3] - show a save details\n" +
-                        "[4] - delete a save\n" +
-                        "[5] - modify a save\n" +
-                        "[6] - change language settings\n" +
-                        "[7] - change lof format\n" +
-                        "[8] - close the app\n"+
-                        "\n================================================"
+                        "==================================================\n" +
+                        "\n\t Welcome in EasySave \n"+
+                        "\n" +
+                        " [1] - create a save\n" +
+                        " [2] - execute a save\n" +
+                        " [3] - show a save details\n" +
+                        " [4] - delete a save\n" +
+                        " [5] - modify a save\n" +
+                        " [6] - change language settings\n" +
+                        " [7] - change lof format\n" +
+                        " [8] - close the app\n"+
+                        "\n================================================="
 
                         );
 
                         //int choice = Convert.ToInt32(menu.Ask());
-                        string choice = menu.Ask("");
+                        string choice = menu.Ask("Please, Enter a number corresponding to the menu: ");
                         if (choice == "1" || choice == "2" || choice == "3" || choice == "4" || choice == "5" || choice == "6" || choice == "7" || choice == "8")
                         {
                             ChangeViewMenuInput(choice);
