@@ -6,6 +6,7 @@ using System.Text;
 using EasySave.Model;
 using Newtonsoft.Json;
 
+
 namespace EasySave.Controllers
 {
    public class BackupControllers
@@ -26,6 +27,7 @@ namespace EasySave.Controllers
            
             BackupList.Add(backup);
             SaveBackup(); }
+            
         }
 
         public void DeleteBackup(int index)
@@ -85,6 +87,16 @@ namespace EasySave.Controllers
             return content;
         }
 
+        public int CountBackup(List<Backup> list)
+        {
+            int i = 0;
+            foreach (var item in list)
+            {
+                i++;
+            }
+            return i;
+        }
+        
         
     }
 }

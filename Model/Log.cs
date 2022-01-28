@@ -18,9 +18,6 @@ namespace EasySave.Model
         private double Durationlog { get; set; }
         private DateTime DateTimelog { get; set; }
 
-        public string logformat;
-
-
         public class LogDailyData
         {
             public string Name;
@@ -42,9 +39,10 @@ namespace EasySave.Model
             DateTimelog = DateTime.Now;
             Pathlog = $"./LogPath/Logs_{DateTime.Now:dd-MM-yyyy}";
 
+            //Check if the directory exist and create it if it's doesn't exist
             Directory.CreateDirectory("./LogPath");
 
-
+            //Check if the file exist in the directory and create it if it doesn't exist
             string path = $"{Pathlog}.json";
             if (!File.Exists($"{Pathlog}.json"))
             {
@@ -52,10 +50,9 @@ namespace EasySave.Model
                 file.Close();
             }
 
+            string LOGJSONData = File.ReadAllText(path); //Get data from the logFile
 
-            string LOGJSONData = File.ReadAllText(path);
-
-            List<LogDailyData> logDailyData = JsonConvert.DeserializeObject<List<LogDailyData>>(LOGJSONData) ?? new List<LogDailyData>();
+            List<LogDailyData> logDailyData = JsonConvert.DeserializeObject<List<LogDailyData>>(LOGJSONData) ?? new List<LogDailyData>(); //Put the LOGJSONdata in List and check if the file is empty
 
             logDailyData.Add(new LogDailyData()
             {
@@ -69,28 +66,13 @@ namespace EasySave.Model
 
             });
 
-            string ObjectJsonData = JsonConvert.SerializeObject(logDailyData, Newtonsoft.Json.Formatting.Indented);
+            string ObjectJsonData = JsonConvert.SerializeObject(logDailyData, Newtonsoft.Json.Formatting.Indented); //Put the List in a Json string 
 
-
-            File.WriteAllText(path, ObjectJsonData);
-
-
-
-
-
+           
+            File.WriteAllText(path, ObjectJsonData); //Write the Json string in the file
 
         }
     }
-
-
-
-
-
-
-
-
-
-
 
     public class LogState
     {
@@ -105,7 +87,6 @@ namespace EasySave.Model
         public DateTime DateTime { get; set; }
         public string State { get; set; }
         
-
         private class LogStateData
         {
             public string Name;
@@ -133,13 +114,10 @@ namespace EasySave.Model
             TotalFilesToCopy = totalfiles;
             Pathlog = $"./StateLogPath/StateLogs";
 
-           
-
-
-
+            //Check if the directory exist and create it if it's doesn't exist
             Directory.CreateDirectory("./StateLogPath");
 
-
+            //Check if the file exist in the directory and create it if it doesn't exist
             string path = $"{Pathlog}.json";
             if (!File.Exists($"{Pathlog}.json"))
             {
@@ -147,10 +125,9 @@ namespace EasySave.Model
                 file.Close();
             }
 
+            string LOGJSONData = File.ReadAllText(path); //Get data from the logFile
 
-            string LOGJSONData = File.ReadAllText(path);
-
-            List<LogStateData> logDailyData = JsonConvert.DeserializeObject<List<LogStateData>>(LOGJSONData) ?? new List<LogStateData>();
+            List<LogStateData> logDailyData = JsonConvert.DeserializeObject<List<LogStateData>>(LOGJSONData) ?? new List<LogStateData>(); //Put the LOGJSONdata in List and check if the file is empty
 
             logDailyData.Add(new LogStateData()
             {
@@ -163,20 +140,13 @@ namespace EasySave.Model
                 Name = Namelog,
                 NbFilesLeftToDo = NbFilesLeftToDo,
                 StateLog = State
-                
-
-
             }) ;
 
-            string ObjectJsonData = JsonConvert.SerializeObject(logDailyData, Newtonsoft.Json.Formatting.Indented);
+            string ObjectJsonData = JsonConvert.SerializeObject(logDailyData, Newtonsoft.Json.Formatting.Indented); //Put the List in a Json string 
 
-
-            File.WriteAllText(path, ObjectJsonData);
+            File.WriteAllText(path, ObjectJsonData); //Write the Json string in the file
 
 
         }
-
-
-
     }
 }
