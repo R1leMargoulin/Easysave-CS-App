@@ -26,7 +26,7 @@ namespace EasySave.Controllers
             Affichage();
         }
 
-        public void Affichage()
+        public void Affichage() //choix de la méthode en fonction de la langue 
         {
             if(model.language == "fr")
             {
@@ -39,14 +39,14 @@ namespace EasySave.Controllers
             else
             {
                 DisplayAppError();
-            }
         }
-        
+        }
+
 
         public void AffichageFr()
         {
             try
-            { 
+            {
                 switch (model.GetMenuView())
                 {
                     case "0": // Affichage accueil
@@ -78,9 +78,10 @@ namespace EasySave.Controllers
 
                         break;
 
+
                     case "1": //View of mode 1, creating of a new save
                         Backup backup = new Backup();
-                    
+
                         menu.Print("Entrez un nom pour la sauvegarde"); //stringmenu 1.1
                         var nomSave = menu.Ask("");
                         backup.Name = nomSave;
@@ -119,7 +120,7 @@ namespace EasySave.Controllers
                         break;
 
                     case "2": // display of mode 2, executing a save
-                    
+
                         menu.Print("Affichage des sauvegardes disponibles"); //stringmenu 2.1
                         menu.Print(GetAllBackup());
                         menu.Print("\n quelle sauvegarde voulez vous executer?"); //Stringmenu 2.2
@@ -130,7 +131,7 @@ namespace EasySave.Controllers
 
                         break;
                     case "3": //Display Backup Informations
-                            menu.Print("Affichage des sauvegardes disponibles"); //stringmenu Displaysave
+                        menu.Print("Affichage des sauvegardes disponibles"); //stringmenu Displaysave
 
                         menu.Print(GetAllBackup());
                         menu.Print("\n de quelle sauvegarde voulez vous les informations?"); //stringmenu 3.1
@@ -145,6 +146,9 @@ namespace EasySave.Controllers
                         break;
 
                     case "4":
+                        menu.Print("Affichage des sauvegardes disponibles"); //stringmenu Displaysave
+                        menu.Print("1 - test1 \n2 - test2");//aremplacer par la lecture des saves dans un fichier ou je ne sais quoi
+                        menu.Print("\n quelle sauvegarde voulez vous supprimer?"); //stringmenu 4.1
 
                         menu.Print("Affichage des sauvegardes disponibles"); 
                         menu.Print(GetAllBackup());          
@@ -157,15 +161,15 @@ namespace EasySave.Controllers
                         break;
 
                     case "5"://Update
-                            menu.Print("Affichage des sauvegardes disponibles"); //stringmenu DisplaySave
+                        menu.Print("Affichage des sauvegardes disponibles"); //stringmenu DisplaySave
 
                         menu.Print(GetAllBackup());
                         menu.Print("\n quelle sauvegarde voulez vous modifier?"); //stringmenu 5.1
-                    
+
                         int updateIndex = Convert.ToInt32(menu.Ask(""));
 
-                            menu.Print("Que voulez vous modifier dans la sauvegarde ?"); //stringmenu 5.2
-                            menu.Print("1 - Nom de la sauvegarde \n2 - Chemin de la ressource a sauvegarder\n3 - chemin de l'emplacement de la sauvegarde\n4 - Type de sauvegarde\n"); //stringmenu 5.3
+                        menu.Print("Que voulez vous modifier dans la sauvegarde ?"); //stringmenu 5.2
+                        menu.Print("1 - Nom de la sauvegarde \n2 - Chemin de la ressource a sauvegarder\n3 - chemin de l'emplacement de la sauvegarde\n4 - Type de sauvegarde\n"); //stringmenu 5.3
 
 
                         int whatToModifyChoice = Convert.ToInt32(menu.Ask(""));
@@ -194,14 +198,14 @@ namespace EasySave.Controllers
                             ListBackup(updateIndex).BackupType = (BackupType)Convert.ToInt32(menu.Ask(""));
                             controllerbackup.UpdateBackup(updateIndex, ListBackup(updateIndex));
                         }
-                    
+
                         ChangeViewMenuInput("0");
                         Affichage();
 
                         break;
 
                     case "6":
-                            menu.Print("Quel langage voulez vous afficher?");//stringmenu 6.1
+                        menu.Print("Quel langage voulez vous afficher?");//stringmenu 6.1
                         int languageCounter = 1;
                         foreach (String language in model.GetLanguageList())
                         {
@@ -222,18 +226,18 @@ namespace EasySave.Controllers
                         throw new Exception();
 
                 }
-
+                
             }
             catch (Exception)
             {
                 ChangeViewMenuInput("0", PopUpMessage.InputError);
             }
-        }
-
+            }
+        
         public void AffichageEn()
         {
             try
-            { 
+            {
                 Backup backup = new Backup();
                 switch (model.GetMenuView())
                 {
@@ -267,7 +271,7 @@ namespace EasySave.Controllers
                         break;
 
                     case "1": //View of mode 1, creating of a new save
-                    
+
                         menu.Print("Type a name for your save");
                         var nomSave = menu.Ask("");
                         backup.Name = nomSave;
@@ -285,7 +289,7 @@ namespace EasySave.Controllers
                                 "Type the number to choose a type of saving:\n" +
                                 "1 - complete (saving of all of the element)\n" +
                                 "2 - diffential (saving of changes only if they exists)"
-                            );                    
+                            );
                         int choixType = Convert.ToInt32(menu.Ask(""));
 
                         if (choixType == 1)
@@ -304,7 +308,7 @@ namespace EasySave.Controllers
 
                    
                     case "2": // display of mode 2, executing a save
- 
+
                         menu.Print("Display of available saves");
                         menu.Print(GetAllBackup());
                         menu.Print("\n\n\n wich save dou you want to execute?");
@@ -404,33 +408,33 @@ namespace EasySave.Controllers
                 }
             }
             catch (Exception)
-            {
+                        {
                 ChangeViewMenuInput("0", PopUpMessage.InputError);
             }
-        }
+                        }
 
 
         public string GetAllBackup()
-        {
+                        {
             var enableBackup = controllerbackup.DisplayAllBackup(this.controllerbackup.BackupList);
 
             return enableBackup;
-        }
+                        }
 
 
         public Backup ListBackup(int index)
-        {
+                        {
             
             Backup backup = controllerbackup.BackupList[index - 1];
             return backup;
-        }
+                        }
         //Display function for an imput error in french
         public void DisplayErrorFR()
-        {
+                        {
             Console.ForegroundColor = ConsoleColor.Red;//Change foreground color
             menu.Print("Erreur de saisie");
             Console.ForegroundColor = ConsoleColor.Gray;
-        }
+                        }
 
         //Display function for an imput error in english
         public void DisplayErrorEN()
@@ -438,11 +442,11 @@ namespace EasySave.Controllers
             Console.ForegroundColor = ConsoleColor.Red;//Change foreground color
             menu.Print("Imput error");
             Console.ForegroundColor = ConsoleColor.Gray;
-        }
+            }
 
         //Display function for a success message in french
         public void DisplaySuccessFR()
-        {
+            {
             Console.ForegroundColor = ConsoleColor.Green;//Change foreground color
             menu.Print("Succès de l'operation");
             Console.ForegroundColor = ConsoleColor.Gray;
@@ -476,7 +480,7 @@ namespace EasySave.Controllers
 
             if (inferreur == PopUpMessage.InputError && model.language == "en")
             {
-                DisplayErrorEN();
+                DisplayErrorEN();   
             }
             if (inferreur == PopUpMessage.Success && model.language == "fr")
             {
@@ -488,8 +492,8 @@ namespace EasySave.Controllers
                 DisplaySuccessEN();
             }
 
-            model.SetMenuView(a);
-            Affichage();
+                model.SetMenuView(a);
+                Affichage();
         }
 
         public string templatetop = "===========================================================\n\n\t Welcome in EasySave\n\n";
@@ -498,7 +502,7 @@ namespace EasySave.Controllers
         private void SelectLangue(string whattodisplay)
         {
             string ExitChoice = menu.Ask(whattodisplay);
-
+            
             try
             {
                 if (ExitChoice == "1")
