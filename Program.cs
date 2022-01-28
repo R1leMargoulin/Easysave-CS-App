@@ -1,5 +1,4 @@
-﻿using System;
-using EasySave.Model;
+﻿using EasySave.Model;
 using EasySave.Controller;
 using EasySave.View;
 

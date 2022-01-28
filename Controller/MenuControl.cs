@@ -21,15 +21,21 @@ namespace EasySave.Controller
             Affichage();
         }
 
+
+        //Function that deside wich language to display
         public void Affichage()
         {
             if(model.language == "fr")
             {
                 AffichageFr();
             }
-            else if (model.language == "en")
+            if (model.language == "en")
             {
                 AffichageEn();
+            }
+            else
+            {
+                DisplayAppError();
             }
         }
 
@@ -43,31 +49,28 @@ namespace EasySave.Controller
                               //menu.Clear();
                         menu.Print
                         (
-                        "===========================================================\n" +
-                        "\n\t Welcome in EasySave \n" +
-                        "\n" +
+                         templatetop+
                         " [1] - créer une sauvegarde\n" +
                         " [2] - éxecuter une sauvegarde\n" +
                         " [3] - Montrer les détails d'une sauvegarde\n" +
                         " [4] - Supprimer une sauvegarde\n" +
                         " [5] - Modifier une sauvegarde\n" +
                         " [6] - Changer la langue\n" +
-                        " [7] - Changer le format des logs\n" +
-                        " [8] - Fermer l'application\n"+
-                        "\n==========================================================="
+                        " [7] - Fermer l'application\n"+
+                        templatebot
                         );
 
 
                         //int choice = Convert.ToInt32(menu.Ask());
                         string choice = menu.Ask("Veuillez entrer un chiffre correspondant aux propositions:");
-                        if (choice == "1" || choice == "2" || choice == "3" || choice == "4" || choice == "5" || choice == "6" || choice == "7" || choice == "8")
+                        if (choice == "1" || choice == "2" || choice == "3" || choice == "4" || choice == "5" || choice == "6" || choice == "7")
                         {
                             ChangeViewMenuInput(choice);
                         }
                         else
                         {
                             //DisplayErrorFr();
-                            ChangeViewMenuInput("0",Erreur.InputErrorFR);
+                            ChangeViewMenuInput("0",PopUpMessage.InputError);
                         }
 
                         break;
@@ -105,6 +108,7 @@ namespace EasySave.Controller
                         ChangeViewMenuInput("0");
                         Affichage();
                         break;
+                        
 
                     case "2": // display of mode 2, executing a save
 
@@ -174,51 +178,18 @@ namespace EasySave.Controller
                         int languageCounter = 1;
                         foreach (String language in model.GetLanguageList())
                         {
-                            menu.Print(Convert.ToString(languageCounter) + " " + language);
+                            menu.Print("["+Convert.ToString(languageCounter) + "] - " + language);
                             languageCounter++;
                         }
-                        int languageChoice = Convert.ToInt32(menu.Ask("Saisie"));
+                        int languageChoice = Convert.ToInt32(menu.Ask(""));
                         model.SetLanguage(model.GetLanguageList()[languageChoice - 1]);//select of the right language into the list in the model class
                         ChangeViewMenuInput("0");
                         Affichage();
                         break;
 
-                    //case "7":
-                    //    menu.Print("Quel format de log voulez vous selectionner?");//stringmenu 7.1
-                    //    int languageCounter = 1;
-                    //    foreach (String language in model.GetLanguageList())
-                    //    {
-                    //        menu.Print(Convert.ToString(languageCounter) + " " + language);
-                    //        languageCounter++;
-                    //    }
-                    //    int languageChoice = Convert.ToInt32(Console.ReadLine());
-                    //    model.SetLanguage(model.GetLanguageList()[languageChoice - 1]);//select of the right language into the list in the model class
-                    //    ChangeViewMenuInput(0);
-                    //    Affichage();
-                    //    break;
-
-
-                    case "8":
-                        menu.Print("Etes vous sur de vouloir quitter l'application?\n\n1 - oui\n2 - non\n"); //stringmenu 8.1
-
-                        string ExitChoice = menu.Ask("Seletion");
-
-                        if (ExitChoice == "1")
-                        {
-                            Environment.Exit(0);
-                        }
-
-
-                        if (ExitChoice == "2")
-                        {
-                            ChangeViewMenuInput("0");
-                            //Affichage();
-                        }
-                        else
-                        {
-                            throw new Exception();
-                        }
-
+                    case "7":
+                        menu.Print(templatetop+"Etes vous sur de vouloir quitter l'application?\n\n [1] - oui\n [2] - non\n"+templatebot);
+                        SelectLangue("Quel est votre choix");
                         break;
                     default:
                         throw new Exception();
@@ -228,10 +199,7 @@ namespace EasySave.Controller
             }
             catch (Exception)
             {
-                //DisplayErrorFr();
-                ChangeViewMenuInput("0",Erreur.InputErrorFR) ;
-                //Affichage();
-
+                InputException("0");
             }
             }
         
@@ -244,31 +212,27 @@ namespace EasySave.Controller
                     case "0": // Affichage accueil
                         menu.Print
                         (
-                        "==================================================\n" +
-                        "\n\t Welcome in EasySave \n"+
-                        "\n" +
-                        " [1] - create a save\n" +
-                        " [2] - execute a save\n" +
-                        " [3] - show a save details\n" +
-                        " [4] - delete a save\n" +
-                        " [5] - modify a save\n" +
-                        " [6] - change language settings\n" +
-                        " [7] - change lof format\n" +
-                        " [8] - close the app\n"+
-                        "\n================================================="
-
+                        templatetop +
+                        " [1] - Create a save\n" +
+                        " [2] - Execute a save\n" +
+                        " [3] - Show a save detail\n" +
+                        " [4] - Delete a save\n" +
+                        " [5] - Modify a save\n" +
+                        " [6] - Change language settings\n" +
+                        " [7] - Close the application\n"+
+                        templatebot
                         );
 
                         //int choice = Convert.ToInt32(menu.Ask());
                         string choice = menu.Ask("Please, Enter a number corresponding to the menu: ");
-                        if (choice == "1" || choice == "2" || choice == "3" || choice == "4" || choice == "5" || choice == "6" || choice == "7" || choice == "8")
+                        if (choice == "1" || choice == "2" || choice == "3" || choice == "4" || choice == "5" || choice == "6" || choice == "7")
                         {
                             ChangeViewMenuInput(choice);
                         }
                         else
                         {
                             //DisplayErrorEN();
-                            ChangeViewMenuInput("0", Erreur.InputErrorEN);
+                            ChangeViewMenuInput("0", PopUpMessage.InputError);
 
                         }
 
@@ -349,9 +313,9 @@ namespace EasySave.Controller
 
                     case "5":
                         menu.Print("Display of available saves");
-                        menu.Print("1 - test1 \n2 - test2");//aremplacer par la lecture des saves dans un fichier ou je ne sais quoi
-                        menu.Print("\n wich save would you want to delete?");
-                        int modifySaveChoice = Convert.ToInt32(menu.Ask(""));
+                        menu.Print("1 - test1 \n2 - test2\n");//aremplacer par la lecture des saves dans un fichier ou je ne sais quoi
+                        
+                        int modifySaveChoice = Convert.ToInt32(menu.Ask("Wich save would you want to delete"));
 
                         menu.Print("What would you want to modify in this save?");
                         menu.Print("1 - Name of the save\n2 - path of the element to save\n3 - path to save in\n4 - Type of the save\n");
@@ -366,53 +330,19 @@ namespace EasySave.Controller
                     case "6":
                         menu.Print("wich language would you want to display?");
                         int languageCounter = 1;
-                        foreach (String language in model.GetLanguageList()) //foreach languages available, we will display.
+                        foreach (string language in model.GetLanguageList()) //foreach languages available, we will display.
                         {
-                            menu.Print(Convert.ToString(languageCounter) + " " + language);
+                            menu.Print("["+Convert.ToString(languageCounter) + "] - " + language);
                             languageCounter++;
                         }
                         int languageChoice = Convert.ToInt32(menu.Ask(""));
                         model.SetLanguage(model.GetLanguageList()[languageChoice - 1]);//select of the right language into the list in the model class
                         ChangeViewMenuInput("0");
-                        Affichage();
                         break;
 
-                    //case 7:
-                    //    menu.Print("wich language would you want to display?");
-                    //    int languageCounter = 1;
-                    //    foreach (String language in model.GetLanguageList()) //foreach languages available, we will display.
-                    //    {
-                    //        menu.Print(Convert.ToString(languageCounter) + " " + language);
-                    //        languageCounter++;
-                    //    }
-                    //    int languageChoice = Convert.ToInt32(Console.ReadLine());
-                    //    model.SetLanguage(model.GetLanguageList()[languageChoice - 1]);//select of the right language into the list in the model class
-                    //    ChangeViewMenuInput(0);
-                    //    Affichage();
-                    //    break;
-
-                    case "8":
-                        if (model.language == "en")
-                        {
-                            menu.Print("Are you sure that you want to exit from the app?\n\n[1] - yes\n[2] - no\n");
-                        }
-                        string ExitChoice = menu.Ask("");
-
-                        if (ExitChoice == "1")
-                        {
-                            Environment.Exit(0);
-                        }
-
-                        if (ExitChoice == "2")
-                        {
-                            ChangeViewMenuInput("0");
-                            //Affichage();
-                        }
-                        else
-                        {
-                            //throw new Exception();
-                            ChangeViewMenuInput("0", Erreur.InputErrorEN);
-                        }
+                    case "7":
+                        menu.Print(templatetop + "Are you sure that you want to exit from the app?\n\n [1] - yes\n [2] - no\n" + templatebot);
+                        SelectLangue("What is your choise");
 
                         break;
                     default:
@@ -421,67 +351,121 @@ namespace EasySave.Controller
             }
             catch (Exception)
             {
-               
-                ChangeViewMenuInput("0",Erreur.InputErrorEN);
-                //Affichage();
-
             }
         }
 
+        //Display function for an imput error in french
         public void DisplayErrorFr()
         {
-            //Change foreground color
-            Console.ForegroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.Red;//Change foreground color
             menu.Print("Erreur de saisie");
             Console.ForegroundColor = ConsoleColor.Gray;
         }
+
+        //Display function for an imput error in english
         public void DisplayErrorEN()
         {
-            //Change foreground color
-            Console.ForegroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.Red;//Change foreground color
             menu.Print("Imput error");
             Console.ForegroundColor = ConsoleColor.Gray;
         }
+
+        //Display function for a success message in french
         public void DisplaySuccessFr()
         {
-            //Change foreground color
-            Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.Green;//Change foreground color
             menu.Print("Succès de l'operation");
             Console.ForegroundColor = ConsoleColor.Gray;
         }
+
+        //Display function for a success message in english
         public void DisplaySuccessEN()
         {
-            //Change foreground color
-            Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.Green; //Change foreground color
             menu.Print("Operation is a Succes");
             Console.ForegroundColor = ConsoleColor.Gray;
         }
 
-        public void ChangeViewMenuInput(string a, Erreur inferreur = Erreur.NoErreur)
+        //Display function for a success message in english
+        public void DisplayAppError()
+        {
+            Console.ForegroundColor = ConsoleColor.Red; //Change foreground color
+            menu.Print("FATAL ERROR");
+            Console.ForegroundColor = ConsoleColor.Gray;
+        }
+
+        //Function that change the menu and display some error if they occur
+        public void ChangeViewMenuInput(string a, PopUpMessage inferreur = PopUpMessage.NoErreur)
         {
             menu.Clear();
 
-            if (inferreur == Erreur.InputErrorFR)
+            if (inferreur == PopUpMessage.InputError && model.language == "fr" )
             {
-               DisplayErrorFr();   
+               DisplayErrorFr();
             }
 
-            if (inferreur == Erreur.InputErrorEN)
+            if (inferreur == PopUpMessage.InputError && model.language == "en")
             {
                 DisplayErrorEN();   
             }
-            if (inferreur == Erreur.SuccesFR)
+            if (inferreur == PopUpMessage.Success && model.language == "fr")
             {
                 DisplaySuccessFr();
             }
 
-            if (inferreur == Erreur.SuccesEN)
+            if (inferreur == PopUpMessage.Success && model.language == "en")
             {
                 DisplaySuccessEN();
             }
+
             model.SetMenuView(a);
-                Affichage();
-            
+            Affichage();
         }
-    }
+
+        public string templatetop = "===========================================================\n\n\t Welcome in EasySave\n\n";
+        public string templatebot = "\n===========================================================";
+
+        private void SelectLangue(string whattodisplay)
+        {
+            string ExitChoice = menu.Ask(whattodisplay);
+
+            try
+            {
+                if (ExitChoice == "1")
+                {
+                    Environment.Exit(0);
+                }
+                if (ExitChoice == "2")
+                {
+                    ChangeViewMenuInput("0");
+                }
+                else
+                {
+                    throw new Exception();
+                }
+            }
+            catch (Exception)
+            {
+                InputException("7");
+            }
+        }
+
+
+        private void InputException(string choiseview)
+        {
+                if (model.language == "fr")
+                { 
+                    ChangeViewMenuInput(choiseview, PopUpMessage.InputError); 
+                }
+                if (model.language == "en")
+                {
+                    ChangeViewMenuInput(choiseview, PopUpMessage.InputError);
+                }
+                else
+                {
+                DisplayAppError();
+                }
+            }
+        
+        }
 }
