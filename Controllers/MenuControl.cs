@@ -4,7 +4,7 @@ using System.Text;
 using EasySave.Model;
 using EasySave.View;
 
-namespace EasySave.Controller
+namespace EasySave.Controllers
 {
     class MenuControl
     {

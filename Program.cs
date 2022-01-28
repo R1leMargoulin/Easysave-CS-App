@@ -1,6 +1,6 @@
 ﻿using System;
 using EasySave.Model;
-using EasySave.Controller;
+using EasySave.Controllers;
 using EasySave.View;
 
 namespace EasySave

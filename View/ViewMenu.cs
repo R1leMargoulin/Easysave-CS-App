@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using EasySave.Model;
-using EasySave.Controller;
+using EasySave.Controllers;
 
 namespace EasySave.View
 {
