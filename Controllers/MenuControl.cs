@@ -152,7 +152,7 @@ namespace EasySave.Controllers
                     case "4":
                         menu.Print(templatetop + "\nAffichage des sauvegardes disponibles : \n\n" + GetAllBackup() + templatebot);
                         //menu.Print(GetAllBackup());          
-                        menu.Print("Quelle sauvegarde voulez vous supprimer?");
+                        menu.Print("\nQuelle sauvegarde voulez vous supprimer?");
                         var deleteindex = Convert.ToInt32(menu.Ask("Quelle est votre choix : "));
                         controllerbackup.DeleteBackup(deleteindex);
                         ChangeViewMenuInput("0", PopUpMessage.Success);
@@ -169,7 +169,7 @@ namespace EasySave.Controllers
                         int updateIndex = Convert.ToInt32(menu.Ask("Quel est votre choix : "));
 
                         menu.Print("Que voulez vous modifier dans la sauvegarde ?"); //stringmenu 5.2
-                        menu.Print("1 - Nom de la sauvegarde \n2 - Chemin de la ressource a sauvegarder\n3 - chemin de l'emplacement de la sauvegarde\n4 - Type de sauvegarde\n"); //stringmenu 5.3
+                        menu.Print("\n [1] - Nom de la sauvegarde \n [2] - Chemin de la ressource a sauvegarder\n [3] - chemin de l'emplacement de la sauvegarde\n [4] - Type de sauvegarde\n"); //stringmenu 5.3
 
 
                         int whatToModifyChoice = Convert.ToInt32(menu.Ask("Quel est votre choix : "));
@@ -342,7 +342,7 @@ namespace EasySave.Controllers
                     case "4":
                         menu.Print(templatetop + "\nDisplay of available saves : \n\n" + GetAllBackup() + "\n" + templatebot);
 
-                        menu.Print("Wich save would you want to delete?");
+                        menu.Print("\nWich save would you want to delete?");
                         var deleteindex = Convert.ToInt32(menu.Ask("What is your choise : "));
                         controllerbackup.DeleteBackup(deleteindex);
                         ChangeViewMenuInput("0", PopUpMessage.Success);
@@ -357,7 +357,7 @@ namespace EasySave.Controllers
                         int updateIndex = Convert.ToInt32(menu.Ask("What is your choise : "));
 
                         menu.Print("What would you want to modify in this save?");
-                        menu.Print(" [1] - Name of the save\n [2] - Source path of the element to save\n [3] - Destination path to save in\n [4] - Type of the save\n");
+                        menu.Print("\n [1] - Name of the save\n [2] - Source path of the element to save\n [3] - Destination path to save in\n [4] - Type of the save\n");
                         int whatToModifyChoice = Convert.ToInt32(menu.Ask(""));
                         ListBackup(updateIndex);
                         if (whatToModifyChoice == 1)
@@ -464,7 +464,7 @@ namespace EasySave.Controllers
         public void DisplaySuccessEN()
         {
             Console.ForegroundColor = ConsoleColor.Green; //Change foreground color
-            menu.Print("Operation is a Succes");
+            menu.Print("Operation is a Success");
             Console.ForegroundColor = ConsoleColor.Gray;
         }
         public string DisplayLanguageList()
