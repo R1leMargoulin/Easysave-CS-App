@@ -323,7 +323,7 @@ namespace EasySave.Controllers
                         menu.Print(GetAllBackup());
                         menu.Print("\n\n\n wich save dou you want to execute?");
                         int Exeindex = Convert.ToInt32(menu.Ask(""));
-                        ListBackup(Exeindex).BackupExecute(ListBackup(Exeindex).DirectorySource, ListBackup(Exeindex).DirectoryTarget);
+                        ListBackup(Exeindex).BackupExecute(ListBackup(Exeindex).DirectorySource,ListBackup(Exeindex).DirectoryTarget);
                         ChangeViewMenuInput("0");
                         Affichage();
 
