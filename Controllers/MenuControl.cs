@@ -56,11 +56,12 @@ namespace EasySave.Controllers
                          templatetop +
                         " [1] - Créer une sauvegarde\n" +
                         " [2] - Executer une sauvegarde\n" +
-                        " [3] - Montrer les détails d'une sauvegarde\n" +
-                        " [4] - Supprimer une sauvegarde\n" +
-                        " [5] - Modifier une sauvegarde\n" +
-                        " [6] - Changer la langue\n" +
-                        " [7] - Fermer l'application\n" +
+                        " [3] - Executer toutes les sauvegardes\n" +
+                        " [4] - Montrer les détails d'une sauvegarde\n" +
+                        " [5] - Supprimer une sauvegarde\n" +
+                        " [6] - Modifier une sauvegarde\n" +
+                        " [7] - Changer la langue\n" +
+                        " [8] - Fermer l'application\n" +
                         templatebot
                         );
 
@@ -129,12 +130,20 @@ namespace EasySave.Controllers
 
                         menu.Print("Quelle sauvegarde voulez vous executer?"); //Stringmenu 2.2
                         int Executeindex = Convert.ToInt32(menu.Ask("Quel est votre choix : "));
-                        ListBackup(Executeindex).BackupExecute(ListBackup(Executeindex).DirectorySource, ListBackup(Executeindex).DirectoryTarget);
+                        ListBackup(Executeindex).BackupExecute();
                         ChangeViewMenuInput("0");
                         Affichage();
 
                         break;
-                    case "3": //Display Backup Informations
+
+                    case "3": // display of mode 2, executing a save
+
+                        controllerbackup.ExecuteAllBackup();
+                        ChangeViewMenuInput("0");
+                        Affichage();
+
+                        break;
+                    case "4": //Display Backup Informations
                         menu.Print(templatetop + "\nAffichage des sauvegardes disponibles : \n\n" + GetAllBackup() + templatebot); //stringmenu Displaysave
 
                         //menu.Print(GetAllBackup());
@@ -149,7 +158,7 @@ namespace EasySave.Controllers
 
                         break;
 
-                    case "4":
+                    case "5":
                         menu.Print(templatetop + "\nAffichage des sauvegardes disponibles : \n\n" + GetAllBackup() + templatebot);
                         //menu.Print(GetAllBackup());          
                         menu.Print("\nQuelle sauvegarde voulez vous supprimer?");
@@ -160,7 +169,7 @@ namespace EasySave.Controllers
 
                         break;
 
-                    case "5"://Update
+                    case "6"://Update
                         menu.Print(templatetop + "\nAffichage des sauvegardes disponibles : \n\n" + GetAllBackup() + templatebot);//stringmenu DisplaySave
 
                         //  menu.Print(GetAllBackup());
@@ -206,7 +215,7 @@ namespace EasySave.Controllers
 
                         break;
 
-                    case "6":
+                    case "7":
                         menu.Print(templatetop + "\nQuel langage voulez vous afficher? \n\n" + DisplayLanguageList() + "\n" + templatebot);
                         //menu.Print(templatetop + "\nQuel langage voulez vous afficher?\n");//stringmenu 6.1
                         //int languageCounter = 1;
@@ -222,7 +231,7 @@ namespace EasySave.Controllers
                         Affichage();
                         break;
 
-                    case "7":
+                    case "8":
                         menu.Print(templatetop + "Etes vous sur de vouloir quitter l'application?\n\n [1] - oui\n [2] - non\n" + templatebot);
                         SelectLangue("Quel est votre choix : ");
                         break;
@@ -252,11 +261,12 @@ namespace EasySave.Controllers
                         templatetop +
                         " [1] - Create a save\n" +
                         " [2] - Execute a save\n" +
-                        " [3] - Show a save detail\n" +
-                        " [4] - Delete a save\n" +
-                        " [5] - Modify a save\n" +
-                        " [6] - Change language settings\n" +
-                        " [7] - Close the application\n" +
+                        " [3] - Execute all save\n" +
+                        " [4] - Show a save detail\n" +
+                        " [5] - Delete a save\n" +
+                        " [6] - Modify a save\n" +
+                        " [7] - Change language settings\n" +
+                        " [8] - Close the application\n" +
                         templatebot
                         );
 
@@ -321,12 +331,20 @@ namespace EasySave.Controllers
 
                         menu.Print("Wich save dou you want to execute?");
                         int Exeindex = Convert.ToInt32(menu.Ask("What is your choise : "));
-                        ListBackup(Exeindex).BackupExecute(ListBackup(Exeindex).DirectorySource, ListBackup(Exeindex).DirectoryTarget);
+                        ListBackup(Exeindex).BackupExecute();
                         ChangeViewMenuInput("0");
                         Affichage();
 
                         break;
-                    case "3":
+
+                    case "3": // display of mode 2, executing a save
+
+                        controllerbackup.ExecuteAllBackup();
+                        ChangeViewMenuInput("0");
+                        Affichage();
+
+                        break;
+                    case "4":
                         menu.Print(templatetop + "\nDisplay of available saves : \n\n" + GetAllBackup() + "\n" + templatebot);
 
                         menu.Print("From wich save would you want informations?");
@@ -339,7 +357,7 @@ namespace EasySave.Controllers
 
                         break;
 
-                    case "4":
+                    case "5":
                         menu.Print(templatetop + "\nDisplay of available saves : \n\n" + GetAllBackup() + "\n" + templatebot);
 
                         menu.Print("\nWich save would you want to delete?");
@@ -350,7 +368,7 @@ namespace EasySave.Controllers
 
                         break;
 
-                    case "5":
+                    case "6":
                         menu.Print(templatetop + "\nDisplay of available saves : \n\n" + GetAllBackup() + "\n" + templatebot);
 
                         menu.Print("Wich save would you want to modify?");
@@ -391,7 +409,7 @@ namespace EasySave.Controllers
 
                         break;
 
-                    case "6":
+                    case "7":
                         menu.Print(templatetop + "\nWich language would you want to display? \n\n" + DisplayLanguageList() + "\n" + templatebot);
                         //int languageCounter = 1;
                         //foreach (String language in model.GetLanguageList()) //foreach languages available, we will display.
@@ -406,7 +424,7 @@ namespace EasySave.Controllers
                         break;
 
 
-                    case "7":
+                    case "8":
                         menu.Print(templatetop + "Are you sure that you want to exit from the app?\n\n [1] - yes\n [2] - no\n" + templatebot);
                         SelectLangue("What is your choise");
 

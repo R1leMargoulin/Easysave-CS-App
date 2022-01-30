@@ -45,10 +45,12 @@ namespace EasySave.Model
                         listFile.Add(item);
                     }
                 }
-                foreach (var itemsource in fileListSource)
+
+                foreach (var itemtarget in fileListTarget)
                 {
-                    foreach (var itemtarget in fileListTarget)
+                    foreach (var itemsource in fileListSource)
                     {
+
 
                         if (itemsource.Name == itemtarget.Name)
                         {
@@ -56,17 +58,18 @@ namespace EasySave.Model
                             {
                                 listFile.Add(itemsource);
                             }
-                            
+
                         }
-                        
+
                         if (test.Contains(itemsource.Name) == false)//If the file is not contains in the list, it's add to the list
                         {
                             listFile.Add(itemsource);
                         }
-                        break;
-                      
                     }
+
                 }
+                    
+                
             }
             foreach (var subitem in subdirectory) //this loop call the function for every sub-directory, to have all files
             {
@@ -77,32 +80,38 @@ namespace EasySave.Model
         }
 
         //Execute the backup to the target directory
-        public void BackupExecute(string source, string targetDirectory)
+        public void BackupExecute()
         {
-            var sourceDirectory = new DirectoryInfo(source);
-            var test = new DirectoryInfo(targetDirectory);
+            var sourceDirectory = new DirectoryInfo(DirectorySource);
+            var test = new DirectoryInfo(DirectoryTarget);
             var fileList = new List<FileInfo>();
-            fileList = GetFileListFromDirectory(fileList, source, targetDirectory);
+            fileList = GetFileListFromDirectory(fileList, DirectorySource, DirectoryTarget);
       
             var totalfiles = sourceDirectory.GetFiles().Length;//Count the file in source Directory
-            var totalfileslefttodo = sourceDirectory.GetFiles().Length;
+            var totalfileslefttodo = sourceDirectory.GetFiles().Length + 1;
 
-           
-                
+            long lenght = 0;
+            foreach(var file in fileList)
+            {
+                lenght += file.Length;
+            } 
+               
+               
             foreach (var file in fileList)
-             {
+             { 
+               
                 string filepath;
 
                 string subdirectorypath = file.DirectoryName.Split(sourceDirectory.Name)[1];
                 
-                if (subdirectorypath != string.Empty)
+                if (subdirectorypath != String.Empty)
                 {
-                    filepath = targetDirectory + subdirectorypath;
+                    filepath =  DirectoryTarget + subdirectorypath;
                 }
 
                 else
                 {
-                    filepath = targetDirectory;
+                    filepath = DirectoryTarget;
                 }
 
                
@@ -117,7 +126,7 @@ namespace EasySave.Model
                 file.CopyTo(filepath, true);//Copy the file in the target directory and allowing the overwriting of an existings file
                 totalfileslefttodo--;
                 new LogDaily(Name, file.FullName, filepath, file.Length / 1000 , stopwatch.ElapsedMilliseconds); //Create a new LogDaily with the properties of the backup
-                new LogState(Name, file.FullName, filepath, file.Length / 1000, stopwatch.ElapsedMilliseconds, totalfileslefttodo, "Active", 0, totalfiles); //Create a new LogState with the properties of the backup
+                new LogState(Name, file.FullName, filepath, lenght / 1000, stopwatch.ElapsedMilliseconds, totalfileslefttodo, "Active", 0, totalfiles); //Create a new LogState with the properties of the backup
                      
                 stopwatch.Stop();
              }

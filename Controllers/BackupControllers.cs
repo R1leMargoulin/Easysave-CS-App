@@ -24,10 +24,20 @@ namespace EasySave.Controllers
             if(index < 5)
             {
 
-           
             BackupList.Add(backup);
-            SaveBackup(); }
+            SaveBackup();
             
+            }
+            
+        }
+
+        public void ExecuteAllBackup()
+        {
+            foreach(Backup backup in BackupList)
+            {
+                backup.BackupExecute();
+            }
+
         }
 
         public void DeleteBackup(int index)
@@ -85,18 +95,7 @@ namespace EasySave.Controllers
             }
 
             return content;
-        }
-
-        public int CountBackup(List<Backup> list)
-        {
-            int i = 0;
-            foreach (var item in list)
-            {
-                i++;
-            }
-            return i;
-        }
-        
+        }        
         
     }
 }
