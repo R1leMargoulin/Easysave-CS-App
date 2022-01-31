@@ -139,7 +139,7 @@ namespace EasySave.Controllers
                     case "3": // display of mode 2, executing a save
 
                         controllerbackup.ExecuteAllBackup();
-                        ChangeViewMenuInput("0");
+                        ChangeViewMenuInput("0", PopUpMessage.Success);
                         Affichage();
 
                         break;
@@ -213,7 +213,6 @@ namespace EasySave.Controllers
 
                         break;
 
-                        break;
 
                     case "7":
                         menu.Print(templatetop + "\nQuel langage voulez vous afficher? \n\n" + DisplayLanguageList() + "\n" + templatebot);
@@ -286,10 +285,11 @@ namespace EasySave.Controllers
 
                     case "1": //View of mode 1, creating of a new save
 
-                        var nomSave = menu.Ask("Type a name for your save : ");
+                        menu.Print(templatetop + "\n [*] - Creation of a save \n" + templatebot);
+                        var nomSave = menu.Ask("\n Type the bath of the element you want to save : ");
                         backup.Name = nomSave;
 
-                        var sourcePath = menu.Ask("Type the path of the element you want to save : ");
+                        var sourcePath = menu.Ask("\n Type the path of the element you want to save : ");
                         backup.DirectorySource = sourcePath;
 
                         var savePath = menu.Ask("Type the path to save in : ");
@@ -307,14 +307,14 @@ namespace EasySave.Controllers
                         {
                             backup.BackupType = BackupType.Complet;
                             controllerbackup.AddBackup(backup);
-                            ChangeViewMenuInput("0");
+                            ChangeViewMenuInput("0", PopUpMessage.Success);
                             Affichage();
                         }
                         if (choixType == 2)
                         {
                             backup.BackupType = BackupType.Differentielle;
                             controllerbackup.AddBackup(backup);
-                            ChangeViewMenuInput("0");
+                            ChangeViewMenuInput("0", PopUpMessage.Success);
                             Affichage();
                         }
                         else
@@ -332,7 +332,7 @@ namespace EasySave.Controllers
                         menu.Print("Wich save dou you want to execute?");
                         int Exeindex = Convert.ToInt32(menu.Ask("What is your choise : "));
                         ListBackup(Exeindex).BackupExecute();
-                        ChangeViewMenuInput("0");
+                        ChangeViewMenuInput("0", PopUpMessage.Success);
                         Affichage();
 
                         break;
@@ -340,7 +340,7 @@ namespace EasySave.Controllers
                     case "3": // display of mode 2, executing a save
 
                         controllerbackup.ExecuteAllBackup();
-                        ChangeViewMenuInput("0");
+                        ChangeViewMenuInput("0", PopUpMessage.Success);
                         Affichage();
 
                         break;
