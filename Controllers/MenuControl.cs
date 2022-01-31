@@ -67,7 +67,7 @@ namespace EasySave.Controllers
 
 
                         string choice = menu.Ask("Veuillez entrer un chiffre correspondant aux propositions:");
-                        if (choice == "1" || choice == "2" || choice == "3" || choice == "4" || choice == "5" || choice == "6" || choice == "7")
+                        if (choice == "1" || choice == "2" || choice == "3" || choice == "4" || choice == "5" || choice == "6" || choice == "7" || choice =="8")
                         {
                             ChangeViewMenuInput(choice);
                         }
@@ -271,7 +271,7 @@ namespace EasySave.Controllers
 
                         //int choice = Convert.ToInt32(menu.Ask());
                         string choice = menu.Ask("Please, Enter a number corresponding to the menu : ");
-                        if (choice == "1" || choice == "2" || choice == "3" || choice == "4" || choice == "5" || choice == "6" || choice == "7")
+                        if (choice == "1" || choice == "2" || choice == "3" || choice == "4" || choice == "5" || choice == "6" || choice == "7" || choice == "8")
                         {
                             ChangeViewMenuInput(choice);
                         }
