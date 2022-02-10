@@ -1,0 +1,16 @@
+﻿<Window x:Class="EasySave.View.UpdateBackup"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EasySave.View"
+        mc:Ignorable="d"
+        Title="UpdateBackup" Height="383" Width="413">
+    <Grid>
+        <TextBox Name="BackupName" HorizontalAlignment="Left" Margin="87,58,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="DirectorySource" HorizontalAlignment="Left" Margin="87,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="DirectoryTarget" HorizontalAlignment="Left" Margin="87,149,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button Click="UpdateBackupadd" Content="Sauvegarder" HorizontalAlignment="Left" Margin="127,214,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

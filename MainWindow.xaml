@@ -6,22 +6,27 @@
         xmlns:local="clr-namespace:EasySave"
         xmlns:ViewModels="clr-namespace:EasySave.ViewModel" d:DataContext="{d:DesignInstance Type=ViewModels:BackupViewModel}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        
+        Title="MainWindow" Height="424" Width="800">
     <Window.Resources>
         <ViewModels:BackupViewModel x:Key="List"/>
     </Window.Resources>
-    <Grid Margin="0,0,318,-6">
+    <Grid Margin="0,0,318,0">
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="Black"/>
                 <GradientStop Color="#FF543B3B" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <Button Click="Button_Add" Content="Ajouter" HorizontalAlignment="Left" Margin="369,160,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.586,1.931"/>
-        
-        <Frame Name="Main" Margin="493,-4,-327,-4"/>
+        <Button Click="Button_Add" Content="Ajouter" HorizontalAlignment="Left" Margin="362,160,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.586,1.931" Width="70">
+
+        </Button>
         <ListBox x:Name="ListBoxBackup" Margin="0,0,147,0"/>
-        <Grid Margin="493,0,-316,0"/>
+        <Button Click="Button_Update" Content="Modifier" HorizontalAlignment="Left" Margin="362,204,0,0" VerticalAlignment="Top" Width="70"/>
+        <Button Click="DeleteBackup" Content="Supprimer" HorizontalAlignment="Left" Margin="362,249,0,0" VerticalAlignment="Top" Width="70"/>
+        <Button Click="ExecuteBackup" Content="Executer" HorizontalAlignment="Left" Margin="362,295,0,0" VerticalAlignment="Top" Width="70"/>
+        <Button Click="ExecuteAllBackup" Content="ExecuteAll" HorizontalAlignment="Left" Margin="362,337,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.661" Width="70"/>
+        <ProgressBar Name="ProgressBar" HorizontalAlignment="Left" Height="13" Margin="340,71,0,0" VerticalAlignment="Top" Width="122"/>
 
     </Grid>
 </Window>

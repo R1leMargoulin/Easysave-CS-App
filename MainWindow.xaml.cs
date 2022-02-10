@@ -4,7 +4,9 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
+using System.Threading;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Navigation;
@@ -45,11 +47,7 @@ namespace EasySave
             if (new FileInfo(backuppath).Length != 0)
             {
                 var backupList = File.ReadAllText(backuppath);
-                ListBackup = JsonConvert.DeserializeObject<List<Backup>>(backupList);
-
-               
-
-                
+                ListBackup = JsonConvert.DeserializeObject<List<Backup>>(backupList); 
             }
 
             else
@@ -66,7 +64,8 @@ namespace EasySave
         }
         public void Button_Add(object sender, EventArgs e)
         {
-            Main.Content = CreateBackup.GetPage();
+            CreateBackup createBackup = new CreateBackup();
+            createBackup.Show();
           
         }
         internal static void SaveBackup(List<Backup> list)
@@ -76,23 +75,58 @@ namespace EasySave
             File.WriteAllText(backuppath, data);
         }
 
-       
+      public Backup IndexList()
+        {
+            int index = ListBoxBackup.SelectedIndex;
+            Backup backup = BackupList[index];
+
+            return backup;
+
+        }
+
+        public void Button_Update(object sender, EventArgs e)
+        {
+            UpdateBackup updateBackup = new UpdateBackup(IndexList());
+            updateBackup.Show();
+        }
+
+        public void DeleteBackup(object sender, EventArgs e)
+        {
+            List<Backup> list = MainWindow.GetPage().BackupList;
+            Backup backup = IndexList();
+            list.Remove(backup);
+            MainWindow.SaveBackup(list);
+            Refresh();
+        }
 
         internal void Refresh()
         {
+            
             BackupList = MainWindow.ListBackup();
             ListBoxBackup.Items.Clear();
             foreach (var backup in BackupList)
             {
                 ListBoxBackup.Items.Add(backup.Name);
             }
-           
-            
+                      
         }
-
-        private void tanguy_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+       
+        public void ExecuteBackup(object sender, EventArgs e)
         {
+            int index = ListBoxBackup.SelectedIndex;
 
+            MainWindow.GetPage().BackupList[index].BackupExecute();
+            MessageBoxResult messageBox = MessageBox.Show("tu es très fort bg, tout est bon");
         }
+
+        public void ExecuteAllBackup(object sender, EventArgs e)
+        {
+            foreach(var item in BackupList)
+            {
+                item.BackupExecute();
+            }
+        }
+
+        
     }
 }

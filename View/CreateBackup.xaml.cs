@@ -17,7 +17,7 @@ namespace EasySave.View
     /// <summary>
     /// Interaction logic for CreateBackup.xaml
     /// </summary>
-    public partial class CreateBackup : Page
+    public partial class CreateBackup : Window
 
     {
         private static CreateBackup home = null;
@@ -48,7 +48,8 @@ namespace EasySave.View
             list.Add(backup);
             MainWindow.SaveBackup(list);
             MainWindow.GetPage().Refresh();
-
+            Close();
+            
             
 
         }
