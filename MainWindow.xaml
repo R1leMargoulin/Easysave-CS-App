@@ -1,0 +1,32 @@
+﻿<Window x:Class="EasySave.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EasySave"
+        xmlns:ViewModels="clr-namespace:EasySave.ViewModel" d:DataContext="{d:DesignInstance Type=ViewModels:BackupViewModel}"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <ViewModels:BackupViewModel x:Key="List"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Black"/>
+                <GradientStop Color="#FF543B3B" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <DataGrid Name="tanguy" AutoGenerateColumns="False" IsReadOnly="True" CanUserSortColumns="False" Margin="10,67,428,26" SelectionChanged="tanguy_SelectionChanged" Background="White">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="D" Header="Nom" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
+                <DataGridTextColumn Header="Répertoire source" Binding="{Binding DirectorySource}" />
+                <DataGridTextColumn Header="Répertoire cible" Binding="{Binding DirectoryTarget}" />
+                <DataGridTextColumn Header="Type de sauvegarde" Binding="{Binding BackupType}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Click="Button_Add" Content="Ajouter" HorizontalAlignment="Left" Margin="453,121,0,0" VerticalAlignment="Top"/>
+        <Button Content="R" HorizontalAlignment="Left" Margin="512,220,0,0" VerticalAlignment="Top" Click="Refresh"/>
+
+    </Grid>
+</Window>

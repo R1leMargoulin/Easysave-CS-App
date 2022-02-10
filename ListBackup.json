@@ -1,0 +1,20 @@
+[
+  {
+    "Name": "complet",
+    "DirectorySource": "C:\\Users\\vgoudeau\\Documents\\test b",
+    "DirectoryTarget": "C:\\Users\\vgoudeau\\Documents\\TEST A",
+    "BackupType": 1
+  },
+  {
+    "Name": "Diff",
+    "DirectorySource": "C:\\Users\\vgoudeau\\Documents\\test b",
+    "DirectoryTarget": "C:\\Users\\vgoudeau\\Documents\\test",
+    "BackupType": 2
+  },
+  {
+    "Name": "test",
+    "DirectorySource": "D",
+    "DirectoryTarget": "d",
+    "BackupType": 1
+  }
+]
