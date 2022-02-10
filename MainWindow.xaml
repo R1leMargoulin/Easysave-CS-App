@@ -26,7 +26,8 @@
         <Button Click="DeleteBackup" Content="Supprimer" HorizontalAlignment="Left" Margin="362,249,0,0" VerticalAlignment="Top" Width="70"/>
         <Button Click="ExecuteBackup" Content="Executer" HorizontalAlignment="Left" Margin="362,295,0,0" VerticalAlignment="Top" Width="70"/>
         <Button Click="ExecuteAllBackup" Content="ExecuteAll" HorizontalAlignment="Left" Margin="362,337,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.661" Width="70"/>
-        <ProgressBar Name="ProgressBar" HorizontalAlignment="Left" Height="13" Margin="340,71,0,0" VerticalAlignment="Top" Width="122"/>
+        <Button Content="Pause" HorizontalAlignment="Left" Margin="380,70,0,0" VerticalAlignment="Top" Click="Button_Pause"/>
+        <Button Content="Play" HorizontalAlignment="Left" Margin="380,116,0,0" VerticalAlignment="Top" Click="Button_Play"/>
 
     </Grid>
 </Window>

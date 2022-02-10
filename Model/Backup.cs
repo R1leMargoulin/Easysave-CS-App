@@ -3,17 +3,29 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Threading;
 
 namespace EasySave.Model
 {
     public class Backup
     {
+        private static EventWaitHandle waitHandle = new ManualResetEvent(initialState: true);
 
         public string Name { get; set; }
         public string DirectorySource { get; set; }
         public string DirectoryTarget { get; set; }
         public BackupType BackupType { get; set; }
 
+
+        public bool IsProcessRunning()
+        {
+            Process[] process = Process.GetProcessesByName("notepad");
+            if(process.Length > 0)
+            {
+                return true;
+            }
+            return false;
+        }
         public List<FileInfo> GetFileListFromDirectory(List<FileInfo> listFile, string source, string target)
         {
             var sourcedirectory = new DirectoryInfo(source);
@@ -78,7 +90,17 @@ namespace EasySave.Model
 
             return listFile;
         }
+       
+        public void Pause()
+        {
+            Thread.CurrentThread.Interrupt();
+        }
+        public void Play()
+        {
+            Thread.CurrentThread.Start();
+        }
 
+        private static Mutex mutex = new Mutex();
         //Execute the backup to the target directory
         public void BackupExecute()
         {
@@ -100,6 +122,7 @@ namespace EasySave.Model
             foreach (var file in fileList)
             {
 
+               
                 string filepath;
 
                 string subdirectorypath = file.DirectoryName.Split(sourceDirectory.Name)[1];

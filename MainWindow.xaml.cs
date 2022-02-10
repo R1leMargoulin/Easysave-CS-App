@@ -113,10 +113,21 @@ namespace EasySave
        
         public void ExecuteBackup(object sender, EventArgs e)
         {
-            int index = ListBoxBackup.SelectedIndex;
+            Backup backup = new Backup();
+            if(backup.IsProcessRunning() == false)
+            {
 
-            MainWindow.GetPage().BackupList[index].BackupExecute();
-            MessageBoxResult messageBox = MessageBox.Show("tu es très fort bg, tout est bon");
+                
+            int index = ListBoxBackup.SelectedIndex;
+                
+                MainWindow.GetPage().BackupList[index].BackupExecute();
+            MessageBoxResult messageBox = MessageBox.Show("tu es très fort bg, tout est bon"); 
+            }
+
+            else
+            {
+                MessageBoxResult messageBox = MessageBox.Show("Une application métier est lancée");
+            }
         }
 
         public void ExecuteAllBackup(object sender, EventArgs e)
@@ -127,6 +138,22 @@ namespace EasySave
             }
         }
 
-        
+        private void Button_Pause(object sender, RoutedEventArgs e)
+        {
+            foreach(var item in BackupList)
+            {
+                item.Pause();
+                MessageBoxResult messageBox = MessageBox.Show("La copie de fichier a été mis en pause");
+            }
+        }
+
+        private void Button_Play(object sender, RoutedEventArgs e)
+        {
+            foreach (var item in BackupList)
+            {
+                item.Play();
+                
+            }
+        }
     }
 }
