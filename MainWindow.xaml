@@ -10,23 +10,18 @@
     <Window.Resources>
         <ViewModels:BackupViewModel x:Key="List"/>
     </Window.Resources>
-    <Grid>
+    <Grid Margin="0,0,318,-6">
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="Black"/>
                 <GradientStop Color="#FF543B3B" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <DataGrid Name="tanguy" AutoGenerateColumns="False" IsReadOnly="True" CanUserSortColumns="False" Margin="10,67,428,26" SelectionChanged="tanguy_SelectionChanged" Background="White">
-            <DataGrid.Columns>
-                <DataGridTextColumn x:Name="D" Header="Nom" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
-                <DataGridTextColumn Header="Répertoire source" Binding="{Binding DirectorySource}" />
-                <DataGridTextColumn Header="Répertoire cible" Binding="{Binding DirectoryTarget}" />
-                <DataGridTextColumn Header="Type de sauvegarde" Binding="{Binding BackupType}" />
-            </DataGrid.Columns>
-        </DataGrid>
-        <Button Click="Button_Add" Content="Ajouter" HorizontalAlignment="Left" Margin="453,121,0,0" VerticalAlignment="Top"/>
-        <Button Content="R" HorizontalAlignment="Left" Margin="512,220,0,0" VerticalAlignment="Top" Click="Refresh"/>
+        <Button Click="Button_Add" Content="Ajouter" HorizontalAlignment="Left" Margin="369,160,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.586,1.931"/>
+        
+        <Frame Name="Main" Margin="493,-4,-327,-4"/>
+        <ListBox x:Name="ListBoxBackup" Margin="0,0,147,0"/>
+        <Grid Margin="493,0,-316,0"/>
 
     </Grid>
 </Window>

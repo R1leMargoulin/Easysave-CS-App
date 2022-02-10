@@ -17,6 +17,7 @@ namespace EasySave
     public partial class MainWindow : Window
     {
         public List<Backup> BackupList { get; set; }
+        private static MainWindow home = null;
 
         private ObservableCollection<Backup> users = new ObservableCollection<Backup>();
 
@@ -24,13 +25,17 @@ namespace EasySave
         {
            
             InitializeComponent();
-            ListBackup();
+            home = this;
+            
+            Refresh();
            
         }
       
-        public void ListBackup()
+        internal static List<Backup> ListBackup()
         {
             string backuppath = Environment.CurrentDirectory + @"\ListBackup.json";
+            List<Backup> ListBackup;
+
 
             if (!File.Exists(backuppath))
             {
@@ -40,38 +45,47 @@ namespace EasySave
             if (new FileInfo(backuppath).Length != 0)
             {
                 var backupList = File.ReadAllText(backuppath);
-                BackupList = JsonConvert.DeserializeObject<List<Backup>>(backupList);
+                ListBackup = JsonConvert.DeserializeObject<List<Backup>>(backupList);
 
-                tanguy.ItemsSource = BackupList;
+               
 
+                
             }
 
             else
             {
-                BackupList = new List<Backup>();
-            }
+                ListBackup = new List<Backup>();
+            }return ListBackup;
+        }
+
+        public static MainWindow GetPage()
+        {
+            if(home != null)
+                return home;
+           return new MainWindow();
         }
         public void Button_Add(object sender, EventArgs e)
         {
-            MenuView menuView = new MenuView();
-             menuView.Show();
+            Main.Content = CreateBackup.GetPage();
           
         }
-        public void SaveBackup()
+        internal static void SaveBackup(List<Backup> list)
         {
             string backuppath = Environment.CurrentDirectory + @"\ListBackup.json";
-            var data = JsonConvert.SerializeObject(BackupList, Formatting.Indented);
+            var data = JsonConvert.SerializeObject(list, Formatting.Indented);
             File.WriteAllText(backuppath, data);
         }
 
        
 
-        public void Refresh(object sender, RoutedEventArgs e)
+        internal void Refresh()
         {
-            tanguy.ItemsSource = null;
-            tanguy.ItemsSource = BackupList;
-            tanguy.Items.Refresh();
-            
+            BackupList = MainWindow.ListBackup();
+            ListBoxBackup.Items.Clear();
+            foreach (var backup in BackupList)
+            {
+                ListBoxBackup.Items.Add(backup.Name);
+            }
            
             
         }
