@@ -144,13 +144,13 @@ namespace EasySave.Model
                 Directory.CreateDirectory(filepath); // Create a directory at the target path
 
 
-                cryptoProcess.StartInfo.Arguments = file.FullName + " 11001101 " + filepath;
-                cryptoProcess.Start();
+                
 
                 Stopwatch stopwatch = Stopwatch.StartNew(); //Start a stopwatch to know the file transfer Time
                 filepath = Path.Combine(filepath, file.Name);
 
-
+                cryptoProcess.StartInfo.Arguments = file.FullName + " 11001101 " + filepath;
+                cryptoProcess.Start();
 
                 //
                 //file.CopyTo(filepath, true);//Copy the file in the target directory and allowing the overwriting of an existings file
