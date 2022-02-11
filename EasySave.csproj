@@ -15,4 +15,8 @@
     <Folder Include="Settings\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModel\" />
+  </ItemGroup>
+
 </Project>

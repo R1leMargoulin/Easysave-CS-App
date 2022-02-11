@@ -40,7 +40,7 @@ namespace EasySave.View
             Backup.Name = BackupName.Text;
             Backup.DirectorySource = DirectorySource.Text;
             Backup.DirectoryTarget = DirectoryTarget.Text;
-            MainWindow mainWindow = MainWindow.GetPage();
+            MainWindow mainWindow = MainWindow.GetMainWindow();
             int index = mainWindow.BackupList.IndexOf(Backup);
             mainWindow.BackupList[index] = Backup;
 

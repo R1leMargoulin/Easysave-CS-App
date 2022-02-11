@@ -19,7 +19,7 @@ namespace EasySave
     public partial class MainWindow : Window
     {
         public List<Backup> BackupList { get; set; }
-        private static MainWindow home = null;
+        private static MainWindow mainWindow = null;
 
         private ObservableCollection<Backup> users = new ObservableCollection<Backup>();
 
@@ -27,7 +27,7 @@ namespace EasySave
         {
            
             InitializeComponent();
-            home = this;
+            mainWindow = this;
             
             Refresh();
            
@@ -56,10 +56,10 @@ namespace EasySave
             }return ListBackup;
         }
 
-        public static MainWindow GetPage()
+        public static MainWindow GetMainWindow()
         {
-            if(home != null)
-                return home;
+            if(mainWindow != null)
+                return mainWindow;
            return new MainWindow();
         }
         public void Button_Add(object sender, EventArgs e)
@@ -92,7 +92,7 @@ namespace EasySave
 
         public void DeleteBackup(object sender, EventArgs e)
         {
-            List<Backup> list = MainWindow.GetPage().BackupList;
+            List<Backup> list = MainWindow.GetMainWindow().BackupList;
             Backup backup = IndexList();
             list.Remove(backup);
             MainWindow.SaveBackup(list);
@@ -120,8 +120,8 @@ namespace EasySave
                 
             int index = ListBoxBackup.SelectedIndex;
                 
-                MainWindow.GetPage().BackupList[index].BackupExecute();
-            MessageBoxResult messageBox = MessageBox.Show("tu es très fort bg, tout est bon"); 
+                MainWindow.GetMainWindow().BackupList[index].BackupExecute();
+            MessageBoxResult messageBox = MessageBox.Show("La sauvegarde a été exécuté"); 
             }
 
             else

@@ -20,34 +20,34 @@ namespace EasySave.View
     public partial class CreateBackup : Window
 
     {
-        private static CreateBackup home = null;
+        private static CreateBackup createBackup = null;
         public CreateBackup()
         {
-            home = this;
+            createBackup = this;
             InitializeComponent();
           
         }
 
-        public static CreateBackup GetPage()
+        public static CreateBackup GetCreateBackup()
         {
-            if(home!= null)
-                return home;
+            if(createBackup != null)
+                return createBackup;
             return new CreateBackup();  
         }
 
         private void CreateBackupAdd( object sender, RoutedEventArgs e)
         {
             Backup backup = new Backup();
-            backup.Name = home.Name.Text;
-            backup.DirectorySource = home.Source.Text;
-            backup.DirectoryTarget = home.Target.Text;
+            backup.Name = createBackup.Name.Text;
+            backup.DirectorySource = createBackup.Source.Text;
+            backup.DirectoryTarget = createBackup.Target.Text;
             backup.BackupType = BackupType.Complet;
             
             List<Backup> list = MainWindow.ListBackup();
 
             list.Add(backup);
             MainWindow.SaveBackup(list);
-            MainWindow.GetPage().Refresh();
+            MainWindow.GetMainWindow().Refresh();
             Close();
             
             
