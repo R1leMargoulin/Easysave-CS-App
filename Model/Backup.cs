@@ -124,7 +124,7 @@ namespace EasySave.Model
                 Process cryptoProcess = new Process();
                 cryptoProcess.StartInfo.UseShellExecute = false;
 
-                cryptoProcess.StartInfo.FileName = "CryptoSoft.exe";
+                cryptoProcess.StartInfo.FileName = "../../../CryptoSoft/CryptoSoft.exe";
 
                 string filepath;
 
