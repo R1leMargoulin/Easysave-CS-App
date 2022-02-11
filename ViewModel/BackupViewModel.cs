@@ -17,7 +17,7 @@ namespace EasySave.ViewModel
 
 
 
-
+        
 
         protected void OnpropertyChanged(string propertyName)
         {
