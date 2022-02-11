@@ -121,8 +121,11 @@ namespace EasySave.Model
 
             foreach (var file in fileList)
             {
+                Process cryptoProcess = new Process();
+                cryptoProcess.StartInfo.UseShellExecute = false;
 
-               
+                cryptoProcess.StartInfo.FileName = "../../../CryptoSoft/CryptoSoft.exe";
+
                 string filepath;
 
                 string subdirectorypath = file.DirectoryName.Split(sourceDirectory.Name)[1];
@@ -141,12 +144,16 @@ namespace EasySave.Model
                 Directory.CreateDirectory(filepath); // Create a directory at the target path
 
 
-
+                
 
                 Stopwatch stopwatch = Stopwatch.StartNew(); //Start a stopwatch to know the file transfer Time
                 filepath = Path.Combine(filepath, file.Name);
 
-                file.CopyTo(filepath, true);//Copy the file in the target directory and allowing the overwriting of an existings file
+                cryptoProcess.StartInfo.Arguments = file.FullName + " 11001101 " + filepath;
+                cryptoProcess.Start();
+
+                //
+                //file.CopyTo(filepath, true);//Copy the file in the target directory and allowing the overwriting of an existings file
                 totalfileslefttodo--;
                 new LogDaily(Name, file.FullName, filepath, file.Length / 1000, stopwatch.ElapsedMilliseconds); //Create a new LogDaily with the properties of the backup
                 new LogState(Name, file.FullName, filepath, lenght / 1000, stopwatch.ElapsedMilliseconds, totalfileslefttodo, "Active", 0, totalfiles); //Create a new LogState with the properties of the backup
