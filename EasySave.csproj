@@ -19,7 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CryptoSoft\CryptoSoft\CryptoSoft.csproj" />
+    <Folder Include="CryptoSoft\" />
   </ItemGroup>
 
 </Project>
