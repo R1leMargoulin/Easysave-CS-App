@@ -7,27 +7,59 @@
         xmlns:ViewModels="clr-namespace:EasySave.ViewModel" d:DataContext="{d:DesignInstance Type=ViewModels:BackupViewModel}"
         mc:Ignorable="d"
         
-        Title="MainWindow" Height="424" Width="800">
+        Title="MainWindow" Height="500" Width="900">
     <Window.Resources>
         <ViewModels:BackupViewModel x:Key="List"/>
     </Window.Resources>
-    <Grid Margin="0,0,318,0">
+    <Border Background="#FF543B3B"
+          BorderBrush="Black" 
+          BorderThickness="2" 
+          Padding="25">
+        <Grid  ShowGridLines="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                
+        </Grid.RowDefinitions>
+            
+            
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="Black"/>
                 <GradientStop Color="#FF543B3B" Offset="1"/>
             </LinearGradientBrush>
-        </Grid.Background>
-        <Button Click="Button_Add" Content="Ajouter" HorizontalAlignment="Left" Margin="362,160,0,0" VerticalAlignment="Top" RenderTransformOrigin="-2.586,1.931" Width="70">
+        </Grid.Background> 
 
-        </Button>
-        <ListBox x:Name="ListBoxBackup" Margin="0,0,147,0"/>
-        <Button Click="Button_Update" Content="Modifier" HorizontalAlignment="Left" Margin="362,204,0,0" VerticalAlignment="Top" Width="70"/>
-        <Button Click="DeleteBackup" Content="Supprimer" HorizontalAlignment="Left" Margin="362,249,0,0" VerticalAlignment="Top" Width="70"/>
-        <Button Click="ExecuteBackup" Content="Executer" HorizontalAlignment="Left" Margin="362,295,0,0" VerticalAlignment="Top" Width="70"/>
-        <Button Click="ExecuteAllBackup" Content="ExecuteAll" HorizontalAlignment="Left" Margin="362,337,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.661" Width="70"/>
-        <Button Content="Pause" HorizontalAlignment="Left" Margin="380,70,0,0" VerticalAlignment="Top" Click="Button_Pause"/>
-        <Button Content="Play" HorizontalAlignment="Left" Margin="380,116,0,0" VerticalAlignment="Top" Click="Button_Play"/>
+    
 
+    <ListBox x:Name="ListBoxBackup" Grid.Column="0" Grid.RowSpan="10" SelectionChanged="ListBoxBackup_SelectionChanged"/>
+    <ListBox x:Name="ListBoxBackup2" Grid.Column="2" Grid.RowSpan="10" SelectionChanged="ListBoxBackup_SelectionChanged"/>
+
+            <Button Click="Button_Add" Grid.Column="1" Grid.Row="3"  Content="Ajouter" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="-2.586,1.931" Width="70" Height="20"></Button>
+            <Button Click="Button_Update" Grid.Column="1"  Grid.Row="4" Content="Modifier" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Height="20"/>
+            <Button Click="DeleteBackup" Grid.Column="1"  Grid.Row="5" Content="Supprimer" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" RenderTransformOrigin="-0.271,0.403" Height="20"/>
+            <Button Click="ExecuteBackup" Grid.Column="1"  Grid.Row="6" Content="Executer" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Height="20"/>
+            <Button Click="ExecuteAllBackup" Grid.Column="1"  Grid.Row="7" Content="ExecuteAll" HorizontalAlignment="Center"  VerticalAlignment="Center" RenderTransformOrigin="0.5,0.661" Width="70" Height="20"/>
+            <Button Content="Pause" Grid.Column="1"  Grid.Row="1" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Click="Button_Pause" Height="20"/>
+            <Button Content="Play" Grid.Column="1"  Grid.Row="0" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Click="Button_Play" Height="20"/>
+            <Button Content="Stop" Grid.Column="1"  Grid.Row="2" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Click="Button_Play" Height="20"/>
+            <Button Content="Quiter" Grid.Column="1" Grid.Row="8" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Click="Button_Play" Height="20"/>
+            <Button Content="Réglages" Grid.Column="1" Grid.Row="9" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Click="Button_Play" Height="20"/>
+ 
     </Grid>
+    </Border>
+
 </Window>

@@ -155,5 +155,10 @@ namespace EasySave
                 
             }
         }
+
+        private void ListBoxBackup_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
