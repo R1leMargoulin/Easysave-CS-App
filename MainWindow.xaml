@@ -11,17 +11,17 @@
     <Window.Resources>
         <ViewModels:BackupViewModel x:Key="List"/>
     </Window.Resources>
-    <Border Background="#FF543B3B"
+    <Border
           BorderBrush="Black" 
           BorderThickness="2" 
-          Padding="25">
+          Padding="25" Background="#FFFFC107">
         <Grid  ShowGridLines="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="4*"/>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="4*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
@@ -32,34 +32,48 @@
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="1*"/>
-                
-        </Grid.RowDefinitions>
-            
-            
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="Black"/>
-                <GradientStop Color="#FF543B3B" Offset="1"/>
-            </LinearGradientBrush>
-        </Grid.Background> 
 
-    
+            </Grid.RowDefinitions>
 
-    <ListBox x:Name="ListBoxBackup" Grid.Column="0" Grid.RowSpan="10" SelectionChanged="ListBoxBackup_SelectionChanged"/>
-    <ListBox x:Name="ListBoxBackup2" Grid.Column="2" Grid.RowSpan="10" SelectionChanged="ListBoxBackup_SelectionChanged"/>
 
-            <Button Click="Button_Add" Grid.Column="1" Grid.Row="3"  Content="Ajouter" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="-2.586,1.931" Width="70" Height="20"></Button>
+
+            <ListBox x:Name="ListBoxBackup" Grid.Column="0" Grid.RowSpan="10" SelectionChanged="ListBoxBackup_SelectionChanged">
+                <ListBox.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="20"/>
+                    </Style>
+                </ListBox.Resources>
+
+            </ListBox>
+
+            <Button  Click="Button_Add" Grid.Column="1" Grid.Row="3"  Content="Ajouter" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="-2.586,1.931" Width="70" Height="20"></Button>
             <Button Click="Button_Update" Grid.Column="1"  Grid.Row="4" Content="Modifier" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Height="20"/>
             <Button Click="DeleteBackup" Grid.Column="1"  Grid.Row="5" Content="Supprimer" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" RenderTransformOrigin="-0.271,0.403" Height="20"/>
             <Button Click="ExecuteBackup" Grid.Column="1"  Grid.Row="6" Content="Executer" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Height="20"/>
             <Button Click="ExecuteAllBackup" Grid.Column="1"  Grid.Row="7" Content="ExecuteAll" HorizontalAlignment="Center"  VerticalAlignment="Center" RenderTransformOrigin="0.5,0.661" Width="70" Height="20"/>
             <Button Content="Pause" Grid.Column="1"  Grid.Row="1" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Click="Button_Pause" Height="20"/>
-            <Button Content="Play" Grid.Column="1"  Grid.Row="0" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Click="Button_Play" Height="20"/>
+
+            <Button Content="Play" Grid.Column="1"  Grid.Row="0" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Click="Button_Play" Height="20">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
             <Button Content="Stop" Grid.Column="1"  Grid.Row="2" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Click="Button_Play" Height="20"/>
             <Button Content="Quiter" Grid.Column="1" Grid.Row="8" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Click="Button_Play" Height="20"/>
             <Button Content="Réglages" Grid.Column="1" Grid.Row="9" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Click="Button_Play" Height="20"/>
- 
-    </Grid>
+
+            <Border Background="White" BorderThickness="1,1,1,1" CornerRadius="20,20,20,20" Grid.RowSpan="10" Grid.Column="2">
+                <Grid>
+                    <Label Content="Label" Margin="0,0,288,402"/>
+
+                </Grid>
+
+            </Border>
+
+        </Grid>
     </Border>
 
 </Window>
