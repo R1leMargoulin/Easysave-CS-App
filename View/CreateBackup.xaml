@@ -9,7 +9,7 @@
       Title="CreateBackup">
 
     <Grid>
-        <TextBox Name="Name" HorizontalAlignment="Left" Margin="116,68,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="206" Height="27"/>
+        <TextBox Name="Namee" HorizontalAlignment="Left" Margin="116,68,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="206" Height="27"/>
         <Label Content="Nom de la Sauvegarde" HorizontalAlignment="Left" Margin="116,37,0,0" VerticalAlignment="Top" Width="152"/>
         <TextBox Name="Source" HorizontalAlignment="Left" Margin="116,136,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="206" Height="26"/>
         <TextBox Name="Target" HorizontalAlignment="Left" Margin="116,207,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Height="31"/>

@@ -28,8 +28,9 @@ namespace EasySave
            
             InitializeComponent();
             home = this;
-            
+            BackupName();
             Refresh();
+            
            
         }
       
@@ -56,7 +57,7 @@ namespace EasySave
             }return ListBackup;
         }
 
-        public static MainWindow GetPage()
+        public static MainWindow GetMainWindow()
         {
             if(home != null)
                 return home;
@@ -84,6 +85,18 @@ namespace EasySave
 
         }
 
+        public void BackupName()
+        {
+            if(ListBoxBackup.SelectedIndex != -1)
+            {
+                Dispatcher.Invoke(() => { BackupNameMenu.Text = IndexList().Name; });
+            }
+            else
+            {
+                BackupNameMenu.Text = "";
+            }
+        }
+
         public void Button_Update(object sender, EventArgs e)
         {
             UpdateBackup updateBackup = new UpdateBackup(IndexList());
@@ -92,7 +105,7 @@ namespace EasySave
 
         public void DeleteBackup(object sender, EventArgs e)
         {
-            List<Backup> list = MainWindow.GetPage().BackupList;
+            List<Backup> list = MainWindow.GetMainWindow().BackupList;
             Backup backup = IndexList();
             list.Remove(backup);
             MainWindow.SaveBackup(list);
@@ -120,7 +133,7 @@ namespace EasySave
                 
             int index = ListBoxBackup.SelectedIndex;
                 
-                MainWindow.GetPage().BackupList[index].BackupExecute();
+                MainWindow.GetMainWindow().BackupList[index].BackupExecute();
             MessageBoxResult messageBox = MessageBox.Show("tu es très fort bg, tout est bon"); 
             }
 
@@ -160,5 +173,7 @@ namespace EasySave
         {
 
         }
+
+       
     }
 }
