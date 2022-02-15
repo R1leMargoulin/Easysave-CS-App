@@ -32,7 +32,15 @@ namespace EasySave.View
             BackupName.Text = backup.Name;
             DirectorySource.Text = backup.DirectorySource;
             DirectoryTarget.Text = backup.DirectoryTarget;
-            
+            if (backup.BackupType == BackupType.Complet)
+            {
+                RadioComplete.IsChecked = true;
+            }
+            if (backup.BackupType == BackupType.Differentielle)
+            {
+                RadioDiffe.IsChecked = true;
+            }
+
         }
         private void UpdateBackupadd(object sender, RoutedEventArgs e)
         {
@@ -40,6 +48,14 @@ namespace EasySave.View
             Backup.Name = BackupName.Text;
             Backup.DirectorySource = DirectorySource.Text;
             Backup.DirectoryTarget = DirectoryTarget.Text;
+            if (RadioComplete.IsChecked == true)
+            {
+                Backup.BackupType = BackupType.Complet; 
+            }
+            if (RadioDiffe.IsChecked == true)
+            {
+                Backup.BackupType = BackupType.Differentielle;
+            }
             MainWindow mainWindow = MainWindow.GetMainWindow();
             int index = mainWindow.BackupList.IndexOf(Backup);
             mainWindow.BackupList[index] = Backup;
@@ -49,6 +65,11 @@ namespace EasySave.View
             Close();
 
 
+
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
 
         }
     }

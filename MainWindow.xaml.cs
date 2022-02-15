@@ -28,7 +28,8 @@ namespace EasySave
            
             InitializeComponent();
             home = this;
-            BackupName();
+            
+            ListBoxBackup.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(BackupName);
             Refresh();
             
            
@@ -85,11 +86,15 @@ namespace EasySave
 
         }
 
-        public void BackupName()
+        internal void BackupName(object sender, EventArgs e)
         {
-            if(ListBoxBackup.SelectedIndex != -1)
+            int index = ListBoxBackup.SelectedIndex;
+            if (index >= 0)
             {
-                Dispatcher.Invoke(() => { BackupNameMenu.Text = IndexList().Name; });
+                Dispatcher.Invoke(() => { BackupNameMenu.Text = BackupList[index].Name; });
+                Dispatcher.Invoke(() => { BackupSourceMenu.Text = BackupList[index].DirectorySource; });
+                Dispatcher.Invoke(() => { BackupTargetMenu.Text = BackupList[index].DirectoryTarget; });
+                Dispatcher.Invoke(() => { if (BackupList[index].BackupType == BackupType.Complet) { CompleteMenu.IsChecked = true; } if (BackupList[index].BackupType == BackupType.Differentielle) { DiffMenu.IsChecked = true; } });
             }
             else
             {
@@ -174,6 +179,9 @@ namespace EasySave
 
         }
 
-       
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

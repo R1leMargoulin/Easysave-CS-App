@@ -41,8 +41,14 @@ namespace EasySave.View
             backup.Name = createBackup.Namee.Text;
             backup.DirectorySource = createBackup.Source.Text;
             backup.DirectoryTarget = createBackup.Target.Text;
-            backup.BackupType = BackupType.Complet;
-            
+            if(RadioComplet.IsChecked == true)
+            {
+                backup.BackupType = BackupType.Complet;
+            }
+            if (RadioDiff.IsChecked == true)
+            {
+                backup.BackupType = BackupType.Differentielle;
+            }
             List<Backup> list = MainWindow.ListBackup();
 
             list.Add(backup);
@@ -51,6 +57,11 @@ namespace EasySave.View
             Close();
             
             
+
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
 
         }
     }
