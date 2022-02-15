@@ -4,13 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EasySave"
-        xmlns:ViewModels="clr-namespace:EasySave.ViewModel" d:DataContext="{d:DesignInstance Type=ViewModels:BackupViewModel}"
+       
         mc:Ignorable="d"
         
         Title="MainWindow" Height="500" Width="900">
-    <Window.Resources>
-        <ViewModels:BackupViewModel x:Key="List"/>
-    </Window.Resources>
+
     <Border
           BorderBrush="Black" 
           BorderThickness="2" 
@@ -129,6 +127,7 @@
                     <Label Content="Nom&#xD;&#xA;" HorizontalAlignment="Left" Margin="122,70,0,0" VerticalAlignment="Top" Height="25"/>
                     <RadioButton Name="CompleteMenu" Content="Sauvegarde Complète" HorizontalAlignment="Left" Margin="191,225,0,0" VerticalAlignment="Top" Checked="RadioButton_Checked"/>
                     <RadioButton Name="DiffMenu" Content="Sauvegarde Différentielle" HorizontalAlignment="Left" Margin="21,225,0,0" VerticalAlignment="Top"/>
+                    <CheckBox Content="CheckBox" HorizontalAlignment="Left" Margin="251,101,0,0" VerticalAlignment="Top"/>
 
 
                 </Grid>
