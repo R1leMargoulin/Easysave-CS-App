@@ -6,8 +6,8 @@ namespace EasySave.Model
 {
     class Settings
     {
-        public String setting_language { get; set; }
-        public String setting_log { get; set; }
+        public Language setting_language { get; set; }
+        public Log_Format setting_log { get; set; }
         public String setting_process { get; set; }
 
     }

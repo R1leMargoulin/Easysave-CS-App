@@ -21,6 +21,9 @@ namespace EasySave
         public List<Backup> BackupList { get; set; }
         private static MainWindow home = null;
 
+        public Language language;
+        public Log_Format logformat;
+
         private ObservableCollection<Backup> users = new ObservableCollection<Backup>();
 
         public MainWindow()
