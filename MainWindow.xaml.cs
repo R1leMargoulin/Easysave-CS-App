@@ -34,7 +34,30 @@ namespace EasySave
             
            
         }
-      
+
+        public void SettingUpdate()
+        {
+            //on a first hand, we read the file and change only what we want to change in it
+            //(this will be usefull if we want to easily add settings content)
+
+            if (File.Exists(@"Settings.json"))
+            {
+                string jsonSettings = File.ReadAllText(@"Settings.json");
+                Settings settings = JsonSerializer.Deserialize<Settings>(jsonSettings);
+                settings.setting_language = language;
+
+                //then, on another hand, we save our file settings
+                jsonSettings = JsonSerializer.Serialize(settings);
+                File.WriteAllText(@"Settings.json", jsonSettings);
+            }
+            else
+            {
+                Settings settings = new Settings { setting_language = language };
+                string jsonSettings = JsonSerializer.Serialize(settings);
+                File.WriteAllText(@"Settings.json", jsonSettings);
+            }
+        }
+
         internal static List<Backup> ListBackup()
         {
             string backuppath = Environment.CurrentDirectory + @"\ListBackup.json";
