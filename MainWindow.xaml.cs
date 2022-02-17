@@ -64,6 +64,11 @@ namespace EasySave
                 return home;
            return new MainWindow();
         }
+
+        private void ExitApp(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
+        }
         public void Button_Add(object sender, EventArgs e)
         {
             CreateBackup createBackup = new CreateBackup();

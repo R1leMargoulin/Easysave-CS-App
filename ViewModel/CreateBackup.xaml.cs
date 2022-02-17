@@ -1,9 +1,11 @@
 ﻿using EasySave.Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -59,10 +61,33 @@ namespace EasySave.View
             
 
         }
+        private void BrowseSourceButton(object sender, RoutedEventArgs e)
+        {
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK )
+            {
+                Source.Text = fbd.SelectedPath;
+            }
+        }
+
+        private void BrowseTargetButton(object sender, RoutedEventArgs e)
+        {
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Target.Text = fbd.SelectedPath;
+            }
+        }
+
+    
+        private void Cancel(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-
+            
         }
     }
 }

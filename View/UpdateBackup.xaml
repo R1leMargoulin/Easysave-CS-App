@@ -5,23 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EasySave.View"
         mc:Ignorable="d"
-        Title="UpdateBackup" Height="286" Width="285">
+        Title="UpdateBackup" Height="286" Width="355">
     <Grid Background="#FFFFC107" Margin="0,0,-33,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="58*"/>
             <RowDefinition Height="77*"/>
         </Grid.RowDefinitions>
         <TextBox Name="BackupName" HorizontalAlignment="Left" Margin="104,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <TextBox Name="DirectorySource" HorizontalAlignment="Left" Margin="104,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.RowSpan="2"/>
-        <TextBox Name="DirectoryTarget" HorizontalAlignment="Left" Margin="104,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Row="1"/>
+        <TextBox Name="DirectorySource" IsReadOnly="True" HorizontalAlignment="Left" Margin="104,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.RowSpan="2"/>
+        <TextBox Name="DirectoryTarget" IsReadOnly="True" HorizontalAlignment="Left" Margin="104,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Row="1"/>
         <Button Click="UpdateBackupadd" Content="Sauvegarder" HorizontalAlignment="Center" Margin="0,113,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <Button Content="Annuler" Click="Cancel" HorizontalAlignment="Left" Margin="362,307,0,0" VerticalAlignment="Top" Height="26" Width="66"/>
         <Label Content="Nom de sauvegarde&#xD;&#xA;" HorizontalAlignment="Center" Margin="0,26,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.555,0.635"/>
         <Label Content="Répertoire Source&#xD;&#xA;" HorizontalAlignment="Left" Margin="101,78,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
         <Label Content="Répertoire  cible&#xD;&#xA;" HorizontalAlignment="Left" Margin="104,9,0,0" VerticalAlignment="Top" Height="24" Grid.Row="1"/>
         <RadioButton Name="RadioComplete" Content="Sauvegarde Complète&#xD;&#xA;" HorizontalAlignment="Left" Margin="11,77,0,0" VerticalAlignment="Top" Grid.Row="1"/>
         <RadioButton Name="RadioDiffe" Content="Sauvegarde Différentielle&#xD;&#xA;" HorizontalAlignment="Left" Margin="156,77,0,0" VerticalAlignment="Top" Grid.Row="1"/>
-        <CheckBox Content="Encryptage
-                  " HorizontalAlignment="Left" Margin="229,61,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
+        <CheckBox Content="Encryptage" HorizontalAlignment="Left" Margin="229,61,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked"/>
+        <Button x:Name="TargetPathButton" Content="Parcourir" Click="BrowseTargetButton" HorizontalAlignment="Left" Margin="18,213,0,0" VerticalAlignment="Top" Width="80" RenderTransformOrigin="0.624,5.191"/>
+        <Button x:Name="SourcePathButton" Content="Parcourir" Click="BrowseSourceButton" HorizontalAlignment="Left" Margin="18,139,0,0" VerticalAlignment="Top" Width="80"/>
 
     </Grid>
 </Window>

@@ -102,7 +102,7 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button Content="Quiter" Grid.Column="1" Grid.Row="8" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Click="Button_Play" Height="20">
+            <Button Click="ExitApp" Content="Quiter" Grid.Column="1" Grid.Row="8" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Height="20">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="10"/>
@@ -119,15 +119,15 @@
 
             <Border Background="White" BorderThickness="1,1,1,1" CornerRadius="20,20,20,20" Grid.RowSpan="10" Grid.Column="2">
                 <Grid>
-                    <TextBox Name="BackupNameMenu" HorizontalAlignment="Left" Margin="122,100,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
-                    <TextBox Name="BackupSourceMenu"  HorizontalAlignment="Left" Margin="122,149,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
-                    <Label Content="Répertoire Source" HorizontalAlignment="Left" Margin="122,118,0,0" VerticalAlignment="Top"/>
-                    <Label Content="Répertoire cible&#xD;&#xA;" HorizontalAlignment="Center" Margin="0,167,0,0" VerticalAlignment="Top" Height="29"/>
-                    <TextBox Name="BackupTargetMenu" HorizontalAlignment="Left" Margin="122,196,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
-                    <Label Content="Nom&#xD;&#xA;" HorizontalAlignment="Left" Margin="122,70,0,0" VerticalAlignment="Top" Height="25"/>
+                    <TextBox Name="BackupNameMenu" HorizontalAlignment="Left" Margin="36,70,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="206" IsReadOnly="True"/>
+                    <TextBox Name="BackupSourceMenu"  HorizontalAlignment="Left" Margin="36,130,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" IsReadOnly="True"/>
+                    <Label Content="Répertoire Source" HorizontalAlignment="Left" Margin="36,100,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Répertoire cible&#xD;&#xA;" HorizontalAlignment="Left" Margin="36,160,0,0" VerticalAlignment="Top" Height="29"/>
+                    <TextBox Name="BackupTargetMenu" HorizontalAlignment="Left" Margin="36,190,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" IsReadOnly="True"/>
+                    <Label Content="Nom"  HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="36,40,0,0" />
                     <RadioButton Name="CompleteMenu" Content="Sauvegarde Complète" HorizontalAlignment="Left" Margin="191,225,0,0" VerticalAlignment="Top" Checked="RadioButton_Checked"/>
                     <RadioButton Name="DiffMenu" Content="Sauvegarde Différentielle" HorizontalAlignment="Left" Margin="21,225,0,0" VerticalAlignment="Top"/>
-                    <CheckBox Content="CheckBox" HorizontalAlignment="Left" Margin="251,101,0,0" VerticalAlignment="Top"/>
+                    <CheckBox Content="Crypté" HorizontalAlignment="Left" Margin="21,263,0,0" VerticalAlignment="Top"/>
 
 
                 </Grid>
