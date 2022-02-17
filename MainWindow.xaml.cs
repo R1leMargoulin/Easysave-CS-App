@@ -10,6 +10,8 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Navigation;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace EasySave
 {
@@ -31,12 +33,30 @@ namespace EasySave
            
             InitializeComponent();
             home = this;
+
             
+            if (File.Exists(@"Settings.json"))
+            {
+                string jsonSettings = File.ReadAllText(@"Settings.json");
+                Settings settings = System.Text.Json.JsonSerializer.Deserialize<Settings>(jsonSettings); //reprise des parametres mis dans le fichier settings.json
+                language = settings.setting_language;
+                logformat = settings.setting_log;
+            }
+            else
+            {
+                language = Model.Language.fr;
+                logformat = Model.Log_Format.json;
+                SettingUpdate();
+
+            }
+
+
             ListBoxBackup.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(BackupName);
             Refresh();
-            
            
         }
+
+
 
         public void SettingUpdate()
         {
@@ -46,19 +66,31 @@ namespace EasySave
             if (File.Exists(@"Settings.json"))
             {
                 string jsonSettings = File.ReadAllText(@"Settings.json");
-                Settings settings = JsonSerializer.Deserialize<Settings>(jsonSettings);
+                Settings settings = System.Text.Json.JsonSerializer.Deserialize<Settings>(jsonSettings);
                 settings.setting_language = language;
+                settings.setting_log = logformat;
 
                 //then, on another hand, we save our file settings
-                jsonSettings = JsonSerializer.Serialize(settings);
+                jsonSettings = System.Text.Json.JsonSerializer.Serialize(settings);
                 File.WriteAllText(@"Settings.json", jsonSettings);
             }
             else
             {
-                Settings settings = new Settings { setting_language = language };
-                string jsonSettings = JsonSerializer.Serialize(settings);
+                Settings settings = new Settings { setting_language = language, setting_log = logformat };
+                string jsonSettings = System.Text.Json.JsonSerializer.Serialize(settings);
                 File.WriteAllText(@"Settings.json", jsonSettings);
             }
+        }
+
+        public void SetLanguage(Language a)
+        {
+            language = a;
+            SettingUpdate();
+        }
+        public void SetLogFormat(Log_Format a)
+        {
+            logformat = a;
+            SettingUpdate();
         }
 
         internal static List<Backup> ListBackup()
