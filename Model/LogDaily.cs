@@ -84,7 +84,7 @@ namespace EasySave.Model
                     XmlWriterSettings xmlWriterSettings = new XmlWriterSettings { Indent = true };
                     using (XmlWriter xml = XmlWriter.Create(path, xmlWriterSettings))
                     {
-                        xml.WriteStartElement($"logs_{ DateTime.Now:dd - MM - yyyy}");
+                        xml.WriteStartElement($"logs_{ DateTime.Now:dd-MM-yyyy}");
                         xml.WriteStartElement(Namelog);
                         xml.WriteElementString("FileSource",Sourcelog);
                         xml.WriteElementString("FileTarget", Targetlog);
@@ -99,13 +99,14 @@ namespace EasySave.Model
                 else
                 {
                     XmlDocument xmlDocument = new XmlDocument();
-                    xmlDocument.Load($"{path}.xml");
+                    xmlDocument.Load(path);
 
                     XPathNavigator navigator = xmlDocument.CreateNavigator();
+                    navigator.MoveToChild($"logs_{ DateTime.Now:dd-MM-yyyy}", "");
 
                     using (XmlWriter xml = navigator.AppendChild())
                     {
-                        xml.WriteStartElement($"logs_{ DateTime.Now:dd - MM - yyyy}");
+                        //xml.WriteStartElement($"logs_{ DateTime.Now:dd-MM-yyyy}");
                         xml.WriteStartElement(Namelog);
                         xml.WriteElementString("FileSource", Sourcelog);
                         xml.WriteElementString("FileTarget", Targetlog);
@@ -114,9 +115,9 @@ namespace EasySave.Model
                         xml.WriteElementString("FileTransferTime", Convert.ToString(Durationlog));
                         xml.WriteElementString("Time", DateTimelog.ToString());
                         xml.WriteEndElement();
-
                     }
-                    xmlDocument.Save($"{path}.xml");
+
+                    xmlDocument.Save(path);
                 }
 
 

@@ -40,7 +40,8 @@ namespace EasySave
                 string jsonSettings = File.ReadAllText(@"Settings.json");
                 Settings settings = System.Text.Json.JsonSerializer.Deserialize<Settings>(jsonSettings); //reprise des parametres mis dans le fichier settings.json
                 language = Settings.setting_language;
-                logformat = Settings.setting_log;
+                //logformat = Settings.setting_log;
+                Settings.setting_log = Log_Format.xml;
             }
             else
             {
