@@ -108,9 +108,20 @@ namespace EasySave
         }
 
         public void Button_Update(object sender, EventArgs e)
-        {
+        { 
+           if(ListBoxBackup.SelectedIndex == -1)
+            {
+
+                MessageBox.Show("Veuillez sélectionner une sauvegarde");
+
+            }
+            else
+            {
+
+            
             UpdateBackup updateBackup = new UpdateBackup(IndexList());
-            updateBackup.Show();
+            updateBackup.Show(); 
+           }
         }
 
         public void DeleteBackup(object sender, EventArgs e)
@@ -179,14 +190,6 @@ namespace EasySave
             }
         }
 
-        private void ListBoxBackup_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
+       
     }
 }

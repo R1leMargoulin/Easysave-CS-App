@@ -7,7 +7,7 @@
        
         mc:Ignorable="d"
         
-        Title="MainWindow" Height="500" Width="900">
+        Title="EasySave" Height="500" Width="900">
 
     <Border
           BorderBrush="Black" 
@@ -35,7 +35,7 @@
 
 
 
-            <ListBox x:Name="ListBoxBackup" Grid.Column="0" Grid.RowSpan="10" SelectionChanged="ListBoxBackup_SelectionChanged">
+            <ListBox x:Name="ListBoxBackup" Grid.Column="0" Grid.RowSpan="10">
                 <ListBox.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="20"/>
@@ -125,7 +125,7 @@
                     <Label Content="Répertoire cible&#xD;&#xA;" HorizontalAlignment="Left" Margin="36,160,0,0" VerticalAlignment="Top" Height="29"/>
                     <TextBox Name="BackupTargetMenu" HorizontalAlignment="Left" Margin="36,190,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" IsReadOnly="True"/>
                     <Label Content="Nom"  HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="36,40,0,0" />
-                    <RadioButton Name="CompleteMenu" Content="Sauvegarde Complète" HorizontalAlignment="Left" Margin="191,225,0,0" VerticalAlignment="Top" Checked="RadioButton_Checked"/>
+                    <RadioButton Name="CompleteMenu" Content="Sauvegarde Complète" HorizontalAlignment="Left" Margin="191,225,0,0" VerticalAlignment="Top" />
                     <RadioButton Name="DiffMenu" Content="Sauvegarde Différentielle" HorizontalAlignment="Left" Margin="21,225,0,0" VerticalAlignment="Top"/>
                     <CheckBox Content="Crypté" HorizontalAlignment="Left" Margin="21,263,0,0" VerticalAlignment="Top"/>
 
