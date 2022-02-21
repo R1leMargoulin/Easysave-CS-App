@@ -29,7 +29,7 @@ namespace EasySave.Model
             public string time;
         }
 
-        public LogDaily(string logname, string logfilesource, string logfiletarget, long logsize, double logduration)
+        public LogDaily(string logname, string logfilesource, string logfiletarget, long logsize, double logduration, Settings settings)
         {
             Namelog = logname;
             Sourcelog = logfilesource;
@@ -42,34 +42,85 @@ namespace EasySave.Model
             //Check if the directory exist and create it if it's doesn't exist
             Directory.CreateDirectory("./LogPath");
 
-            //Check if the file exist in the directory and create it if it doesn't exist
-            string path = $"{Pathlog}.json";
-            if (!File.Exists($"{Pathlog}.json"))
+            if (settings.setting_log == Log_Format.json)
             {
-                StreamWriter file = File.AppendText($"{Pathlog}.json");
-                file.Close();
+                //Check if the file exist in the directory and create it if it doesn't exist
+                string path = $"{Pathlog}.json";
+                if (!File.Exists($"{Pathlog}.json"))
+                {
+                    StreamWriter file = File.AppendText($"{Pathlog}.json");
+                    file.Close();
+                }
+
+                string LOGJSONData = File.ReadAllText(path); //Get data from the logFile
+
+                List<LogDailyData> logDailyData = JsonConvert.DeserializeObject<List<LogDailyData>>(LOGJSONData) ?? new List<LogDailyData>(); //Put the LOGJSONdata in List and check if the file is empty
+
+                logDailyData.Add(new LogDailyData()
+                {
+                    destPath = Sourcelog,
+                    Filesize = Sizelog,
+                    time = DateTimelog.ToString(),
+                    FileSource = Sourcelog,
+                    FileTarget = Targetlog,
+                    FileTransferTime = Durationlog,
+                    Name = Namelog
+
+                });
+
+                string ObjectJsonData = JsonConvert.SerializeObject(logDailyData, Newtonsoft.Json.Formatting.Indented); //Put the List in a Json string 
+
+
+                File.WriteAllText(path, ObjectJsonData); //Write the Json string in the file
             }
 
-            string LOGJSONData = File.ReadAllText(path); //Get data from the logFile
 
-            List<LogDailyData> logDailyData = JsonConvert.DeserializeObject<List<LogDailyData>>(LOGJSONData) ?? new List<LogDailyData>(); //Put the LOGJSONdata in List and check if the file is empty
-
-            logDailyData.Add(new LogDailyData()
+            if (settings.setting_log == Log_Format.xml)
             {
-                destPath = Sourcelog,
-                Filesize = Sizelog,
-                time = DateTimelog.ToString(),
-                FileSource = Sourcelog,
-                FileTarget = Targetlog,
-                FileTransferTime = Durationlog,
-                Name = Namelog
+                //Check if the file exist in the directory and create it if it doesn't exist
+                string path = $"{Pathlog}.xml";
+                if (!File.Exists($"{Pathlog}.xml"))
+                {
+                    XmlWriterSettings xmlWriterSettings = new XmlWriterSettings { Indent = true };
+                    using (XmlWriter xml = XmlWriter.Create(path, xmlWriterSettings))
+                    {
+                        xml.WriteStartElement($"logs_{ DateTime.Now:dd - MM - yyyy}");
+                        xml.WriteStartElement(Namelog);
+                        xml.WriteElementString("FileSource",Sourcelog);
+                        xml.WriteElementString("FileTarget", Targetlog);
+                        xml.WriteElementString("DestinationPath", Sourcelog);
+                        xml.WriteElementString("FileSize", Convert.ToString(Sizelog));
+                        xml.WriteElementString("FileTransferTime", Convert.ToString(Durationlog));
+                        xml.WriteElementString("Time",DateTimelog.ToString());
+                        xml.WriteEndElement();
 
-            });
+                    }
+                }
+                else
+                {
+                    XmlDocument xmlDocument = new XmlDocument();
+                    xmlDocument.Load($"{path}.xml");
 
-            string ObjectJsonData = JsonConvert.SerializeObject(logDailyData, Newtonsoft.Json.Formatting.Indented); //Put the List in a Json string 
+                    XPathNavigator navigator = xmlDocument.CreateNavigator();
+
+                    using (XmlWriter xml = navigator.AppendChild())
+                    {
+                        xml.WriteStartElement($"logs_{ DateTime.Now:dd - MM - yyyy}");
+                        xml.WriteStartElement(Namelog);
+                        xml.WriteElementString("FileSource", Sourcelog);
+                        xml.WriteElementString("FileTarget", Targetlog);
+                        xml.WriteElementString("DestinationPath", Sourcelog);
+                        xml.WriteElementString("FileSize", Convert.ToString(Sizelog));
+                        xml.WriteElementString("FileTransferTime", Convert.ToString(Durationlog));
+                        xml.WriteElementString("Time", DateTimelog.ToString());
+                        xml.WriteEndElement();
+
+                    }
+                    xmlDocument.Save($"{path}.xml");
+                }
 
 
-            File.WriteAllText(path, ObjectJsonData); //Write the Json string in the file
+            }
 
         }
     }
