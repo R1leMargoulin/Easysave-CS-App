@@ -99,7 +99,6 @@ namespace EasySave
                 Dispatcher.Invoke(() => { BackupNameMenu.Text = BackupList[index].Name; });
                 Dispatcher.Invoke(() => { BackupSourceMenu.Text = BackupList[index].DirectorySource; });
                 Dispatcher.Invoke(() => { BackupTargetMenu.Text = BackupList[index].DirectoryTarget; });
-                //Dispatcher.Invoke(() => { if (BackupList[index].BackupType == BackupType.Complet) { SaveType.Text = } });
                 Dispatcher.Invoke(() => { if (BackupList[index].BackupType == BackupType.Complet) { CompleteMenu.IsChecked = true; } if (BackupList[index].BackupType == BackupType.Differentielle) { DiffMenu.IsChecked = true; } });
             }
             else
@@ -112,9 +111,7 @@ namespace EasySave
         { 
            if(ListBoxBackup.SelectedIndex == -1)
             {
-
                 MessageBox.Show("Veuillez sélectionner une sauvegarde");
-
             }
             else
             {
@@ -127,11 +124,18 @@ namespace EasySave
 
         public void DeleteBackup(object sender, EventArgs e)
         {
-            List<Backup> list = MainWindow.GetMainWindow().BackupList;
-            Backup backup = IndexList();
-            list.Remove(backup);
-            MainWindow.SaveBackup(list);
-            Refresh();
+            if (ListBoxBackup.SelectedIndex == -1)
+            {
+                MessageBox.Show("Veuillez sélectionner une sauvegarde");
+            }
+            else
+            {
+                List<Backup> list = MainWindow.GetMainWindow().BackupList;
+                Backup backup = IndexList();
+                list.Remove(backup);
+                MainWindow.SaveBackup(list);
+                Refresh();
+            }
         }
 
         internal void Refresh()
@@ -148,20 +152,27 @@ namespace EasySave
        
         public void ExecuteBackup(object sender, EventArgs e)
         {
-            Backup backup = new Backup();
-            if(backup.IsProcessRunning() == false)
+            if (ListBoxBackup.SelectedIndex == -1)
             {
-
-                
-            int index = ListBoxBackup.SelectedIndex;
-                
-                MainWindow.GetMainWindow().BackupList[index].BackupExecute();
-            MessageBoxResult messageBox = MessageBox.Show("tu es très fort bg, tout est bon"); 
+                MessageBox.Show("Veuillez sélectionner une sauvegarde");
             }
-
             else
             {
-                MessageBoxResult messageBox = MessageBox.Show("Une application métier est lancée");
+                Backup backup = new Backup();
+                if (backup.IsProcessRunning() == false)
+                {
+
+
+                    int index = ListBoxBackup.SelectedIndex;
+
+                    MainWindow.GetMainWindow().BackupList[index].BackupExecute();
+                    MessageBoxResult messageBox = MessageBox.Show("tu es très fort bg, tout est bon");
+                }
+
+                else
+                {
+                    MessageBoxResult messageBox = MessageBox.Show("Une application métier est lancée");
+                }
             }
         }
 
@@ -175,19 +186,33 @@ namespace EasySave
 
         private void Button_Pause(object sender, RoutedEventArgs e)
         {
-            foreach(var item in BackupList)
+            if (ListBoxBackup.SelectedIndex == -1)
             {
-                item.Pause();
-                MessageBoxResult messageBox = MessageBox.Show("La copie de fichier a été mis en pause");
+                MessageBox.Show("Veuillez sélectionner une sauvegarde");
+            }
+            else
+            {
+                foreach (var item in BackupList)
+                {
+                    item.Pause();
+                    MessageBoxResult messageBox = MessageBox.Show("La copie de fichier a été mis en pause");
+                }
             }
         }
 
         private void Button_Play(object sender, RoutedEventArgs e)
         {
-            foreach (var item in BackupList)
+            if (ListBoxBackup.SelectedIndex == -1)
             {
-                item.Play();
-                
+                MessageBox.Show("Veuillez sélectionner une sauvegarde");
+            }
+            else
+            {
+                foreach (var item in BackupList)
+                {
+                    item.Play();
+
+                }
             }
         }
 

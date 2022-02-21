@@ -125,7 +125,7 @@
                     <Label Content="Répertoire cible&#xD;&#xA;" HorizontalAlignment="Left" Margin="36,160,0,0" VerticalAlignment="Top" Height="29"/>
                     <TextBox Name="BackupTargetMenu" HorizontalAlignment="Left" Margin="36,190,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" IsReadOnly="True"/>
                     <Label Content="Nom"  HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="36,40,0,0" />
-                    <RadioButton Name="CompleteMenu" Content="Sauvegarde Complète" HorizontalAlignment="Left" Margin="191,250,0,0" VerticalAlignment="Top" Checked="RadioButton_Checked" IsEnabled="False"/>
+                    <RadioButton Name="CompleteMenu" Content="Sauvegarde Complète" HorizontalAlignment="Left" Margin="191,250,0,0" VerticalAlignment="Top" IsEnabled="False"/>
                     <RadioButton Name="DiffMenu" Content="Sauvegarde Différentielle" HorizontalAlignment="Left" Margin="21,250,0,0" VerticalAlignment="Top" IsEnabled="False"/>
                     <CheckBox Content="Crypté" HorizontalAlignment="Left" Margin="21,300,0,0" VerticalAlignment="Top" IsEnabled="False"/>
 
