@@ -29,7 +29,7 @@ namespace EasySave.Model
             public string time;
         }
 
-        public LogDaily(string logname, string logfilesource, string logfiletarget, long logsize, double logduration, Settings settings)
+        public LogDaily(string logname, string logfilesource, string logfiletarget, long logsize, double logduration)
         {
             Namelog = logname;
             Sourcelog = logfilesource;
@@ -42,7 +42,7 @@ namespace EasySave.Model
             //Check if the directory exist and create it if it's doesn't exist
             Directory.CreateDirectory("./LogPath");
 
-            if (settings.setting_log == Log_Format.json)
+            if (Settings.setting_log == Log_Format.json)
             {
                 //Check if the file exist in the directory and create it if it doesn't exist
                 string path = $"{Pathlog}.json";
@@ -75,7 +75,7 @@ namespace EasySave.Model
             }
 
 
-            if (settings.setting_log == Log_Format.xml)
+            if (Settings.setting_log == Log_Format.xml)
             {
                 //Check if the file exist in the directory and create it if it doesn't exist
                 string path = $"{Pathlog}.xml";

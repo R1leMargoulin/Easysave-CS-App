@@ -39,8 +39,8 @@ namespace EasySave
             {
                 string jsonSettings = File.ReadAllText(@"Settings.json");
                 Settings settings = System.Text.Json.JsonSerializer.Deserialize<Settings>(jsonSettings); //reprise des parametres mis dans le fichier settings.json
-                language = settings.setting_language;
-                logformat = settings.setting_log;
+                language = Settings.setting_language;
+                logformat = Settings.setting_log;
             }
             else
             {
@@ -67,8 +67,8 @@ namespace EasySave
             {
                 string jsonSettings = File.ReadAllText(@"Settings.json");
                 Settings settings = System.Text.Json.JsonSerializer.Deserialize<Settings>(jsonSettings);
-                settings.setting_language = language;
-                settings.setting_log = logformat;
+                Settings.setting_language = language;
+                Settings.setting_log = logformat;
 
                 //then, on another hand, we save our file settings
                 jsonSettings = System.Text.Json.JsonSerializer.Serialize(settings);
@@ -76,8 +76,8 @@ namespace EasySave
             }
             else
             {
-                Settings settings = new Settings { setting_language = language, setting_log = logformat };
-                string jsonSettings = System.Text.Json.JsonSerializer.Serialize(settings);
+                Settings sett = new Settings();
+                string jsonSettings = System.Text.Json.JsonSerializer.Serialize(sett);
                 File.WriteAllText(@"Settings.json", jsonSettings);
             }
         }
