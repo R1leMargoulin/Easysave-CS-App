@@ -99,6 +99,7 @@ namespace EasySave
                 Dispatcher.Invoke(() => { BackupNameMenu.Text = BackupList[index].Name; });
                 Dispatcher.Invoke(() => { BackupSourceMenu.Text = BackupList[index].DirectorySource; });
                 Dispatcher.Invoke(() => { BackupTargetMenu.Text = BackupList[index].DirectoryTarget; });
+                //Dispatcher.Invoke(() => { if (BackupList[index].BackupType == BackupType.Complet) { SaveType.Text = } });
                 Dispatcher.Invoke(() => { if (BackupList[index].BackupType == BackupType.Complet) { CompleteMenu.IsChecked = true; } if (BackupList[index].BackupType == BackupType.Differentielle) { DiffMenu.IsChecked = true; } });
             }
             else

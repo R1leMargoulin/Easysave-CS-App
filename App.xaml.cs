@@ -13,5 +13,10 @@ namespace EasySave
     /// </summary>
     public partial class App : Application
     {
+
+        public static string messageError()
+        {
+            return "Erreur de Saisie";
+        }
     }
 }
