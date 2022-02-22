@@ -10,12 +10,22 @@ namespace EasySave.Model
     public class Backup
     {
         private static EventWaitHandle waitHandle = new ManualResetEvent(initialState: true);
+        public static List<string> AcceptedExtensionFiles = new List<string>()
+        {
+            ".pdf",
+            ".jpeg",
+            ".jpg"
+            
+        };
+
+        public List<FileInfo> priori = new List<FileInfo>();
 
         public string Name { get; set; }
         public string DirectorySource { get; set; }
         public string DirectoryTarget { get; set; }
         public BackupType BackupType { get; set; }
 
+        
 
         public bool IsProcessRunning()
         {
@@ -32,7 +42,9 @@ namespace EasySave.Model
             var targetdirectory = new DirectoryInfo(target);
             var fileListSource = sourcedirectory.GetFiles(); //Get all Files from the directory
             var fileListTarget = targetdirectory.GetFiles();
+           
             List<string> test = new List<string>();
+            
             foreach (var item in fileListTarget)
             {
                 test.Add(item.Name);
@@ -45,7 +57,15 @@ namespace EasySave.Model
             {
                 foreach (var item in fileListSource)
                 {
-                    listFile.Add(item);
+                    if (AcceptedExtensionFiles.Contains(item.Extension))
+                    {
+                        priori.Add(item);
+                    }
+                    else
+                    {
+                        listFile.Add(item);
+                    }
+                    
                 }
             }
             if (BackupType == BackupType.Differentielle)//If Backuptype is Differentielle, there is comparison in every file from the directory, and compare the name, if the name is equals, it checks the LastTimeWrite to only have the modified files.
@@ -54,6 +74,7 @@ namespace EasySave.Model
                 {
                     foreach (var item in fileListSource)
                     {
+                        
                         listFile.Add(item);
                     }
                 }
@@ -87,7 +108,7 @@ namespace EasySave.Model
             {
                 GetFileListFromDirectory(listFile, subitem.FullName, targetdirectory.FullName);
             }
-
+        
             return listFile;
         }
        
@@ -118,6 +139,41 @@ namespace EasySave.Model
                 lenght += file.Length;
             }
 
+            if(priori != null)
+            {
+                foreach( var file in priori)
+                {
+                    string filepath;
+
+                    string subdirectorypath = file.DirectoryName.Split(sourceDirectory.Name)[1];
+
+                    if (subdirectorypath != String.Empty)
+                    {
+                        filepath = DirectoryTarget + subdirectorypath;
+                    }
+
+                    else
+                    {
+                        filepath = DirectoryTarget;
+                    }
+
+
+                    Directory.CreateDirectory(filepath); // Create a directory at the target path
+
+
+
+
+                    Stopwatch stopwatch = Stopwatch.StartNew(); //Start a stopwatch to know the file transfer Time
+                    filepath = Path.Combine(filepath, file.Name);
+
+                    file.CopyTo(filepath, true);//Copy the file in the target directory and allowing the overwriting of an existings file
+                    totalfileslefttodo--;
+                    new LogDaily(Name, file.FullName, filepath, file.Length / 1000, stopwatch.ElapsedMilliseconds); //Create a new LogDaily with the properties of the backup
+                    new LogState(Name, file.FullName, filepath, lenght / 1000, stopwatch.ElapsedMilliseconds, totalfileslefttodo, "Active", 0, totalfiles); //Create a new LogState with the properties of the backup
+
+                    stopwatch.Stop();
+                }
+            }
 
             foreach (var file in fileList)
             {
