@@ -40,9 +40,9 @@ namespace EasySave
             if (File.Exists(@"Settings.json"))
             {
                 string jsonSettings = File.ReadAllText(@"Settings.json");
-                Settings settings = System.Text.Json.JsonSerializer.Deserialize<Settings>(jsonSettings); //reprise des parametres mis dans le fichier settings.json
-                language = Settings.setting_language;
-                logformat = Settings.setting_log;
+                Model.Settings settings = System.Text.Json.JsonSerializer.Deserialize<Model.Settings>(jsonSettings); //reprise des parametres mis dans le fichier settings.json
+                language = Model.Settings.setting_language;
+                logformat = Model.Settings.setting_log;
                 //Settings.setting_log = Log_Format.xml;
             }
             else
@@ -69,9 +69,9 @@ namespace EasySave
             if (File.Exists(@"Settings.json"))
             {
                 string jsonSettings = File.ReadAllText(@"Settings.json");
-                Settings settings = System.Text.Json.JsonSerializer.Deserialize<Settings>(jsonSettings);
-                Settings.setting_language = language;
-                Settings.setting_log = logformat;
+                Model.Settings settings = System.Text.Json.JsonSerializer.Deserialize<Model.Settings>(jsonSettings);
+                Model.Settings.setting_language = language;
+                Model.Settings.setting_log = logformat;
 
                 //then, on another hand, we save our file settings
                 jsonSettings = System.Text.Json.JsonSerializer.Serialize(settings);
@@ -79,7 +79,7 @@ namespace EasySave
             }
             else
             {
-                Settings sett = new Settings();
+                Model.Settings sett = new Model.Settings();
                 string jsonSettings = System.Text.Json.JsonSerializer.Serialize(sett);
                 File.WriteAllText(@"Settings.json", jsonSettings);
             }
@@ -233,7 +233,7 @@ namespace EasySave
                          Thread.Sleep(2000);
                          int index = ListBoxBackup.SelectedIndex;
 
-                         MainWindow.GetMainWindow().BackupList[index].BackupExecute();
+                         MainWindow.GetMainWindow().BackupList[index].BackupExecuteThread();
                          MessageBoxResult messageBox = MessageBox.Show("tu es très fort bg, tout est bon");
                      }
                  }
@@ -311,7 +311,7 @@ namespace EasySave
 
         private void LaunchSettings(object sender, RoutedEventArgs e)
         {
-            Settings _settings = new Settings();
+            ViewModel.Settings _settings = new ViewModel.Settings();
             _settings.Show();
         }
 
