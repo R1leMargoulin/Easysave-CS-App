@@ -102,7 +102,13 @@ namespace EasySave.Model
 
         private static Mutex mutex = new Mutex();
         //Execute the backup to the target directory
-        public void BackupExecute()
+
+        public void BackupExecuteThread(Backup Dir)
+        {
+            Thread t = new Thread(new ParameterizedThreadStart(BackupExecute));
+           
+        }
+        public void BackupExecute(Backup dir)
         {
             var sourceDirectory = new DirectoryInfo(DirectorySource);
             var test = new DirectoryInfo(DirectoryTarget);
