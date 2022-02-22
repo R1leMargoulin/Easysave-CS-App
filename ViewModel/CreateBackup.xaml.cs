@@ -1,9 +1,11 @@
 ﻿using EasySave.Model;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -49,20 +51,59 @@ namespace EasySave.View
             {
                 backup.BackupType = BackupType.Differentielle;
             }
-            List<Backup> list = MainWindow.ListBackup();
+            if (createBackup.Namee.Text == "" || createBackup.Source.Text =="" || createBackup.Target.Text=="" || RadioComplet.IsChecked == false && RadioDiff.IsChecked == false)
+            {
+                System.Windows.MessageBox.Show(messageError());
+            }
+            else
+            {
+                List<Backup> list = MainWindow.ListBackup();
 
-            list.Add(backup);
-            MainWindow.SaveBackup(list);
-            MainWindow.GetMainWindow().Refresh();
+                list.Add(backup);
+                MainWindow.SaveBackup(list);
+                MainWindow.GetMainWindow().Refresh();
+            }
+
             Close();
+
+            
+
             
             
 
         }
+        private void BrowseSourceButton(object sender, RoutedEventArgs e)
+        {
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK )
+            {
+                Source.Text = fbd.SelectedPath;
+            }
+        }
+
+        private void BrowseTargetButton(object sender, RoutedEventArgs e)
+        {
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Target.Text = fbd.SelectedPath;
+            }
+        }
+
+    
+        private void Cancel(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
+            
+        }
 
+        public static string messageError()
+        {
+            return "Erreur de Saisie";
         }
     }
 }

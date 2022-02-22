@@ -4,10 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EasySave"
-       
         mc:Ignorable="d"
-        
         Title="MainWindow" Height="500" Width="900">
+
 
     <Border
           BorderBrush="Black" 
@@ -35,7 +34,7 @@
 
 
 
-            <ListBox x:Name="ListBoxBackup" Grid.Column="0" Grid.RowSpan="10" SelectionChanged="ListBoxBackup_SelectionChanged">
+            <ListBox x:Name="ListBoxBackup" Grid.Column="0" Grid.RowSpan="10">
                 <ListBox.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="20"/>
@@ -79,7 +78,7 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button Content="Pause" Grid.Column="1"  Grid.Row="1" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Click="Button_Pause" Height="20">
+            <Button Click="Button_Pause" Content="Pause" Grid.Column="1"  Grid.Row="1" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Height="20">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="10"/>
@@ -87,7 +86,7 @@
                 </Button.Resources>
             </Button>
 
-            <Button Content="Play" Grid.Column="1"  Grid.Row="0" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Click="Button_Play" Height="20">
+            <Button Click="Button_Play" Content="Play" Grid.Column="1"  Grid.Row="0" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Height="20">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="10"/>
@@ -95,21 +94,21 @@
                 </Button.Resources>
             </Button>
 
-            <Button Content="Stop" Grid.Column="1"  Grid.Row="2" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Click="Button_Play" Height="20">
+            <Button Click="Button_Stop" Content="Stop" Grid.Column="1"  Grid.Row="2" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Height="20">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="10"/>
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button Content="Quiter" Grid.Column="1" Grid.Row="8" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Click="Button_Play" Height="20">
+            <Button Click="ExitApp" Content="Quiter" Grid.Column="1" Grid.Row="8" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Height="20">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="10"/>
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button Content="Réglages" Grid.Column="1" Grid.Row="9" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Click="Button_Play" Height="20">
+            <Button Click="LaunchSettings" Content="Réglages" Grid.Column="1" Grid.Row="9" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Height="20">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="10"/>
@@ -119,15 +118,15 @@
 
             <Border Background="White" BorderThickness="1,1,1,1" CornerRadius="20,20,20,20" Grid.RowSpan="10" Grid.Column="2">
                 <Grid>
-                    <TextBox Name="BackupNameMenu" HorizontalAlignment="Left" Margin="122,100,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
-                    <TextBox Name="BackupSourceMenu"  HorizontalAlignment="Left" Margin="122,149,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
-                    <Label Content="Répertoire Source" HorizontalAlignment="Left" Margin="122,118,0,0" VerticalAlignment="Top"/>
-                    <Label Content="Répertoire cible&#xD;&#xA;" HorizontalAlignment="Center" Margin="0,167,0,0" VerticalAlignment="Top" Height="29"/>
-                    <TextBox Name="BackupTargetMenu" HorizontalAlignment="Left" Margin="122,196,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsReadOnly="True"/>
-                    <Label Content="Nom&#xD;&#xA;" HorizontalAlignment="Left" Margin="122,70,0,0" VerticalAlignment="Top" Height="25"/>
-                    <RadioButton Name="CompleteMenu" Content="Sauvegarde Complète" HorizontalAlignment="Left" Margin="191,225,0,0" VerticalAlignment="Top" Checked="RadioButton_Checked"/>
-                    <RadioButton Name="DiffMenu" Content="Sauvegarde Différentielle" HorizontalAlignment="Left" Margin="21,225,0,0" VerticalAlignment="Top"/>
-                    <CheckBox Content="CheckBox" HorizontalAlignment="Left" Margin="251,101,0,0" VerticalAlignment="Top"/>
+                    <TextBox Name="BackupNameMenu" HorizontalAlignment="Left" Margin="36,70,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="206" IsReadOnly="True"/>
+                    <TextBox Name="BackupSourceMenu"  HorizontalAlignment="Left" Margin="36,130,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" IsReadOnly="True"/>
+                    <Label Content="Répertoire Source" HorizontalAlignment="Left" Margin="36,100,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Répertoire cible&#xD;&#xA;" HorizontalAlignment="Left" Margin="36,160,0,0" VerticalAlignment="Top" Height="29"/>
+                    <TextBox Name="BackupTargetMenu" HorizontalAlignment="Left" Margin="36,190,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" IsReadOnly="True"/>
+                    <Label Content="Nom"  HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="36,40,0,0" />
+                    <RadioButton Name="CompleteMenu" Content="Sauvegarde Complète" HorizontalAlignment="Left" Margin="191,250,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+                    <RadioButton Name="DiffMenu" Content="Sauvegarde Différentielle" HorizontalAlignment="Left" Margin="21,250,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+                    <CheckBox Content="Crypté" HorizontalAlignment="Left" Margin="259,70,0,0" VerticalAlignment="Top" IsEnabled="False"/>
 
 
                 </Grid>
@@ -135,6 +134,6 @@
             </Border>
 
         </Grid>
-    </Border>
 
+    </Border>
 </Window>

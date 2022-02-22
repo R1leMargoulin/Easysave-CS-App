@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -63,10 +64,31 @@ namespace EasySave.View
             MainWindow.SaveBackup(mainWindow.BackupList);
             mainWindow.Refresh();
             Close();
-
-
-
         }
+
+        private void BrowseSourceButton(object sender, RoutedEventArgs e)
+        {
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                DirectorySource.Text = fbd.SelectedPath;
+            }
+        }
+
+        private void BrowseTargetButton(object sender, RoutedEventArgs e)
+        {
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                DirectoryTarget.Text = fbd.SelectedPath;
+            }
+        }
+
+        private void Cancel(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
