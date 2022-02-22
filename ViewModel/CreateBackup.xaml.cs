@@ -51,12 +51,23 @@ namespace EasySave.View
             {
                 backup.BackupType = BackupType.Differentielle;
             }
-            List<Backup> list = MainWindow.ListBackup();
+            if (createBackup.Namee.Text == "" || createBackup.Source.Text =="" || createBackup.Target.Text=="" || RadioComplet.IsChecked == false && RadioDiff.IsChecked == false)
+            {
+                System.Windows.MessageBox.Show(messageError());
+            }
+            else
+            {
+                List<Backup> list = MainWindow.ListBackup();
 
-            list.Add(backup);
-            MainWindow.SaveBackup(list);
-            MainWindow.GetMainWindow().Refresh();
+                list.Add(backup);
+                MainWindow.SaveBackup(list);
+                MainWindow.GetMainWindow().Refresh();
+            }
+
             Close();
+
+            
+
             
             
 
@@ -88,6 +99,11 @@ namespace EasySave.View
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        public static string messageError()
+        {
+            return "Erreur de Saisie";
         }
     }
 }
