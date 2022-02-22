@@ -8,18 +8,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace EasySave.View
+namespace EasySave.ViewModel
 {
     /// <summary>
-    /// Logique d'interaction pour Page1.xaml
+    /// Logique d'interaction pour Settings.xaml
     /// </summary>
-    public partial class Page1 : Page
+    public partial class Settings : Window
     {
-        public Page1()
+        private static Settings settingspage = null;
+        public Settings()
         {
+            settingspage = this;
             InitializeComponent();
         }
     }

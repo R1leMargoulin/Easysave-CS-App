@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Threading;
+using System.Windows;
 
 namespace EasySave.Model
 {
@@ -26,8 +27,33 @@ namespace EasySave.Model
             }
             return false;
         }
+
+        public bool IsDirectoryExits(string source)
+        {
+            var sourcedirectory = new DirectoryInfo(source);
+            if (!sourcedirectory.Exists)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public void Pause()
+        {
+            waitHandle.Reset();
+        }
+
+        public void ResumePlay()
+        {
+            waitHandle.Set();
+        }
+
         public List<FileInfo> GetFileListFromDirectory(List<FileInfo> listFile, string source, string target)
         {
+            
             var sourcedirectory = new DirectoryInfo(source);
             var targetdirectory = new DirectoryInfo(target);
             var fileListSource = sourcedirectory.GetFiles(); //Get all Files from the directory
@@ -90,15 +116,7 @@ namespace EasySave.Model
 
             return listFile;
         }
-       
-        public void Pause()
-        {
-            Thread.CurrentThread.Interrupt();
-        }
-        public void Play()
-        {
-            Thread.CurrentThread.Start();
-        }
+      
 
         private static Mutex mutex = new Mutex();
         //Execute the backup to the target directory
