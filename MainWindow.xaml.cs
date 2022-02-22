@@ -197,7 +197,7 @@ namespace EasySave
                 
             int index = ListBoxBackup.SelectedIndex;
                 
-                MainWindow.GetMainWindow().BackupList[index].BackupExecute();
+                MainWindow.GetMainWindow().BackupList[index].BackupExecuteThread();
             MessageBoxResult messageBox = MessageBox.Show("tu es très fort bg, tout est bon"); 
             }
 
@@ -211,7 +211,7 @@ namespace EasySave
         {
             foreach(var item in BackupList)
             {
-                item.BackupExecute();
+                item.BackupExecuteThread();
             }
         }
 

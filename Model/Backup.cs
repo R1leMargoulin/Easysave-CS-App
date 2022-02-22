@@ -103,17 +103,18 @@ namespace EasySave.Model
         private static Mutex mutex = new Mutex();
         //Execute the backup to the target directory
 
-        public void BackupExecuteThread(Backup Dir)
+        public void BackupExecuteThread()
         {
-            Thread t = new Thread(new ParameterizedThreadStart(BackupExecute));
+            Thread t = new Thread(()=>BackupExecute(this));
+            t.Start();
            
         }
         public void BackupExecute(Backup dir)
         {
-            var sourceDirectory = new DirectoryInfo(DirectorySource);
-            var test = new DirectoryInfo(DirectoryTarget);
+            var sourceDirectory = new DirectoryInfo(dir.DirectorySource);
+            var test = new DirectoryInfo(dir.DirectoryTarget);
             var fileList = new List<FileInfo>();
-            fileList = GetFileListFromDirectory(fileList, DirectorySource, DirectoryTarget);
+            fileList = GetFileListFromDirectory(fileList, dir.DirectorySource, dir.DirectoryTarget);
 
             var totalfiles = sourceDirectory.GetFiles().Length;//Count the file in source Directory
             var totalfileslefttodo = sourceDirectory.GetFiles().Length + 1;
@@ -135,12 +136,12 @@ namespace EasySave.Model
 
                 if (subdirectorypath != String.Empty)
                 {
-                    filepath = DirectoryTarget + subdirectorypath;
+                    filepath = dir.DirectoryTarget + subdirectorypath;
                 }
 
                 else
                 {
-                    filepath = DirectoryTarget;
+                    filepath = dir.DirectoryTarget;
                 }
 
 
