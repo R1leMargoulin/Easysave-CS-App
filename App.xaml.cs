@@ -14,7 +14,7 @@ namespace EasySave
     /// </summary>
     public partial class App : Application
     {
-        /*
+        
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
@@ -25,8 +25,8 @@ namespace EasySave
             }
             else
             {
-                new MainWindow();
-                //new MainWindow().Show();
+                //new MainWindow();
+                new MainWindow().Show();
             }
         }
 
@@ -41,7 +41,7 @@ namespace EasySave
             {
                 return true;
             }
-        }*/
+        }
         
 
         public static string messageErrorProcess()
