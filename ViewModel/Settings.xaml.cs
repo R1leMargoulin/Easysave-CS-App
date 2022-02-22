@@ -23,5 +23,11 @@ namespace EasySave.ViewModel
             settingspage = this;
             InitializeComponent();
         }
+
+        private void Cancel(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
     }
 }
