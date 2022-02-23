@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <sys:String x:Key="ResoureDictionaryName">Loc-en-US</sys:String>
+
+    <sys:String x:Key="WindowTitle">Je sais pas test</sys:String>
+    <sys:String x:Key="FirstNameLabel">prenom</sys:String>
+    <sys:String x:Key="LastNameLabel">nom de famille</sys:String>
+    
+    
+
+</ResourceDictionary>

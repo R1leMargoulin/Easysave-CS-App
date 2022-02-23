@@ -5,8 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EasySave"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="900">
-
+        Title="{DynamicResource ResourceKey=WindowTitle}" Height="500" Width="900">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/i18N/MainWindows.en-US.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
 
     <Border
           BorderBrush="Black" 
@@ -101,6 +107,16 @@
                     </Style>
                 </Button.Resources>
             </Button>
+            
+                <DockPanel Margin="5" HorizontalAlignment="Center">
+                    <Menu DockPanel.Dock="Top">
+                        <MenuItem Name="menuItemLanguages" Header="Language">
+                            <MenuItem Header="English US" Tag="en-US" IsCheckable="True" Click="MenuItem_Click"/>
+                            <MenuItem Header="French FR" Tag="fr-FR" IsCheckable="True" Click="MenuItem_Click"/>
+                        </MenuItem>
+                    </Menu>
+                </DockPanel>
+            
             <Button Click="ExitApp" Content="Quiter" Grid.Column="1" Grid.Row="8" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Height="20">
                 <Button.Resources>
                     <Style TargetType="Border">
@@ -115,6 +131,7 @@
                     </Style>
                 </Button.Resources>
             </Button>
+            
 
             <Border Background="White" BorderThickness="1,1,1,1" CornerRadius="20,20,20,20" Grid.RowSpan="10" Grid.Column="2">
                 <Grid>
@@ -130,6 +147,7 @@
 
 
                 </Grid>
+                
 
             </Border>
 

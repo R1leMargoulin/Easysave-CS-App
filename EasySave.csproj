@@ -8,6 +8,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Page Remove="i18N\MainWindows.en-US.xaml" />
+    <Page Remove="i18N\MainWindows.fr-FR.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="i18N\MainWindows.fr-FR.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+      <Generator></Generator>
+    </Content>
+    <Content Include="i18N\MainWindows.en-US.xaml">
+      <Generator></Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup> 
 
