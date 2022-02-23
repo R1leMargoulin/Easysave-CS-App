@@ -2,12 +2,38 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using System.Text;
 using System.Xml.XPath;
 using System.Xml;
 
 namespace EasySave.Model
 {
+    public class ArgsLogState
+    {
+        public string logname { get; set; }
+        public string logfilesource { get; set; }
+        public string logfiletarget { get; set; }
+        public long logsize { get; set; }
+        public double logduration { get; set; }
+        public int nbFilesLeft { get; set; }
+        public string state { get; set; }
+        public int progression { get; set; }
+        public int totalfiles { get; set; }
+
+        public ArgsLogState(string alogname, string alogfilesource, string alogfiletarget, long alogsize, double alogduration, int anbFilesLeft, string astate, int aprogression, int atotalfiles)
+        {
+            logname = alogname;
+            logfilesource = alogfilesource;
+            logfiletarget = alogfiletarget;
+            logsize = alogsize;
+            logduration = alogduration;
+            nbFilesLeft = anbFilesLeft;
+            state = astate;
+            progression = aprogression;
+            totalfiles = atotalfiles;
+        }
+    }
     public class LogState
     {
         private string Pathlog { get; set; }
@@ -20,6 +46,8 @@ namespace EasySave.Model
         public int Progression { get; set; }
         public DateTime DateTime { get; set; }
         public string State { get; set; }
+
+        private static LogState _instance;
 
         private class LogStateData
         {
@@ -35,21 +63,21 @@ namespace EasySave.Model
 
         }
 
-        public LogState(string logname, string logfilesource, string logfiletarget, long logsize, double logduration, int nbFilesLeft, string state, int progression, int totalfiles)
+        public LogState(ArgsLogState arg)
         {
-            Namelog = logname;
-            SourceBackup = logfilesource;
-            TargetBackup = logfiletarget;
-            TotalFilesSize = logsize;
-            NbFilesLeftToDo = nbFilesLeft;
+            Namelog = arg.logname;
+            SourceBackup = arg.logfilesource;
+            TargetBackup = arg.logfiletarget;
+            TotalFilesSize = arg.logsize;
+            NbFilesLeftToDo = arg.nbFilesLeft;
             DateTime = DateTime.Now;
-            State = state;
-            Progression = progression;
-            TotalFilesToCopy = totalfiles;
+            State = arg.state;
+            Progression = arg.progression;
+            TotalFilesToCopy = arg.totalfiles;
             Pathlog = $"./StateLogPath/StateLogs";
 
-            //Check if the directory exist and create it if it's doesn't exist
-            Directory.CreateDirectory("./StateLogPath");
+        //Check if the directory exist and create it if it's doesn't exist
+        Directory.CreateDirectory("./StateLogPath");
 
             if (Settings.setting_log == Log_Format.json)
             {
@@ -135,8 +163,15 @@ namespace EasySave.Model
 
 
             }
-
-
+        }
+        public static LogState GetInstance(ArgsLogState arg)
+        {
+            if (_instance == null)
+            {
+                _instance = new LogState(arg);
+            }
+            return _instance;
         }
     }
+
 }

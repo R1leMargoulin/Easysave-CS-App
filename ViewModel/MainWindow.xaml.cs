@@ -234,53 +234,58 @@ namespace EasySave
             }
                       
         }
-       
+        private static Thread ExecuteAllThread;
         public void ExecuteBackup(object sender, EventArgs e)
         {
-            
-             if (ListBoxBackup.SelectedIndex == -1)
-             {
-                 MessageBox.Show("Veuillez sélectionner une sauvegarde");
-             }
-             else
-             {
-                 Backup backup = new Backup();
-                 if (backup.IsProcessRunning() == false)
-                 {
-                     if (backup.IsDirectoryExits(BackupSourceMenu.Text) == false)
-                     {
-                         MessageBoxResult messageBox = MessageBox.Show("Erreur de fichier source");
-                     }
-                     else
-                     {
-                         Thread.Sleep(2000);
-                         int index = ListBoxBackup.SelectedIndex;
+            int index = ListBoxBackup.SelectedIndex;
+            if (ListBoxBackup.SelectedIndex == -1)
+            {
+                MessageBox.Show("Veuillez sélectionner une sauvegarde");
+            }
+            else
+            { 
+            new Thread(new ThreadStart(delegate ()
+            {
 
-                         MainWindow.GetMainWindow().BackupList[index].BackupExecuteThread();
-                         MessageBoxResult messageBox = MessageBox.Show("tu es très fort bg, tout est bon");
-                     }
-                 }
-                 else
-                 {
-                     MessageBoxResult messageBox = MessageBox.Show("Une application métier est lancée");
-                 }
-             }
-            //new Thread(new ThreadStart(delegate ()
-            //{
-            //    int index = ListBoxBackup.SelectedIndex;
-            //    MainWindow.GetMainWindow().BackupList[index].BackupExecute();
-            //    MessageBoxResult messageBox = MessageBox.Show("tu es très fort bg, tout est bon");
-            //})).Start();
+                {
+                    Backup backup = new Backup();
+                    if (backup.IsProcessRunning() == false)
+                    /*{
+                        if (backup.IsDirectoryExits(BackupSourceMenu.Text) == false)
+                        {
+                            MessageBoxResult messageBox = MessageBox.Show("Erreur de fichier source");
+                        }
+                        else*/
+                        {
+
+                            MainWindow.GetMainWindow().BackupList[index].BackupExecuteThread();
+                            //MessageBoxResult messageBox = MessageBox.Show("tu es très fort bg, tout est bon");
+                        }
+                    //}
+                    else
+                    {
+                        MessageBoxResult messageBox = MessageBox.Show("Une application métier est lancée");
+                    }
+                }
+            })).Start();
+            }
+
 
 
         }
 
         public void ExecuteAllBackup(object sender, EventArgs e)
         {
-            foreach(var item in BackupList)
+
+            ExecuteAllThread = new Thread(new ThreadStart(delegate ()
             {
-                item.BackupExecuteThread();
-            }
+                foreach (var item in BackupList)
+                {
+                    item.BackupExecuteThread();
+                }
+            }));
+
+            ExecuteAllThread.Start();
         }
 
         private void Button_Pause(object sender, RoutedEventArgs e)
@@ -326,8 +331,7 @@ namespace EasySave
             {
                 foreach (var item in BackupList)
                 {
-                    
-
+                  //  item.Active = false;
                 }
             }
         }
@@ -337,6 +341,13 @@ namespace EasySave
             ViewModel.Settings _settings = new ViewModel.Settings();
             _settings.Show();
         }
+
+        private void StartConnection(object sender, RoutedEventArgs e)
+        {
+            Server server = new Server();
+            server.RunNetwork();
+        }
+
 
 
     }

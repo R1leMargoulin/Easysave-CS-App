@@ -25,8 +25,9 @@ namespace EasySave.Model
         public string DirectorySource { get; set; }
         public string DirectoryTarget { get; set; }
         public BackupType BackupType { get; set; }
+       // public bool Active { get; set; }
 
-        
+
 
         public bool IsProcessRunning()
         {
@@ -168,6 +169,7 @@ namespace EasySave.Model
             {
                 foreach( var file in priori)
                 {
+                    waitHandle.WaitOne();
                     string filepath;
 
                     string subdirectorypath = file.DirectoryName.Split(sourceDirectory.Name)[1];
@@ -193,8 +195,10 @@ namespace EasySave.Model
 
                     file.CopyTo(filepath, true);//Copy the file in the target directory and allowing the overwriting of an existings file
                     totalfileslefttodo--;
-                    new LogDaily(Name, file.FullName, filepath, file.Length / 1000, stopwatch.ElapsedMilliseconds); //Create a new LogDaily with the properties of the backup
-                    new LogState(Name, file.FullName, filepath, lenght / 1000, stopwatch.ElapsedMilliseconds, totalfileslefttodo, "Active", 0, totalfiles); //Create a new LogState with the properties of the backup
+                    ArgsLogDaily arglogDaily =new ArgsLogDaily(Name, file.FullName, filepath, file.Length / 1000, stopwatch.ElapsedMilliseconds); //Create a new LogDaily with the properties of the
+                    LogDaily.GetInstance(arglogDaily);
+                    ArgsLogState argLogState = new ArgsLogState(Name, file.FullName, filepath, lenght / 1000, stopwatch.ElapsedMilliseconds, totalfileslefttodo, "Active", 0, totalfiles); //Create a new LogState with the properties of the backup
+                    LogState.GetInstance(argLogState);
 
                     stopwatch.Stop();
                 }
@@ -202,7 +206,7 @@ namespace EasySave.Model
 
             foreach (var file in fileList)
             {
-
+                waitHandle.WaitOne();
                
                 string filepath;
 
@@ -229,12 +233,15 @@ namespace EasySave.Model
 
                 file.CopyTo(filepath, true);//Copy the file in the target directory and allowing the overwriting of an existings file
                 totalfileslefttodo--;
-                new LogDaily(Name, file.FullName, filepath, file.Length / 1000, stopwatch.ElapsedMilliseconds); //Create a new LogDaily with the properties of the backup
-                new LogState(Name, file.FullName, filepath, lenght / 1000, stopwatch.ElapsedMilliseconds, totalfileslefttodo, "Active", 0, totalfiles); //Create a new LogState with the properties of the backup
+                ArgsLogDaily arglogDaily = new ArgsLogDaily(Name, file.FullName, filepath, file.Length / 1000, stopwatch.ElapsedMilliseconds); //Create a new LogDaily with the properties of the
+                LogDaily.GetInstance(arglogDaily);
+                ArgsLogState argLogState = new ArgsLogState(Name, file.FullName, filepath, lenght / 1000, stopwatch.ElapsedMilliseconds, totalfileslefttodo, "Active", 0, totalfiles); //Create a new LogState with the properties of the backup
+                LogState.GetInstance(argLogState);
 
                 stopwatch.Stop();
             }
-            new LogState(Name, "", "", 0, 0, 0, "END", 0, 0);
+            ArgsLogState o = new ArgsLogState(Name, "", "", 0, 0, 0, "END", 0, 0);
+            LogState.GetInstance(o);
         }
     }
 }
