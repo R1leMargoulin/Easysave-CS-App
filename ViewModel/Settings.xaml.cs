@@ -24,6 +24,9 @@ namespace EasySave.ViewModel
             
             InitializeComponent();
             LogFormat.ItemsSource = new List<string>() { "json", "xml" };
+            RefreshProcess();
+            RefreshImportantFile();
+            RefreshEncrypt();
         }
 
 
@@ -42,6 +45,112 @@ namespace EasySave.ViewModel
             }
 
         }
+
+        internal void RefreshProcess()
+        {
+            Model.Settings settings = new Model.Settings();
+            settings.FileSettings();
+            var list = settings.setting_process;
+            ListExtentionProcess.Items.Clear();
+            foreach(var item in list)
+            {
+                ListExtentionProcess.Items.Add(item);
+            }
+        }
+
+        public void AddProcess(object sender, RoutedEventArgs e)
+        {
+            Model.Settings settings = new Model.Settings();
+            settings.FileSettings();
+
+            settings.ProcessAdd(TextBoxToAdd.Text);
+            RefreshProcess();
+
+        }
+
+        public void DeleteProcess(object sender, RoutedEventArgs e)
+        {
+            Model.Settings settings = new Model.Settings();
+            settings.FileSettings();
+            var list = settings.setting_process;
+            int i = ListExtentionProcess.SelectedIndex;
+            list.RemoveAt(i);
+            settings.ProcessDelete(list);
+            
+            RefreshProcess();
+
+        }
+        internal void RefreshImportantFile()
+        {
+            Model.Settings settings = new Model.Settings();
+            settings.FileSettings();
+            var list = settings.setting_importantfile;
+            ListExtensionImportantFiles.Items.Clear();
+            foreach (var item in list)
+            {
+                ListExtensionImportantFiles.Items.Add(item);
+            }
+        }
+        public void AddImportantFile(object sender, RoutedEventArgs e)
+        {
+            Model.Settings settings = new Model.Settings();
+            settings.FileSettings();
+
+            settings.ImportantFileAdd(TextBoxToAdd.Text);
+            RefreshImportantFile();
+
+        }
+
+        public void DeleteImportantFile(object sender, RoutedEventArgs e)
+        {
+            Model.Settings settings = new Model.Settings();
+            settings.FileSettings();
+            var list = settings.setting_importantfile;
+            int i = ListExtensionImportantFiles.SelectedIndex;
+            list.RemoveAt(i);
+            settings.ImportantFileDelete(list);
+
+            RefreshImportantFile();
+
+        }
+
+
+        internal void RefreshEncrypt()
+        {
+            Model.Settings settings = new Model.Settings();
+            settings.FileSettings();
+            var list = settings.setting_encryptfile;
+            ListEncrypt.Items.Clear();
+            foreach (var item in list)
+            {
+                ListEncrypt.Items.Add(item);
+            }
+        }
+
+        public void AddEncryptFile(object sender, RoutedEventArgs e)
+        {
+            Model.Settings settings = new Model.Settings();
+            settings.FileSettings();
+
+            settings.EncryptFileAdd(TextBoxToAdd.Text);
+            RefreshEncrypt();
+
+        }
+
+        public void DeleteEncryptFile(object sender, RoutedEventArgs e)
+        {
+            Model.Settings settings = new Model.Settings();
+            settings.FileSettings();
+            var list = settings.setting_encryptfile;
+            int i = ListEncrypt.SelectedIndex;
+            list.RemoveAt(i);
+            settings.EncryptFileDelete(list);
+
+            RefreshEncrypt();
+
+        }
+
+
         private void Cancel(object sender, RoutedEventArgs e)
         {
             Close();
