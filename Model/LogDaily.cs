@@ -9,6 +9,24 @@ using System.IO;
 
 namespace EasySave.Model
 {
+    public class ArgsLogDaily{
+        public string logname { get; set; }
+        public string logfilesource { get; set; }
+        public string logfiletarget { get; set; }
+        public long logsize { get; set; }
+        public double logduration { get; set; }
+        public ArgsLogDaily(string alogname, string alogfilesource, string alogfiletarget, long alogsize, double alogduration)
+        {
+            logname = alogname;
+            logduration = alogduration;
+            logfiletarget = alogfiletarget;
+            logsize = alogsize;
+            logduration = alogduration;
+        }
+
+
+
+    }
     public class LogDaily
     {
         private string Pathlog { get; set; }
@@ -18,6 +36,8 @@ namespace EasySave.Model
         private long Sizelog { get; set; }
         private double Durationlog { get; set; }
         private DateTime DateTimelog { get; set; }
+
+        private static LogDaily _instance;
 
         public class LogDailyData
         {
@@ -31,14 +51,13 @@ namespace EasySave.Model
         }
         private static Mutex MutexLogDaily = new Mutex();
 
-        public LogDaily(string logname, string logfilesource, string logfiletarget, long logsize, double logduration)
+        private LogDaily(ArgsLogDaily arg)
         {
-            MutexLogDaily.WaitOne();
-            Namelog = logname;
-            Sourcelog = logfilesource;
-            Targetlog = logfiletarget;
-            Sizelog = logsize;
-            Durationlog = logduration;
+            Namelog = arg.logname;
+            Sourcelog = arg.logfilesource;
+            Targetlog = arg.logfiletarget;
+            Sizelog = arg.logsize;
+            Durationlog = arg.logduration;
             DateTimelog = DateTime.Now;
             Pathlog = $"./LogPath/Logs_{DateTime.Now:dd-MM-yyyy}";
 
@@ -125,7 +144,14 @@ namespace EasySave.Model
 
 
             }
-            MutexLogDaily.ReleaseMutex();
+        }
+        public static LogDaily GetInstance(ArgsLogDaily arg)
+        {
+            if (_instance == null)
+            {
+                _instance = new LogDaily(arg);
+            }
+            return _instance;
         }
     }
 
