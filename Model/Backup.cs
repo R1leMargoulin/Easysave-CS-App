@@ -31,10 +31,15 @@ namespace EasySave.Model
 
         public bool IsProcessRunning()
         {
-            Process[] process = Process.GetProcessesByName("notepad");
+            Settings settings = new Settings();
+            settings.FileSettings();
+            foreach(var item in settings.setting_process)
+            { 
+            Process[] process = Process.GetProcessesByName(item);
             if(process.Length > 0)
             {
                 return true;
+            }
             }
             return false;
         }
@@ -169,6 +174,14 @@ namespace EasySave.Model
             {
                 foreach( var file in priori)
                 {
+
+                    while(IsProcessRunning() == true)
+                    {
+                        waitHandle.Reset();
+                        MainWindow mainWindow = MainWindow.GetMainWindow();
+                        mainWindow.ProcessRunningError();
+                        waitHandle.Set();
+                    }
                     waitHandle.WaitOne();
                     string filepath;
 
@@ -206,6 +219,14 @@ namespace EasySave.Model
 
             foreach (var file in fileList)
             {
+
+                while (IsProcessRunning() == true)
+                {
+                    waitHandle.Reset();
+                    MainWindow mainWindow = MainWindow.GetMainWindow();
+                    mainWindow.ProcessRunningError();
+                    waitHandle.Set();
+                }
                 waitHandle.WaitOne();
                
                 string filepath;

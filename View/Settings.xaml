@@ -13,7 +13,7 @@
         <TextBox x:Name="MaxSize" HorizontalAlignment="Left" Margin="30,65,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="MaxSizeLabel_Invalid" Content="Label" HorizontalAlignment="Left" Margin="181,61,0,0" VerticalAlignment="Top" Width="121"/>
         <Button Content="Cancel" x:Name="CancelButton" Click="Cancel"  HorizontalAlignment="Left" Margin="30,170,0,0" VerticalAlignment="Top" Height="37" Width="76"/>
-        <Button Content="Save" x:Name="Save"  HorizontalAlignment="Left" Margin="130,170,0,0" VerticalAlignment="Top" Height="37" Width="114"/>
+        <Button Click="LogFormatComboBox" Content="Save" x:Name="Save"  HorizontalAlignment="Left" Margin="130,170,0,0" VerticalAlignment="Top" Height="37" Width="114"/>
         <Label x:Name="LogFormatLabel" Content="Label" HorizontalAlignment="Left" Margin="25,98,0,0" VerticalAlignment="Top" Width="575"/>
         <ComboBox x:Name="LogFormat" HorizontalAlignment="Left" Margin="30,129,0,0" VerticalAlignment="Top" Width="120"/>
         <Grid Margin="20,215,10,20">
@@ -24,9 +24,9 @@
             <Button x:Name="BtnAddJobApp"  Content="+" HorizontalAlignment="Left" Margin="300,169,0,35" Width="44" Height="25"/>
             <Button x:Name="BtnRemoveJobApp" Content="-" HorizontalAlignment="Left" Margin="370,169,0,35" Width="44" Height="25"/>
             <TextBox x:Name="ExtentionTextBox" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-            <Label x:Name="ExtentionNotCopyLabel" Content="Label" HorizontalAlignment="Left" Margin="10,18,0,0" VerticalAlignment="Top" />
-            <Label x:Name="ExtentionImpFilesLabel" Content="Label" HorizontalAlignment="Left" Margin="155,18,0,0" VerticalAlignment="Top" />
-            <Label x:Name="JobsAppLabel" Content="Label" HorizontalAlignment="Left" Margin="300,18,0,0" VerticalAlignment="Top" Width="233"/>
+            <Label x:Name="ExtentionNotCopyLabel" Content="Process" HorizontalAlignment="Left" Margin="10,18,0,0" VerticalAlignment="Top" />
+            <Label x:Name="ExtentionImpFilesLabel" Content="Encrypter" HorizontalAlignment="Left" Margin="155,18,0,0" VerticalAlignment="Top" />
+            <Label x:Name="JobsAppLabel" Content="Prioritaire" HorizontalAlignment="Left" Margin="300,18,0,0" VerticalAlignment="Top" Width="233"/>
             <ListBox x:Name="ListExtentionToCrypt" HorizontalAlignment="Left" Margin="10,40,0,95" Width="115"/>
             <ListBox x:Name="ListExtensionImportantFiles" HorizontalAlignment="Left" Margin="155,40,0,95" Width="115"/>
             <ListBox x:Name="ListJobsApp" HorizontalAlignment="Left" Margin="300,40,0,95" Width="115"/>

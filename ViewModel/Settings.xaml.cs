@@ -21,9 +21,27 @@ namespace EasySave.ViewModel
         public Settings()
         {
             settingspage = this;
+            
             InitializeComponent();
+            LogFormat.ItemsSource = new List<string>() { "json", "xml" };
         }
 
+
+        public void LogFormatComboBox(object sender, RoutedEventArgs e)
+        {
+            var log = LogFormat.SelectedItem;
+            Model.Settings settings = new Model.Settings();
+            if (log.Equals("json"))
+            {
+                settings.LogJson();
+            }
+
+            if (log.Equals("xml"))
+            {
+                settings.LogXml();
+            }
+
+        }
         private void Cancel(object sender, RoutedEventArgs e)
         {
             Close();

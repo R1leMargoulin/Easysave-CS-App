@@ -32,25 +32,12 @@ namespace EasySave
 
         public MainWindow()
         {
-           
+
             InitializeComponent();
             home = this;
 
-            if (File.Exists(@"Settings.json"))
-            {
-                string jsonSettings = File.ReadAllText(@"Settings.json");
-                Model.Settings settings = System.Text.Json.JsonSerializer.Deserialize<Model.Settings>(jsonSettings); //reprise des parametres mis dans le fichier settings.json
-                language = Model.Settings.setting_language;
-                logformat = Model.Settings.setting_log;
-                //Settings.setting_log = Log_Format.xml;
-            }
-            else
-            {
-                language = Model.Language.fr;
-                logformat = Model.Log_Format.json;
-                SettingUpdate();
-
-            }
+            Model.Settings settings = new Model.Settings();
+            settings.FileSettings();
 
 
             ListBoxBackup.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(BackupName);
@@ -59,40 +46,18 @@ namespace EasySave
 
 
 
-        public void SettingUpdate()
-        {
-            //on a first hand, we read the file and change only what we want to change in it
-            //(this will be usefull if we want to easily add settings content)
 
-            if (File.Exists(@"Settings.json"))
-            {
-                string jsonSettings = File.ReadAllText(@"Settings.json");
-                Model.Settings settings = System.Text.Json.JsonSerializer.Deserialize<Model.Settings>(jsonSettings);
-                Model.Settings.setting_language = language;
-                Model.Settings.setting_log = logformat;
 
-                //then, on another hand, we save our file settings
-                jsonSettings = System.Text.Json.JsonSerializer.Serialize(settings);
-                File.WriteAllText(@"Settings.json", jsonSettings);
-            }
-            else
-            {
-                Model.Settings sett = new Model.Settings();
-                string jsonSettings = System.Text.Json.JsonSerializer.Serialize(sett);
-                File.WriteAllText(@"Settings.json", jsonSettings);
-            }
-        }
-
-        public void SetLanguage(Language a)
-        {
-            language = a;
-            SettingUpdate();
-        }
-        public void SetLogFormat(Log_Format a)
-        {
-            logformat = a;
-            SettingUpdate();
-        }
+        //public void SetLanguage(Language a)
+        //{
+        //    language = a;
+        //    SettingUpdate();
+        //}
+        //public void SetLogFormat(Log_Format a)
+        //{
+        //    logformat = a;
+        //    SettingUpdate();
+        //}
 
         internal static List<Backup> ListBackup()
         {
@@ -108,20 +73,21 @@ namespace EasySave
             if (new FileInfo(backuppath).Length != 0)
             {
                 var backupList = File.ReadAllText(backuppath);
-                ListBackup = JsonConvert.DeserializeObject<List<Backup>>(backupList); 
+                ListBackup = JsonConvert.DeserializeObject<List<Backup>>(backupList);
             }
 
             else
             {
                 ListBackup = new List<Backup>();
-            }return ListBackup;
+            }
+            return ListBackup;
         }
 
         public static MainWindow GetMainWindow()
         {
-            if(home != null)
+            if (home != null)
                 return home;
-           return new MainWindow();
+            return new MainWindow();
         }
 
         private void ExitApp(object sender, EventArgs e)
@@ -133,7 +99,7 @@ namespace EasySave
         {
             CreateBackup createBackup = new CreateBackup();
             createBackup.Show();
-          
+
         }
         internal static void SaveBackup(List<Backup> list)
         {
@@ -142,7 +108,7 @@ namespace EasySave
             File.WriteAllText(backuppath, data);
         }
         //test
-      public Backup IndexList()
+        public Backup IndexList()
         {
             int index = ListBoxBackup.SelectedIndex;
             Backup backup = BackupList[index];
@@ -168,18 +134,18 @@ namespace EasySave
         }
 
         public void Button_Update(object sender, EventArgs e)
-        { 
-           if(ListBoxBackup.SelectedIndex == -1)
+        {
+            if (ListBoxBackup.SelectedIndex == -1)
             {
                 MessageBox.Show("Veuillez sélectionner une sauvegarde");
             }
             else
             {
 
-            
-            UpdateBackup updateBackup = new UpdateBackup(IndexList());
-            updateBackup.Show(); 
-           }
+
+                UpdateBackup updateBackup = new UpdateBackup(IndexList());
+                updateBackup.Show();
+            }
         }
 
         public void DeleteBackup(object sender, EventArgs e)
@@ -200,14 +166,14 @@ namespace EasySave
 
         internal void Refresh()
         {
-            
+
             BackupList = MainWindow.ListBackup();
             ListBoxBackup.Items.Clear();
             foreach (var backup in BackupList)
             {
                 ListBoxBackup.Items.Add(backup.Name);
             }
-                      
+
         }
         private static Thread ExecuteAllThread;
         public void ExecuteBackup(object sender, EventArgs e)
@@ -218,31 +184,28 @@ namespace EasySave
                 MessageBox.Show("Veuillez sélectionner une sauvegarde");
             }
             else
-            { 
-            new Thread(new ThreadStart(delegate ()
             {
-
+                new Thread(new ThreadStart(delegate ()
                 {
-                    Backup backup = new Backup();
-                    if (backup.IsProcessRunning() == false)
+
+                    {
+                        Backup backup = new Backup();
+                        
                     /*{
                         if (backup.IsDirectoryExits(BackupSourceMenu.Text) == false)
                         {
                             MessageBoxResult messageBox = MessageBox.Show("Erreur de fichier source");
                         }
                         else*/
-                        {
+                        
 
                             MainWindow.GetMainWindow().BackupList[index].BackupExecuteThread();
-                            //MessageBoxResult messageBox = MessageBox.Show("tu es très fort bg, tout est bon");
-                        }
+                        //MessageBoxResult messageBox = MessageBox.Show("tu es très fort bg, tout est bon");
+                    
                     //}
-                    else
-                    {
-                        MessageBoxResult messageBox = MessageBox.Show("Une application métier est lancée");
+                    
                     }
-                }
-            })).Start();
+                })).Start();
             }
 
 
@@ -306,7 +269,7 @@ namespace EasySave
             {
                 foreach (var item in BackupList)
                 {
-                  //  item.Active = false;
+                    //  item.Active = false;
                 }
             }
         }
@@ -324,6 +287,9 @@ namespace EasySave
         }
 
 
-
+        public void ProcessRunningError()
+        {
+            MessageBox.Show("Une application métier est lancée");
+        }
     }
 }
