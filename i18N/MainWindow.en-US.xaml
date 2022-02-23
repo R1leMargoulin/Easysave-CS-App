@@ -4,9 +4,24 @@
 
     <sys:String x:Key="ResoureDictionaryName">Loc-en-US</sys:String>
 
-    <sys:String x:Key="WindowTitle">TESTESTESTEST</sys:String>
-    <sys:String x:Key="Add">Add a work</sys:String>
-    <sys:String x:Key="LastNameLabel">Last Name</sys:String>
+    <sys:String x:Key="WindowTitle">EasySave Backup Software</sys:String>
+    <sys:String x:Key="Add">Add </sys:String>
+    <sys:String x:Key="Modify">Modify</sys:String>
+    <sys:String x:Key="Delete">Delete</sys:String>
+    <sys:String x:Key="Execute">Execute</sys:String>
+    <sys:String x:Key="ExecuteAll">Run All</sys:String>
+    <sys:String x:Key="Pause">Pause</sys:String>
+    <sys:String x:Key="Play">Play</sys:String>
+    <sys:String x:Key="Stop">Stop</sys:String>
+    <sys:String x:Key="US">English</sys:String>
+    <sys:String x:Key="FR">French</sys:String>
+    <sys:String x:Key="Quit">Quit</sys:String>
+    <sys:String x:Key="Cancel">Cancel</sys:String>
+    <sys:String x:Key="Save">Save</sys:String>
+    
+    
+    
+
     
     
 
