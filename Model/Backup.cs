@@ -166,6 +166,11 @@ namespace EasySave.Model
             var totalfiles = sourceDirectory.GetFiles().Length;//Count the file in source Directory
             var totalfileslefttodo = sourceDirectory.GetFiles().Length + 1;
 
+            Process cryptoProcess = new Process();
+            cryptoProcess.StartInfo.UseShellExecute = false;
+            cryptoProcess.StartInfo.FileName = "../../../CryptoSoft/CryptoSoft.exe";
+
+
             long lenght = 0;
             foreach (var file in fileList)
             {
@@ -208,7 +213,15 @@ namespace EasySave.Model
                     Stopwatch stopwatch = Stopwatch.StartNew(); //Start a stopwatch to know the file transfer Time
                     filepath = Path.Combine(filepath, file.Name);
 
-                    file.CopyTo(filepath, true);//Copy the file in the target directory and allowing the overwriting of an existings file
+                    if (dir.IsEncrypted)
+                    {
+                        cryptoProcess.StartInfo.Arguments = file.FullName + " 11001101 " + filepath;
+                        cryptoProcess.Start();
+                    }
+                    else
+                    {
+                        file.CopyTo(filepath, true);//Copy the file in the target directory and allowing the overwriting of an existings file
+                    }
                     totalfileslefttodo--;
                     ArgsLogDaily arglogDaily =new ArgsLogDaily(Name, file.FullName, filepath, file.Length / 1000, stopwatch.ElapsedMilliseconds); //Create a new LogDaily with the properties of the
                     LogDaily.GetInstance(arglogDaily);
@@ -254,7 +267,15 @@ namespace EasySave.Model
                 Stopwatch stopwatch = Stopwatch.StartNew(); //Start a stopwatch to know the file transfer Time
                 filepath = Path.Combine(filepath, file.Name);
 
-                file.CopyTo(filepath, true);//Copy the file in the target directory and allowing the overwriting of an existings file
+                if (dir.IsEncrypted)
+                {
+                    cryptoProcess.StartInfo.Arguments = file.FullName + " 11001101 " + filepath;
+                    cryptoProcess.Start();
+                }
+                else
+                {
+                    file.CopyTo(filepath, true);//Copy the file in the target directory and allowing the overwriting of an existings file
+                }
                 totalfileslefttodo--;
                 ArgsLogDaily arglogDaily = new ArgsLogDaily(Name, file.FullName, filepath, file.Length / 1000, stopwatch.ElapsedMilliseconds); //Create a new LogDaily with the properties of the
                 LogDaily.GetInstance(arglogDaily);
