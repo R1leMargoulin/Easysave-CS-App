@@ -18,7 +18,7 @@
         <Label Content="Répertoire cible&#xD;&#xA;" HorizontalAlignment="Left" Margin="116,181,0,0" VerticalAlignment="Top"/>
         <RadioButton Name="RadioComplet" Content="Sauvegarde Complète&#xD;&#xA;" HorizontalAlignment="Left" Margin="73,266,0,0" VerticalAlignment="Top"/>
         <RadioButton Name="RadioDiff" Content="Sauvegarde Différentielle&#xD;&#xA;" HorizontalAlignment="Left" Margin="236,266,0,0" VerticalAlignment="Top"/>
-        <CheckBox Content="Encryptage&#xD;&#xA;" HorizontalAlignment="Left" Margin="340,71,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked" Width="111" Height="21"/>
+        <CheckBox Name="Encrypted" Content="Encryptage&#xD;&#xA;" HorizontalAlignment="Left" Margin="340,71,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked" Width="111" Height="21"/>
         <Button x:Name="TargetPathButton" Content="Parcourir" Click="BrowseTargetButton" HorizontalAlignment="Left" Margin="18,213,0,0" VerticalAlignment="Top" Width="80"/>
         <Button x:Name="SourcePathButton" Content="Parcourir" Click="BrowseSourceButton" HorizontalAlignment="Left" Margin="18,139,0,0" VerticalAlignment="Top" Width="80"/>
 

@@ -43,6 +43,7 @@ namespace EasySave.View
             backup.Name = createBackup.Namee.Text;
             backup.DirectorySource = createBackup.Source.Text;
             backup.DirectoryTarget = createBackup.Target.Text;
+            backup.IsEncrypted = Encrypted.IsChecked.Value;
             if(RadioComplet.IsChecked == true)
             {
                 backup.BackupType = BackupType.Complet;
