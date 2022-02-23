@@ -25,8 +25,9 @@ namespace EasySave.Model
         public string DirectorySource { get; set; }
         public string DirectoryTarget { get; set; }
         public BackupType BackupType { get; set; }
+       // public bool Active { get; set; }
 
-        
+
 
         public bool IsProcessRunning()
         {
