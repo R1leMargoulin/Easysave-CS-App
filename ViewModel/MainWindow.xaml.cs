@@ -4,12 +4,14 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.ComponentModel;
 using System.IO;
 using System.Threading;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Navigation;
+using EasySave.ViewModel;
 
 namespace EasySave
 {
@@ -67,7 +69,8 @@ namespace EasySave
 
         private void ExitApp(object sender, EventArgs e)
         {
-            Environment.Exit(0);
+            base.OnClosed(e);
+            Process.GetCurrentProcess().Kill();
         }
         public void Button_Add(object sender, EventArgs e)
         {
@@ -152,28 +155,42 @@ namespace EasySave
        
         public void ExecuteBackup(object sender, EventArgs e)
         {
-            if (ListBoxBackup.SelectedIndex == -1)
-            {
-                MessageBox.Show("Veuillez sélectionner une sauvegarde");
-            }
-            else
-            {
-                Backup backup = new Backup();
-                if (backup.IsProcessRunning() == false)
-                {
+            
+             if (ListBoxBackup.SelectedIndex == -1)
+             {
+                 MessageBox.Show("Veuillez sélectionner une sauvegarde");
+             }
+             else
+             {
+                 Backup backup = new Backup();
+                 if (backup.IsProcessRunning() == false)
+                 {
+                     if (backup.IsDirectoryExits(BackupSourceMenu.Text) == false)
+                     {
+                         MessageBoxResult messageBox = MessageBox.Show("Erreur de fichier source");
+                     }
+                     else
+                     {
+                         Thread.Sleep(2000);
+                         int index = ListBoxBackup.SelectedIndex;
+
+                         MainWindow.GetMainWindow().BackupList[index].BackupExecute();
+                         MessageBoxResult messageBox = MessageBox.Show("tu es très fort bg, tout est bon");
+                     }
+                 }
+                 else
+                 {
+                     MessageBoxResult messageBox = MessageBox.Show("Une application métier est lancée");
+                 }
+             }
+            //new Thread(new ThreadStart(delegate ()
+            //{
+            //    int index = ListBoxBackup.SelectedIndex;
+            //    MainWindow.GetMainWindow().BackupList[index].BackupExecute();
+            //    MessageBoxResult messageBox = MessageBox.Show("tu es très fort bg, tout est bon");
+            //})).Start();
 
 
-                    int index = ListBoxBackup.SelectedIndex;
-                   
-                    MainWindow.GetMainWindow().BackupList[index].BackupExecute();
-                    MessageBoxResult messageBox = MessageBox.Show("tu es très fort bg, tout est bon");
-                }
-
-                else
-                {
-                    MessageBoxResult messageBox = MessageBox.Show("Une application métier est lancée");
-                }
-            }
         }
 
         public void ExecuteAllBackup(object sender, EventArgs e)
@@ -195,8 +212,9 @@ namespace EasySave
                 foreach (var item in BackupList)
                 {
                     item.Pause();
-                    MessageBoxResult messageBox = MessageBox.Show("La copie de fichier a été mis en pause");
+                    //MessageBoxResult messageBox = MessageBox.Show("La copie de fichier a été mis en pause");
                 }
+                MessageBoxResult messageBox = MessageBox.Show("La copie de fichier a été mis en pause");
             }
         }
 
@@ -210,10 +228,32 @@ namespace EasySave
             {
                 foreach (var item in BackupList)
                 {
-                    item.Play();
+                    item.ResumePlay();
 
                 }
             }
+        }
+
+        private void Button_Stop(object sender, RoutedEventArgs e)
+        {
+            if (ListBoxBackup.SelectedIndex == -1)
+            {
+                MessageBox.Show("Veuillez sélectionner une sauvegarde");
+            }
+            else
+            {
+                foreach (var item in BackupList)
+                {
+                    
+
+                }
+            }
+        }
+
+        private void LaunchSettings(object sender, RoutedEventArgs e)
+        {
+            Settings _settings = new Settings();
+            _settings.Show();
         }
 
         public void Progress (object sender, RoutedEventArgs e)
