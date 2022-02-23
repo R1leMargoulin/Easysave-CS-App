@@ -163,8 +163,6 @@ namespace EasySave.Model
 
 
             }
-
-            MutexLogState.ReleaseMutex();
         }
         public static LogState GetInstance(ArgsLogState arg)
         {
