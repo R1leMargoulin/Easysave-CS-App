@@ -168,6 +168,7 @@ namespace EasySave.Model
             {
                 foreach( var file in priori)
                 {
+                    waitHandle.WaitOne();
                     string filepath;
 
                     string subdirectorypath = file.DirectoryName.Split(sourceDirectory.Name)[1];
@@ -202,7 +203,7 @@ namespace EasySave.Model
 
             foreach (var file in fileList)
             {
-
+                waitHandle.WaitOne();
                
                 string filepath;
 

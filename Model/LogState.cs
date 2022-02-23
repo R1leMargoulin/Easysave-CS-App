@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using System.Text;
 using System.Xml.XPath;
 using System.Xml;
@@ -35,8 +36,11 @@ namespace EasySave.Model
 
         }
 
+        private static Mutex MutexLogState = new Mutex();
+
         public LogState(string logname, string logfilesource, string logfiletarget, long logsize, double logduration, int nbFilesLeft, string state, int progression, int totalfiles)
         {
+            MutexLogState.WaitOne();
             Namelog = logname;
             SourceBackup = logfilesource;
             TargetBackup = logfiletarget;
@@ -136,7 +140,7 @@ namespace EasySave.Model
 
             }
 
-
+            MutexLogState.ReleaseMutex();
         }
     }
 }
