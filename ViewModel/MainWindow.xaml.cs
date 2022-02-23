@@ -36,7 +36,6 @@ namespace EasySave
             InitializeComponent();
             home = this;
 
-            
             if (File.Exists(@"Settings.json"))
             {
                 string jsonSettings = File.ReadAllText(@"Settings.json");
@@ -56,7 +55,6 @@ namespace EasySave
 
             ListBoxBackup.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(BackupName);
             Refresh();
-           
         }
 
 
@@ -308,8 +306,7 @@ namespace EasySave
             {
                 foreach (var item in BackupList)
                 {
-                    
-
+                  //  item.Active = false;
                 }
             }
         }
@@ -319,6 +316,13 @@ namespace EasySave
             ViewModel.Settings _settings = new ViewModel.Settings();
             _settings.Show();
         }
+
+        private void StartConnection(object sender, RoutedEventArgs e)
+        {
+            Server server = new Server();
+            server.RunNetwork();
+        }
+
 
 
     }
