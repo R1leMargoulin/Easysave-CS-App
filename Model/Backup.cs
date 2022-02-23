@@ -25,8 +25,9 @@ namespace EasySave.Model
         public string DirectorySource { get; set; }
         public string DirectoryTarget { get; set; }
         public BackupType BackupType { get; set; }
+       // public bool Active { get; set; }
 
-        
+
 
         public bool IsProcessRunning()
         {
@@ -168,6 +169,7 @@ namespace EasySave.Model
             {
                 foreach( var file in priori)
                 {
+                    waitHandle.WaitOne();
                     string filepath;
 
                     string subdirectorypath = file.DirectoryName.Split(sourceDirectory.Name)[1];
@@ -204,7 +206,7 @@ namespace EasySave.Model
 
             foreach (var file in fileList)
             {
-
+                waitHandle.WaitOne();
                
                 string filepath;
 

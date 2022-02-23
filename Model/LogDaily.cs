@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Text;
 using System.Xml.XPath;
 using System.Xml;
@@ -48,6 +49,7 @@ namespace EasySave.Model
             public double FileTransferTime;
             public string time;
         }
+        private static Mutex MutexLogDaily = new Mutex();
 
         private LogDaily(ArgsLogDaily arg)
         {
@@ -90,7 +92,7 @@ namespace EasySave.Model
 
                 string ObjectJsonData = JsonConvert.SerializeObject(logDailyData, Newtonsoft.Json.Formatting.Indented); //Put the List in a Json string 
 
-
+                
                 File.WriteAllText(path, ObjectJsonData); //Write the Json string in the file
             }
 

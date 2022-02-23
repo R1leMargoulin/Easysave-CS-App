@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 using System.Text;
 using System.Xml.XPath;
 using System.Xml;
@@ -163,7 +164,7 @@ namespace EasySave.Model
 
             }
 
-
+            MutexLogState.ReleaseMutex();
         }
         public static LogState GetInstance(ArgsLogState arg)
         {
