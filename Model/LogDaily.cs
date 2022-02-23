@@ -33,7 +33,7 @@ namespace EasySave.Model
 
         public LogDaily(string logname, string logfilesource, string logfiletarget, long logsize, double logduration)
         {
-            MutexLogDaily.WaitOne();
+            //MutexLogDaily.WaitOne();
             Namelog = logname;
             Sourcelog = logfilesource;
             Targetlog = logfiletarget;
@@ -125,7 +125,7 @@ namespace EasySave.Model
 
 
             }
-            MutexLogDaily.ReleaseMutex();
+            //MutexLogDaily.ReleaseMutex();
         }
     }
 
