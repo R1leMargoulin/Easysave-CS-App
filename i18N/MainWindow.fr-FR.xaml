@@ -5,7 +5,7 @@
     <sys:String x:Key="ResoureDictionaryName">Loc-en-US</sys:String>
 
     <sys:String x:Key="WindowTitle">Je sais pas test</sys:String>
-    <sys:String x:Key="FirstNameLabel">prenom</sys:String>
+    <sys:String x:Key="Add">Ajout d'un travail</sys:String>
     <sys:String x:Key="LastNameLabel">nom de famille</sys:String>
     
     
