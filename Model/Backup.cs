@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
@@ -35,6 +36,16 @@ namespace EasySave.Model
                 return true;
             }
             return false;
+        }
+
+        public int Total(string source)
+        {
+            var sourcedirectory = new DirectoryInfo(source);
+            var fileListSource = sourcedirectory.GetFiles();
+
+            int i = fileListSource.Length;
+
+            return i;   
         }
         public List<FileInfo> GetFileListFromDirectory(List<FileInfo> listFile, string source, string target)
         {
@@ -125,6 +136,7 @@ namespace EasySave.Model
         //Execute the backup to the target directory
         public void BackupExecute()
         {
+            int i = 0;
             var sourceDirectory = new DirectoryInfo(DirectorySource);
             var test = new DirectoryInfo(DirectoryTarget);
             var fileList = new List<FileInfo>();
@@ -172,12 +184,14 @@ namespace EasySave.Model
                     new LogState(Name, file.FullName, filepath, lenght / 1000, stopwatch.ElapsedMilliseconds, totalfileslefttodo, "Active", 0, totalfiles); //Create a new LogState with the properties of the backup
 
                     stopwatch.Stop();
+                    
+                    
+
                 }
             }
 
             foreach (var file in fileList)
             {
-
                
                 string filepath;
 
@@ -208,8 +222,11 @@ namespace EasySave.Model
                 new LogState(Name, file.FullName, filepath, lenght / 1000, stopwatch.ElapsedMilliseconds, totalfileslefttodo, "Active", 0, totalfiles); //Create a new LogState with the properties of the backup
 
                 stopwatch.Stop();
+                
+                
             }
             new LogState(Name, "", "", 0, 0, 0, "END", 0, 0);
+           
         }
     }
 }

@@ -9,132 +9,136 @@
 Title="EasySave" Height="500" Width="900">
 
 
-         <Border
+    <Border
           BorderBrush="Black" 
           BorderThickness="2" 
           Padding="25" Background="#FFFFC107">
-                <Grid  ShowGridLines="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="4*"/>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="4*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
-                        <RowDefinition Height="1*"/>
+        <Grid  ShowGridLines="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
 
-                    </Grid.RowDefinitions>
-
-
-
-                    <ListBox x:Name="ListBoxBackup" Grid.Column="0" Grid.RowSpan="10">
-                        <ListBox.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="20"/>
-                            </Style>
-                        </ListBox.Resources>
-
-                    </ListBox>
-
-                    <Button  Click="Button_Add" Grid.Column="1" Grid.Row="3"  Content="Ajouter" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="-2.586,1.931" Width="70" Height="20">
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="10"/>
-                            </Style>
-                        </Button.Resources>
-                    </Button>
-                    <Button Click="Button_Update" Grid.Column="1"  Grid.Row="4" Content="Modifier" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Height="20">
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="10"/>
-                            </Style>
-                        </Button.Resources>
-                    </Button>
-                    <Button Click="DeleteBackup" Grid.Column="1"  Grid.Row="5" Content="Supprimer" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" RenderTransformOrigin="-0.271,0.403" Height="20">
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="10"/>
-                            </Style>
-                        </Button.Resources>
-                    </Button>
-                    <Button Click="ExecuteBackup" Grid.Column="1"  Grid.Row="6" Content="Executer" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Height="20">
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="10"/>
-                            </Style>
-                        </Button.Resources>
-                    </Button>
-                    <Button Click="ExecuteAllBackup" Grid.Column="1"  Grid.Row="7" Content="ExecuteAll" HorizontalAlignment="Center"  VerticalAlignment="Center" RenderTransformOrigin="0.5,0.661" Width="70" Height="20">
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="10"/>
-                            </Style>
-                        </Button.Resources>
-                    </Button>
-                    <Button Content="Pause" Grid.Column="1"  Grid.Row="1" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Click="Button_Pause" Height="20">
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="10"/>
-                            </Style>
-                        </Button.Resources>
-                    </Button>
-
-                    <Button Content="Play" Grid.Column="1"  Grid.Row="0" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Click="Button_Play" Height="20">
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="10"/>
-                            </Style>
-                        </Button.Resources>
-                    </Button>
-
-                    <Button Content="Stop" Grid.Column="1"  Grid.Row="2" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Click="Button_Play" Height="20">
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="10"/>
-                            </Style>
-                        </Button.Resources>
-                    </Button>
-                    <Button Click="ExitApp" Content="Quiter" Grid.Column="1" Grid.Row="8" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Height="20">
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="10"/>
-                            </Style>
-                        </Button.Resources>
-                    </Button>
-                    <Button Content="Réglages" Grid.Column="1" Grid.Row="9" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Click="Button_Play" Height="20">
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="10"/>
-                            </Style>
-                        </Button.Resources>
-                    </Button>
-
-                    <Border Background="White" BorderThickness="1,1,1,1" CornerRadius="20,20,20,20" Grid.RowSpan="10" Grid.Column="2">
-                        <Grid>
-                            <TextBox Name="BackupNameMenu" HorizontalAlignment="Left" Margin="36,70,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="206" IsReadOnly="True"/>
-                            <TextBox Name="BackupSourceMenu"  HorizontalAlignment="Left" Margin="36,130,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" IsReadOnly="True"/>
-                            <Label Content="Répertoire Source" HorizontalAlignment="Left" Margin="36,100,0,0" VerticalAlignment="Top"/>
-                            <Label Content="Répertoire cible&#xD;&#xA;" HorizontalAlignment="Left" Margin="36,160,0,0" VerticalAlignment="Top" Height="29"/>
-                            <TextBox Name="BackupTargetMenu" HorizontalAlignment="Left" Margin="36,190,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" IsReadOnly="True"/>
-                            <Label Content="Nom"  HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="36,40,0,0" />
-                            <RadioButton Name="CompleteMenu" Content="Sauvegarde Complète" HorizontalAlignment="Left" Margin="191,250,0,0" VerticalAlignment="Top" IsEnabled="False"/>
-                            <RadioButton Name="DiffMenu" Content="Sauvegarde Différentielle" HorizontalAlignment="Left" Margin="21,250,0,0" VerticalAlignment="Top" IsEnabled="False"/>
-                            <CheckBox Content="Crypté" HorizontalAlignment="Left" Margin="21,300,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+            </Grid.RowDefinitions>
 
 
-                        </Grid>
 
-                    </Border>
+            <ListBox x:Name="ListBoxBackup" Grid.Column="0" Grid.RowSpan="10">
+                <ListBox.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="20"/>
+                    </Style>
+                </ListBox.Resources>
+
+            </ListBox>
+
+            <Button  Click="Button_Add" Grid.Column="1" Grid.Row="3"  Content="Ajouter" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="-2.586,1.931" Width="70" Height="20">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Click="Button_Update" Grid.Column="1"  Grid.Row="4" Content="Modifier" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Height="20">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Click="DeleteBackup" Grid.Column="1"  Grid.Row="5" Content="Supprimer" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" RenderTransformOrigin="-0.271,0.403" Height="20">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Click="ExecuteBackup" Grid.Column="1"  Grid.Row="6" Content="Executer" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Height="20">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Click="ExecuteAllBackup" Grid.Column="1"  Grid.Row="7" Content="ExecuteAll" HorizontalAlignment="Center"  VerticalAlignment="Center" RenderTransformOrigin="0.5,0.661" Width="70" Height="20">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Content="Pause" Grid.Column="1"  Grid.Row="1" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Click="Button_Pause" Height="20">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button Content="Play" Grid.Column="1"  Grid.Row="0" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Click="Button_Play" Height="20">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button Content="Stop" Grid.Column="1"  Grid.Row="2" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Click="Button_Play" Height="20">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Click="ExitApp" Content="Quiter" Grid.Column="1" Grid.Row="8" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Height="20">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Content="Réglages" Grid.Column="1" Grid.Row="9" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Click="Button_Play" Height="20">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Border Background="White" BorderThickness="1,1,1,1" CornerRadius="20,20,20,20" Grid.RowSpan="10" Grid.Column="2">
+                <Grid>
+                    <TextBox Name="BackupNameMenu" HorizontalAlignment="Left" Margin="36,70,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="206" IsReadOnly="True"/>
+                    <TextBox Name="BackupSourceMenu"  HorizontalAlignment="Left" Margin="36,130,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" IsReadOnly="True"/>
+                    <Label Content="Répertoire Source" HorizontalAlignment="Left" Margin="36,100,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Répertoire cible&#xD;&#xA;" HorizontalAlignment="Left" Margin="36,160,0,0" VerticalAlignment="Top" Height="29"/>
+                    <TextBox Name="BackupTargetMenu" HorizontalAlignment="Left" Margin="36,190,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" IsReadOnly="True"/>
+                    <Label Content="Nom"  HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="36,40,0,0" />
+                    <RadioButton Name="CompleteMenu" Content="Sauvegarde Complète" HorizontalAlignment="Left" Margin="191,250,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+                    <RadioButton Name="DiffMenu" Content="Sauvegarde Différentielle" HorizontalAlignment="Left" Margin="21,250,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+                    <CheckBox Content="Crypté" HorizontalAlignment="Left" Margin="21,300,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+                    <ProgressBar x:Name="Progressbar" HorizontalAlignment="Left" Height="20" Margin="88,369,0,0" VerticalAlignment="Top" Width="186"/>
+                    <Label Content="Progress :" HorizontalAlignment="Left" Margin="142,392,0,0" VerticalAlignment="Top" Width="78"/>
+                    <Label x:Name="percent" Content="" HorizontalAlignment="Left" Margin="204,395,0,0" VerticalAlignment="Top"/>
+                    <Button Click="Progress" Content="Button" HorizontalAlignment="Left" Margin="209,337,0,0" VerticalAlignment="Top"/>
+
 
                 </Grid>
+
+            </Border>
+
+        </Grid>
 
     </Border>
 </Window>

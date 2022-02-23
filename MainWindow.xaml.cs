@@ -164,7 +164,7 @@ namespace EasySave
 
 
                     int index = ListBoxBackup.SelectedIndex;
-
+                   
                     MainWindow.GetMainWindow().BackupList[index].BackupExecute();
                     MessageBoxResult messageBox = MessageBox.Show("tu es très fort bg, tout est bon");
                 }
@@ -216,6 +216,56 @@ namespace EasySave
             }
         }
 
-       
+        public void Progress (object sender, RoutedEventArgs e)
+        {
+            BackgroundWorker worker = new BackgroundWorker();
+            worker.WorkerReportsProgress = true;
+            worker.DoWork += worker_DoWork;
+            worker.ProgressChanged += worker_ProgressChanged;
+            worker.RunWorkerAsync();
+        }
+
+        void worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            int i = 0;
+            
+            Backup backup = BackupList[0];
+            int total = backup.Total(backup.DirectorySource);
+            var sourcedirectory = new DirectoryInfo(backup.DirectorySource);
+            var fileListSource = sourcedirectory.GetFiles();
+            int z = 1;
+            foreach(var item in fileListSource)
+            {
+                
+                int longu = z * 100 / total;
+                if(longu <=100)
+            {
+
+            
+                (sender as BackgroundWorker).ReportProgress(longu);
+                    z++;
+                    Thread.Sleep(1000);
+                }
+            }
+           
+            
+               
+
+            
+        }
+
+        void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            //initialisation de la barre de progression avec le pourcentage de progression
+            Progressbar.Value   = e.ProgressPercentage;
+
+            //Affichage de la progression sur un label
+            percent.Content = Progressbar.Value.ToString() +"%";
+
+
+
+        }
+
+
     }
 }
