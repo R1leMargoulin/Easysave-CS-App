@@ -37,9 +37,11 @@ namespace EasySave
                 WorkerReportsProgress = true,
                 WorkerSupportsCancellation = true
             };
-            backgroundWorker.DoWork += Startconnection;
+            backgroundWorker.DoWork += server.Startconnection;
             backgroundWorker.RunWorkerAsync();
            */
+            
+
             InitializeComponent();
             home = this;
 
@@ -62,6 +64,7 @@ namespace EasySave
 
             ListBoxBackup.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(BackupName);
             Refresh();
+            SetUPServer();
         }
 
 
@@ -326,18 +329,31 @@ namespace EasySave
 
         void Startconnection(object sender, DoWorkEventArgs e)
         {
+            //var str = ListBackup().Name;
             Model.Server server = new Model.Server();
-            server.RunNetwork();
+            //Thread thread = new Thread(new ThreadStart(delegate { server.RunNetwork(Name); }));
+            Thread thread = new Thread(new ThreadStart(server.RunNetwork));
+            thread.Start();
         }
-        public void StartconnectionClick(object sender, RoutedEventArgs e)
+        /*public void StartconnectionClick(object sender, RoutedEventArgs e)
         {
             
             Model.Server server = new Model.Server();
             Thread thread = new Thread(new ThreadStart(server.RunNetwork));
             thread.Start();
             //server.RunNetwork();
-        }
+        }*/
 
+        public void SetUPServer()
+        {
+            BackgroundWorker backgroundWorker = new BackgroundWorker
+            {
+                WorkerReportsProgress = true,
+                WorkerSupportsCancellation = true
+            };
+            backgroundWorker.DoWork += Startconnection;
+            backgroundWorker.RunWorkerAsync();
+        }
 
     }
 }

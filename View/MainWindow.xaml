@@ -115,13 +115,13 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button Click="StartconnectionClick" Content="Réglages"  HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Height="20">
+            <!--<Button Click="StartconnectionClick" Content="Réglages"  HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Height="20">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="10"/>
                     </Style>
                 </Button.Resources>
-            </Button>
+            </Button>-->
 
             <Border Background="White" BorderThickness="1,1,1,1" CornerRadius="20,20,20,20" Grid.RowSpan="10" Grid.Column="2">
                 <Grid>

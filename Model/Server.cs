@@ -18,12 +18,22 @@ namespace EasySave.Model
         {
 
         }
+        /*public void RunNetwork(string name)
+        {
+            Socket socket = SeConnecter();
+            Socket client = AccepterConnection(socket);
+            //this.ListenTo(client);
+            Thread.Sleep(2000);
+            this.SendToTo(client,name);
+
+        }*/
         public void RunNetwork()
         {
             Socket socket = SeConnecter();
             Socket client = AccepterConnection(socket);
-            this.ListenTo(client);
-            this.SendToTo(client,"Aucune save en cours");
+            //this.ListenTo(client);
+            Thread.Sleep(2000);
+            this.SendToTo(client, "name");
 
         }
         private static Socket SeConnecter()
@@ -97,25 +107,26 @@ namespace EasySave.Model
                 client.Send(buffer);
             }
         }
-            private void SendToTo(Socket client, string name)
-            {
-                if (client != null)
-                {
-                    //string msg = "action : play";
-                    byte[] bmsg = Encoding.UTF8.GetBytes(name);
+        public void SendToTo(Socket client, string name)
+        {
+                //if (client != null)
+                //{
+                //string msg = "action : play";
+                byte[] bmsg = new byte[1024];
+                bmsg = Encoding.ASCII.GetBytes(name);
                     try
                     {
-                        client.Send(bmsg);
+                while (true)
+                {
+                    client.Send(bmsg);
+                    //Thread.Sleep(10000);
+                }
                     }
                     catch (Exception ex)
                     {
 
                     }
-            }
             
-
-
-
         }
         private static void Deconnecter(Socket socket)
         {
