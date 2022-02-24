@@ -170,6 +170,7 @@ namespace EasySave.Model
             if (_instance == null)
             {
                 _instance = new LogState(arg);
+                _instance = null;
             }
             return _instance;
         }

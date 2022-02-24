@@ -51,10 +51,11 @@ namespace EasySave.Model
             public double FileTransferTime;
             public string time;
         }
-        private static Mutex MutexLogDaily = new Mutex();
+   
 
         private LogDaily(ArgsLogDaily arg)
         {
+            
             Namelog = arg.logname;
             Sourcelog = arg.logfilesource;
             Targetlog = arg.logfiletarget;
@@ -83,7 +84,7 @@ namespace EasySave.Model
 
                 logDailyData.Add(new LogDailyData()
                 {
-                    destPath = Sourcelog,
+                   
                     Filesize = Sizelog,
                     time = DateTimelog.ToString(),
                     FileSource = Sourcelog,
@@ -96,7 +97,8 @@ namespace EasySave.Model
                 string ObjectJsonData = JsonConvert.SerializeObject(logDailyData, Newtonsoft.Json.Formatting.Indented); //Put the List in a Json string 
 
                 
-                File.WriteAllText(path, ObjectJsonData); //Write the Json string in the file
+                File.WriteAllText(path, ObjectJsonData);
+               //Write the Json string in the file
             }
 
 
@@ -147,13 +149,17 @@ namespace EasySave.Model
 
 
             }
+           
+           
         }
         public static LogDaily GetInstance(ArgsLogDaily arg)
         {
             if (_instance == null)
             {
                 _instance = new LogDaily(arg);
+                _instance = null;
             }
+           
             return _instance;
         }
     }

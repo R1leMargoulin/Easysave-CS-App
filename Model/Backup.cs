@@ -19,6 +19,13 @@ namespace EasySave.Model
             
         };
 
+        public List<string> listpriori()
+        {
+            Settings settings = new Settings();
+            settings.FileSettings();
+            return settings.setting_importantfile;
+        }
+
         public List<FileInfo> priori = new List<FileInfo>();
 
         public string Name { get; set; }
@@ -91,7 +98,7 @@ namespace EasySave.Model
             {
                 foreach (var item in fileListSource)
                 {
-                    if (AcceptedExtensionFiles.Contains(item.Extension))
+                    if (listpriori().Contains(item.Extension))
                     {
                         priori.Add(item);
                     }
@@ -123,14 +130,33 @@ namespace EasySave.Model
                         {
                             if (itemsource.LastWriteTime != itemtarget.LastWriteTime)
                             {
-                                listFile.Add(itemsource);
+                                if (listpriori().Contains(itemsource.Extension))
+                                {
+                                    priori.Add(itemsource);
+                                }
+                                else
+                                {
+                                    listFile.Add(itemsource);
+
+                                }
+                                
                             }
 
                         }
 
                         if (test.Contains(itemsource.Name) == false)//If the file is not contains in the list, it's add to the list
                         {
-                            listFile.Add(itemsource);
+                            if (listpriori().Contains(itemsource.Extension))
+                            {
+                                priori.Add(itemsource);
+                            }
+                            else
+                            {
+
+                          
+                            listFile.Add(itemsource); 
+                            
+                            }
                         }
                     }
 
