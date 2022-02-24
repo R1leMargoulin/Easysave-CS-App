@@ -22,7 +22,14 @@ namespace EasySave.ViewModel
         {
             settingspage = this;
             InitializeComponent();
+            LocUtils.SetDefaultLanguage(this);
+
+            
+            
         }
+
+      
+
 
         private void Cancel(object sender, RoutedEventArgs e)
         {

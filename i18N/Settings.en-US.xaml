@@ -9,7 +9,7 @@
     <sys:String x:Key="Modify">Modify</sys:String>
     <sys:String x:Key="Delete">Delete</sys:String>
     <sys:String x:Key="Execute">Execute</sys:String>
-    <sys:String x:Key="ExecuteAll">Execute All</sys:String>
+    <sys:String x:Key="ExecuteAll">Run All</sys:String>
     <sys:String x:Key="Pause">Pause</sys:String>
     <sys:String x:Key="Play">Play</sys:String>
     <sys:String x:Key="Stop">Stop</sys:String>
@@ -19,7 +19,6 @@
     <sys:String x:Key="Cancel">Cancel</sys:String>
     <sys:String x:Key="Save">Save</sys:String>
     <sys:String x:Key="SettingsTitle">EasySave Settings</sys:String>
-    <sys:String x:Key="Settings">Settings</sys:String>
     
     
     

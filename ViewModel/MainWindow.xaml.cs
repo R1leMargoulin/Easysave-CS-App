@@ -70,18 +70,21 @@ namespace EasySave
           
         }
         
-        private void MenuItem_Click(Object sender, RoutedEventArgs e)
+        public void MenuItem_Click(Object sender, RoutedEventArgs e)
         {
             foreach (MenuItem item in menuItemLanguages.Items)
             {
                 item.IsChecked = false;
             }
-
             MenuItem mi = sender as MenuItem;
             mi.IsChecked = true ;
             LocUtils.SwitchLanguage(this, mi.Tag.ToString());
 
         }
+
+        
+        
+
 
 
         public void SettingUpdate()
