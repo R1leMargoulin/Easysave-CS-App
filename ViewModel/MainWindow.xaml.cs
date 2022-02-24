@@ -44,23 +44,10 @@ namespace EasySave
                 if (item.Tag.ToString().Equals(LocUtils.GetCurrentCultureName(this)))
                     item.IsChecked = true;
             }
-            
-            
-            if (File.Exists(@"Settings.json"))
-            {
-                string jsonSettings = File.ReadAllText(@"Settings.json");
-                Model.Settings settings = System.Text.Json.JsonSerializer.Deserialize<Model.Settings>(jsonSettings); //reprise des parametres mis dans le fichier settings.json
-                language = Model.Settings.setting_language;
-                logformat = Model.Settings.setting_log;
-                //Settings.setting_log = Log_Format.xml;
-            }
-            else
-            {
-                language = Model.Language.fr;
-                logformat = Model.Log_Format.json;
-                SettingUpdate();
 
-            }
+            Model.Settings settings = new Model.Settings();
+            settings.FileSettings();
+
 
 
             ListBoxBackup.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(BackupName);
@@ -78,6 +65,16 @@ namespace EasySave
             }
             MenuItem mi = sender as MenuItem;
             mi.IsChecked = true ;
+            Model.Settings settings = new Model.Settings();
+            settings.FileSettings();
+            if (mi.Tag.ToString().Equals("fr-FR"))
+            {
+                settings.LangFR();
+            }
+            if (mi.Tag.ToString().Equals("en-US"))
+            {
+                settings.LangEN();
+            }
             LocUtils.SwitchLanguage(this, mi.Tag.ToString());
            // return mi.Tag.ToString();
         }
@@ -87,40 +84,18 @@ namespace EasySave
 
 
 
-        public void SettingUpdate()
-        {
-            //on a first hand, we read the file and change only what we want to change in it
-            //(this will be usefull if we want to easily add settings content)
+        
 
-            if (File.Exists(@"Settings.json"))
-            {
-                string jsonSettings = File.ReadAllText(@"Settings.json");
-                Model.Settings settings = System.Text.Json.JsonSerializer.Deserialize<Model.Settings>(jsonSettings);
-                Model.Settings.setting_language = language;
-                Model.Settings.setting_log = logformat;
-
-                //then, on another hand, we save our file settings
-                jsonSettings = System.Text.Json.JsonSerializer.Serialize(settings);
-                File.WriteAllText(@"Settings.json", jsonSettings);
-            }
-            else
-            {
-                Model.Settings sett = new Model.Settings();
-                string jsonSettings = System.Text.Json.JsonSerializer.Serialize(sett);
-                File.WriteAllText(@"Settings.json", jsonSettings);
-            }
-        }
-
-        public void SetLanguage(Language a)
-        {
-            language = a;
-            SettingUpdate();
-        }
-        public void SetLogFormat(Log_Format a)
-        {
-            logformat = a;
-            SettingUpdate();
-        }
+        //public void SetLanguage(Language a)
+        //{
+        //    language = a;
+        //    SettingUpdate();
+        //}
+        //public void SetLogFormat(Log_Format a)
+        //{
+        //    logformat = a;
+        //    SettingUpdate();
+        //}
 
         internal static List<Backup> ListBackup()
         {

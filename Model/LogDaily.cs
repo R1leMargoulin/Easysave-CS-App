@@ -9,7 +9,8 @@ using System.IO;
 
 namespace EasySave.Model
 {
-    public class ArgsLogDaily{
+    public class ArgsLogDaily
+    {
         public string logname { get; set; }
         public string logfilesource { get; set; }
         public string logfiletarget { get; set; }
@@ -18,7 +19,7 @@ namespace EasySave.Model
         public ArgsLogDaily(string alogname, string alogfilesource, string alogfiletarget, long alogsize, double alogduration)
         {
             logname = alogname;
-            logduration = alogduration;
+            logfilesource = alogfilesource;
             logfiletarget = alogfiletarget;
             logsize = alogsize;
             logduration = alogduration;
@@ -39,6 +40,8 @@ namespace EasySave.Model
 
         private static LogDaily _instance;
 
+
+
         public class LogDailyData
         {
             public string Name;
@@ -49,10 +52,11 @@ namespace EasySave.Model
             public double FileTransferTime;
             public string time;
         }
-        private static Mutex MutexLogDaily = new Mutex();
+
 
         private LogDaily(ArgsLogDaily arg)
         {
+
             Namelog = arg.logname;
             Sourcelog = arg.logfilesource;
             Targetlog = arg.logfiletarget;
@@ -63,8 +67,9 @@ namespace EasySave.Model
 
             //Check if the directory exist and create it if it's doesn't exist
             Directory.CreateDirectory("./LogPath");
-
-            if (Settings.setting_log == Log_Format.json)
+            Settings settings = new Settings();
+            settings.FileSettings();
+            if (settings.setting_log == Log_Format.json)
             {
                 //Check if the file exist in the directory and create it if it doesn't exist
                 string path = $"{Pathlog}.json";
@@ -80,7 +85,7 @@ namespace EasySave.Model
 
                 logDailyData.Add(new LogDailyData()
                 {
-                    destPath = Sourcelog,
+
                     Filesize = Sizelog,
                     time = DateTimelog.ToString(),
                     FileSource = Sourcelog,
@@ -92,12 +97,13 @@ namespace EasySave.Model
 
                 string ObjectJsonData = JsonConvert.SerializeObject(logDailyData, Newtonsoft.Json.Formatting.Indented); //Put the List in a Json string 
 
-                
-                File.WriteAllText(path, ObjectJsonData); //Write the Json string in the file
+
+                File.WriteAllText(path, ObjectJsonData);
+                //Write the Json string in the file
             }
 
 
-            if (Settings.setting_log == Log_Format.xml)
+            if (settings.setting_log == Log_Format.xml)
             {
                 //Check if the file exist in the directory and create it if it doesn't exist
                 string path = $"{Pathlog}.xml";
@@ -108,12 +114,12 @@ namespace EasySave.Model
                     {
                         xml.WriteStartElement($"logs_{ DateTime.Now:dd-MM-yyyy}");
                         xml.WriteStartElement(Namelog);
-                        xml.WriteElementString("FileSource",Sourcelog);
+                        xml.WriteElementString("FileSource", Sourcelog);
                         xml.WriteElementString("FileTarget", Targetlog);
                         xml.WriteElementString("DestinationPath", Sourcelog);
                         xml.WriteElementString("FileSize", Convert.ToString(Sizelog));
                         xml.WriteElementString("FileTransferTime", Convert.ToString(Durationlog));
-                        xml.WriteElementString("Time",DateTimelog.ToString());
+                        xml.WriteElementString("Time", DateTimelog.ToString());
                         xml.WriteEndElement();
 
                     }
@@ -144,13 +150,17 @@ namespace EasySave.Model
 
 
             }
+
+
         }
         public static LogDaily GetInstance(ArgsLogDaily arg)
         {
             if (_instance == null)
             {
                 _instance = new LogDaily(arg);
+                _instance = null;
             }
+
             return _instance;
         }
     }

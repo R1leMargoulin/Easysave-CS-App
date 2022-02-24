@@ -35,10 +35,22 @@ namespace EasySave.ViewModel
 
         public void test()
         {
-            MainWindow mainWindow = MainWindow.GetMainWindow();
-            var t = "fr-FR";
-            LocUtils.SwitchLanguage(this, t);
-            
+            Model.Settings settings =  new Model.Settings();
+            settings.FileSettings();
+            var lang = settings.setting_language;
+            if(lang == Model.Language.fr)
+            {
+                MainWindow mainWindow = MainWindow.GetMainWindow();
+                var t = "fr-FR";
+                LocUtils.SwitchLanguage(this, t);
+            }
+            if (lang == Model.Language.en)
+            {
+                MainWindow mainWindow = MainWindow.GetMainWindow();
+                var t = "en-US";
+                LocUtils.SwitchLanguage(this, t);
+            }
+
         }
 
         private void Cancel(object sender, RoutedEventArgs e)
