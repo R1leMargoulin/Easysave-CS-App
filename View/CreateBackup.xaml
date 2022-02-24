@@ -6,6 +6,13 @@
       xmlns:local="clr-namespace:EasySave.View"
       mc:Ignorable="d"
       Title="CreateBackup" Height="400" Width="500">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/i18N/MainWindow.en-US.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
 
     <Grid Background="#FFFFC107">
         <TextBox Name="Namee" HorizontalAlignment="Left" Margin="116,68,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="206" Height="27"/>

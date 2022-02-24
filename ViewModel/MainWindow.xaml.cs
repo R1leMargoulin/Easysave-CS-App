@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using EasySave.ViewModel;
+using System.Windows.Controls;
 
 namespace EasySave
 {
@@ -36,14 +37,51 @@ namespace EasySave
             InitializeComponent();
             home = this;
 
+            LocUtils.SetDefaultLanguage(this);
+
+            foreach (MenuItem item in menuItemLanguages.Items) 
+            {
+                if (item.Tag.ToString().Equals(LocUtils.GetCurrentCultureName(this)))
+                    item.IsChecked = true;
+            }
+            
+            
+            if (File.Exists(@"Settings.json"))
+            {
+                string jsonSettings = File.ReadAllText(@"Settings.json");
+                Model.Settings settings = System.Text.Json.JsonSerializer.Deserialize<Model.Settings>(jsonSettings); //reprise des parametres mis dans le fichier settings.json
+                language = Model.Settings.setting_language;
+                logformat = Model.Settings.setting_log;
+                //Settings.setting_log = Log_Format.xml;
+            }
+            else
+            {
+                language = Model.Language.fr;
+                logformat = Model.Log_Format.json;
+                SettingUpdate();
             Model.Settings settings = new Model.Settings();
             settings.FileSettings();
 
 
             ListBoxBackup.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(BackupName);
             Refresh();
-        }
 
+           
+          
+        }
+        
+        private void MenuItem_Click(Object sender, RoutedEventArgs e)
+        {
+            foreach (MenuItem item in menuItemLanguages.Items)
+            {
+                item.IsChecked = false;
+            }
+
+            MenuItem mi = sender as MenuItem;
+            mi.IsChecked = true ;
+            LocUtils.SwitchLanguage(this, mi.Tag.ToString());
+
+        }
 
 
 
