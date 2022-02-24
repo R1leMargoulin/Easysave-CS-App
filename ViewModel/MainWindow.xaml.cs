@@ -32,7 +32,14 @@ namespace EasySave
 
         public MainWindow()
         {
-           
+            /*BackgroundWorker backgroundWorker = new BackgroundWorker
+            {
+                WorkerReportsProgress = true,
+                WorkerSupportsCancellation = true
+            };
+            backgroundWorker.DoWork += Startconnection;
+            backgroundWorker.RunWorkerAsync();
+           */
             InitializeComponent();
             home = this;
 
@@ -317,12 +324,19 @@ namespace EasySave
             _settings.Show();
         }
 
-        private void StartConnection(object sender, RoutedEventArgs e)
+        void Startconnection(object sender, DoWorkEventArgs e)
         {
-            Server server = new Server();
+            Model.Server server = new Model.Server();
             server.RunNetwork();
         }
-
+        public void StartconnectionClick(object sender, RoutedEventArgs e)
+        {
+            
+            Model.Server server = new Model.Server();
+            Thread thread = new Thread(new ThreadStart(server.RunNetwork));
+            thread.Start();
+            //server.RunNetwork();
+        }
 
 
     }

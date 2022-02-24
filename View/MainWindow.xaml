@@ -115,6 +115,13 @@
                     </Style>
                 </Button.Resources>
             </Button>
+            <Button Click="StartconnectionClick" Content="Réglages"  HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Height="20">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
 
             <Border Background="White" BorderThickness="1,1,1,1" CornerRadius="20,20,20,20" Grid.RowSpan="10" Grid.Column="2">
                 <Grid>
@@ -127,8 +134,7 @@
                     <RadioButton Name="CompleteMenu" Content="Sauvegarde Complète" HorizontalAlignment="Left" Margin="191,250,0,0" VerticalAlignment="Top" IsEnabled="False"/>
                     <RadioButton Name="DiffMenu" Content="Sauvegarde Différentielle" HorizontalAlignment="Left" Margin="21,250,0,0" VerticalAlignment="Top" IsEnabled="False"/>
                     <CheckBox Content="Crypté" HorizontalAlignment="Left" Margin="259,70,0,0" VerticalAlignment="Top" IsEnabled="False"/>
-                    <Button Click="StartConnection" Content="Start" HorizontalAlignment="Left" Margin="259,95,0,0" Width="70" Height="20"></Button>
-                    
+
 
                 </Grid>
 

@@ -14,11 +14,16 @@ namespace EasySave.Model
 {
     public class Server
     {
+        public Server()
+        {
+
+        }
         public void RunNetwork()
         {
             Socket socket = SeConnecter();
             Socket client = AccepterConnection(socket);
-            this.Listen(client);
+            this.ListenTo(client);
+            this.SendToTo(client,"Aucune save en cours");
 
         }
         private static Socket SeConnecter()
@@ -31,11 +36,19 @@ namespace EasySave.Model
             // Create a TCP/IP socket.
             Socket socket = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
-            socket.Bind(ipEP);
-            socket.Listen(port);
+            try
+            {
+                socket.Bind(ipEP);
+                socket.Listen(port);
 
 
-            return socket;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Vérifier votre connexion réseau");
+            }
+        
+        return socket;
         }
 
         private static Socket AccepterConnection(Socket socket)
@@ -56,46 +69,53 @@ namespace EasySave.Model
             return null;
         }
 
-        private void Listen(Socket client)
-        {
-
-
-        }
-
-        private static void Send(Socket client)
+        private void ListenTo(Socket client)
         {
             byte[] bytes = new Byte[1024];
-            int i = 0;
-
-            try
-            {
-                string msg = "name : SAVENAME";
-                byte[] bmsg = Encoding.UTF8.GetBytes(msg);
-                client.Send(bmsg);
-            }
-            catch (Exception ex)
-            {
-
-            }
+            List<Backup> list = MainWindow.GetMainWindow().BackupList;
 
             while (true)
             {
                 try
                 {
-
-
-                    i = (i + 1) % 100;
-                    string msg = "value :" + i.ToString();
-                    byte[] bmsg = Encoding.UTF8.GetBytes(msg);
-                    client.Send(bmsg);
-                    Thread.Sleep(500);
-
+               //     Dispatcher BackupList[index].Name; });
                 }
                 catch (Exception ex)
                 {
 
                 }
             }
+
+        }
+
+        private void SendTo(Socket client, string name)
+        {
+            while (true)
+            {
+                byte[] buffer = new byte[1024];
+                buffer = Encoding.UTF8.GetBytes(name.ToString());
+                client.Send(buffer);
+            }
+        }
+            private void SendToTo(Socket client, string name)
+            {
+                if (client != null)
+                {
+                    //string msg = "action : play";
+                    byte[] bmsg = Encoding.UTF8.GetBytes(name);
+                    try
+                    {
+                        client.Send(bmsg);
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+            }
+            
+
+
+
         }
         private static void Deconnecter(Socket socket)
         {
