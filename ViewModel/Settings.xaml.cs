@@ -23,6 +23,9 @@ namespace EasySave.ViewModel
             settingspage = this;
             InitializeComponent();
             LocUtils.SetDefaultLanguage(this);
+            test();
+
+            
 
             
             
@@ -30,6 +33,13 @@ namespace EasySave.ViewModel
 
       
 
+        public void test()
+        {
+            MainWindow mainWindow = MainWindow.GetMainWindow();
+            var t = "fr-FR";
+            LocUtils.SwitchLanguage(this, t);
+            
+        }
 
         private void Cancel(object sender, RoutedEventArgs e)
         {
