@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using EasySave.ViewModel;
+using System.Windows.Controls;
 
 namespace EasySave
 {
@@ -32,18 +33,53 @@ namespace EasySave
 
         public MainWindow()
         {
-
+           
             InitializeComponent();
             home = this;
 
+            LocUtils.SetDefaultLanguage(this);
+
+            foreach (MenuItem item in menuItemLanguages.Items) 
+            {
+                if (item.Tag.ToString().Equals(LocUtils.GetCurrentCultureName(this)))
+                    item.IsChecked = true;
+            }
+            
+            
+            
             Model.Settings settings = new Model.Settings();
             settings.FileSettings();
 
-
             ListBoxBackup.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(BackupName);
             Refresh();
+            SetUPServer();
         }
 
+           
+          
+        
+        
+        public  void  MenuItem_Click(Object sender, RoutedEventArgs e)
+        {
+            foreach (MenuItem item in menuItemLanguages.Items)
+            {
+                item.IsChecked = false;
+            }
+            MenuItem mi = sender as MenuItem;
+            mi.IsChecked = true ;
+            Model.Settings settings = new Model.Settings();
+            settings.FileSettings();
+            if (mi.Tag.ToString().Equals("fr-FR"))
+            {
+                settings.LangFR();
+            }
+            if (mi.Tag.ToString().Equals("en-US"))
+            {
+                settings.LangEN();
+            }
+            LocUtils.SwitchLanguage(this, mi.Tag.ToString());
+           // return mi.Tag.ToString();
+        }
 
 
 
@@ -280,12 +316,26 @@ namespace EasySave
             _settings.Show();
         }
 
-        private void StartConnection(object sender, RoutedEventArgs e)
+        void Startconnection(object sender, DoWorkEventArgs e)
         {
-            Server server = new Server();
-            server.RunNetwork();
+            //var str = ListBackup().Name;
+            Model.Server server = new Model.Server();
+            //Thread thread = new Thread(new ThreadStart(delegate { server.RunNetwork(Name); }));
+            Thread thread = new Thread(new ThreadStart(server.RunNetwork));
+            thread.Start();
         }
 
+
+        public void SetUPServer()
+        {
+            BackgroundWorker backgroundWorker = new BackgroundWorker
+            {
+                WorkerReportsProgress = true,
+                WorkerSupportsCancellation = true
+            };
+            backgroundWorker.DoWork += Startconnection;
+            backgroundWorker.RunWorkerAsync();
+        }
 
         public void ProcessRunningError()
         {

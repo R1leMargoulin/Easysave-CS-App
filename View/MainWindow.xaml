@@ -5,8 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EasySave"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500" Width="900">
-
+        Title="{DynamicResource ResourceKey=WindowTitle}" Height="500" Width="900">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/i18N/MainWindow.en-US.xaml"/>
+                <ResourceDictionary Source="/i18N/MainWindow.fr-FR.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
 
     <Border
           BorderBrush="Black" 
@@ -14,9 +21,10 @@
           Padding="25" Background="#FFFFC107">
         <Grid  ShowGridLines="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="4*"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="7*"/>
+                <ColumnDefinition Width="332*"/>
+                <ColumnDefinition Width="169*"/>
+                <ColumnDefinition Width="338*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
@@ -31,10 +39,24 @@
                 <RowDefinition Height="1*"/>
 
             </Grid.RowDefinitions>
+            <Menu x:Name="MenuBar" Height="23" Width="102" RenderTransformOrigin="0.5,0.5" Margin="-25,-24,261,44" Grid.ColumnSpan="2">
+                <Menu.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="1" ScaleY="1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Menu.RenderTransform>
+                <MenuItem  Name="menuItemLanguages" Header="_Langue" Height="16" Width="95" RenderTransformOrigin="0.518,1.378">
+                    <MenuItem Header="{DynamicResource ResourceKey=US}" Tag="en-US" IsCheckable="True" Click="MenuItem_Click"/>
+                    <MenuItem Header="{DynamicResource ResourceKey=FR}" Tag="fr-FR" IsCheckable="True" Click="MenuItem_Click"/>
+                </MenuItem>
+            </Menu>
 
 
 
-            <ListBox x:Name="ListBoxBackup" Grid.Column="0" Grid.RowSpan="10">
+            <ListBox x:Name="ListBoxBackup" Grid.Column="0" Grid.RowSpan="10" Grid.ColumnSpan="2">
                 <ListBox.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="20"/>
@@ -43,50 +65,42 @@
 
             </ListBox>
 
-            <Button  Click="Button_Add" Grid.Column="1" Grid.Row="3"  Content="Ajouter" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="-2.586,1.931" Width="70" Height="20">
+            <Button  Click="Button_Add" Grid.Column="2" Grid.Row="3"  Content="{DynamicResource ResourceKey=Add}" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="-2.586,1.931" Width="70" Height="20">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="10"/>
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button Click="Button_Update" Grid.Column="1"  Grid.Row="4" Content="Modifier" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Height="20">
+            <Button Click="Button_Update" Grid.Column="2"  Grid.Row="4" Content="{DynamicResource ResourceKey=Modify}" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Height="20">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="10"/>
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button Click="DeleteBackup" Grid.Column="1"  Grid.Row="5" Content="Supprimer" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" RenderTransformOrigin="-0.271,0.403" Height="20">
+            <Button Click="DeleteBackup" Grid.Column="2"  Grid.Row="5" Content="{DynamicResource ResourceKey=Delete}" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" RenderTransformOrigin="-0.271,0.403" Height="20">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="10"/>
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button Click="ExecuteBackup" Grid.Column="1"  Grid.Row="6" Content="Executer" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Height="20">
+            <Button Click="ExecuteBackup" Grid.Column="2"  Grid.Row="6" Content="{DynamicResource ResourceKey=Execute}" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Height="20">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="10"/>
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button Click="ExecuteAllBackup" Grid.Column="1"  Grid.Row="7" Content="ExecuteAll" HorizontalAlignment="Center"  VerticalAlignment="Center" RenderTransformOrigin="0.5,0.661" Width="70" Height="20">
+            <Button Click="ExecuteAllBackup" Grid.Column="2"  Grid.Row="7" Content="{DynamicResource ResourceKey=ExecuteAll}" HorizontalAlignment="Center"  VerticalAlignment="Center" RenderTransformOrigin="0.5,0.661" Width="102" Height="20">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="10"/>
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button Click="Button_Pause" Content="Pause" Grid.Column="1"  Grid.Row="1" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Height="20">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
-
-            <Button Click="Button_Play" Content="Play" Grid.Column="1"  Grid.Row="0" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Height="20">
+            <Button Click="Button_Pause" Content="{DynamicResource ResourceKey=Pause}" Grid.Column="2"  Grid.Row="1" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Height="20">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="10"/>
@@ -94,21 +108,7 @@
                 </Button.Resources>
             </Button>
 
-            <Button Click="Button_Stop" Content="Stop" Grid.Column="1"  Grid.Row="2" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Height="20">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
-            <Button Click="ExitApp" Content="Quiter" Grid.Column="1" Grid.Row="8" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Height="20">
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius" Value="10"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
-            <Button Click="LaunchSettings" Content="Réglages" Grid.Column="1" Grid.Row="9" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Height="20">
+            <Button Click="Button_Play" Content="{DynamicResource ResourceKey=Play}" Grid.Column="2" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Height="20">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="10"/>
@@ -116,8 +116,39 @@
                 </Button.Resources>
             </Button>
 
-            <Border Background="White" BorderThickness="1,1,1,1" CornerRadius="20,20,20,20" Grid.RowSpan="10" Grid.Column="2">
-                <Grid>
+            <Button Click="Button_Stop" Content="{DynamicResource ResourceKey=Stop}" Grid.Column="2"  Grid.Row="2" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Height="20">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <Button Click="ExitApp" Content="{DynamicResource ResourceKey=Quit}" Grid.Column="2" Grid.Row="8" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Height="20">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Click="LaunchSettings" Content="{DynamicResource ResourceKey=Settings}" Grid.Column="2" Grid.Row="9" HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Height="20">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <!--<Button Click="StartconnectionClick" Content="Réglages"  HorizontalAlignment="Center"  VerticalAlignment="Center" Width="70" Height="20">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>-->
+
+
+            <Border Background="White" BorderThickness="1,1,1,1" CornerRadius="20,20,20,20" Grid.RowSpan="10" Grid.Column="3">
+                <Grid Margin="-3,0,3,0">
                     <TextBox Name="BackupNameMenu" HorizontalAlignment="Left" Margin="36,70,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="206" IsReadOnly="True"/>
                     <TextBox Name="BackupSourceMenu"  HorizontalAlignment="Left" Margin="36,130,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" IsReadOnly="True"/>
                     <Label Content="Répertoire Source" HorizontalAlignment="Left" Margin="36,100,0,0" VerticalAlignment="Top"/>
@@ -127,10 +158,10 @@
                     <RadioButton Name="CompleteMenu" Content="Sauvegarde Complète" HorizontalAlignment="Left" Margin="191,250,0,0" VerticalAlignment="Top" IsEnabled="False"/>
                     <RadioButton Name="DiffMenu" Content="Sauvegarde Différentielle" HorizontalAlignment="Left" Margin="21,250,0,0" VerticalAlignment="Top" IsEnabled="False"/>
                     <CheckBox Content="Crypté" HorizontalAlignment="Left" Margin="259,70,0,0" VerticalAlignment="Top" IsEnabled="False"/>
-                    <Button Click="StartConnection" Content="Start" HorizontalAlignment="Left" Margin="259,95,0,0" Width="70" Height="20"></Button>
-                    
+
 
                 </Grid>
+
 
             </Border>
 

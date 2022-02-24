@@ -9,7 +9,8 @@ using System.IO;
 
 namespace EasySave.Model
 {
-    public class ArgsLogDaily{
+    public class ArgsLogDaily
+    {
         public string logname { get; set; }
         public string logfilesource { get; set; }
         public string logfiletarget { get; set; }
@@ -101,9 +102,9 @@ namespace EasySave.Model
 
                 string ObjectJsonData = JsonConvert.SerializeObject(logDailyData, Newtonsoft.Json.Formatting.Indented); //Put the List in a Json string 
 
-                
+
                 File.WriteAllText(path, ObjectJsonData);
-               //Write the Json string in the file
+                //Write the Json string in the file
             }
 
 
@@ -118,12 +119,12 @@ namespace EasySave.Model
                     {
                         xml.WriteStartElement($"logs_{ DateTime.Now:dd-MM-yyyy}");
                         xml.WriteStartElement(Namelog);
-                        xml.WriteElementString("FileSource",Sourcelog);
+                        xml.WriteElementString("FileSource", Sourcelog);
                         xml.WriteElementString("FileTarget", Targetlog);
                         xml.WriteElementString("DestinationPath", Sourcelog);
                         xml.WriteElementString("FileSize", Convert.ToString(Sizelog));
                         xml.WriteElementString("FileTransferTime", Convert.ToString(Durationlog));
-                        xml.WriteElementString("Time",DateTimelog.ToString());
+                        xml.WriteElementString("Time", DateTimelog.ToString());
                         xml.WriteEndElement();
 
                     }

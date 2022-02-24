@@ -281,6 +281,8 @@ namespace EasySave.Model
                     LogState.GetInstance(argLogState);
 
                     stopwatch.Stop();
+                    Server serverexe = new Server();
+                    //serverexe.RunNetwork(Name);
                 }
             }
 
