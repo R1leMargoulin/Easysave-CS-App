@@ -174,7 +174,10 @@ namespace EasySave.Model
             long lenght = 0;
             foreach (var file in fileList)
             {
-                lenght += file.Length;
+                if (file.Length < (3 * 10 ^ 6))
+                {
+                    lenght += file.Length;
+                }
             }
 
             if(priori != null)

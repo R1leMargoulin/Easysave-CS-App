@@ -18,7 +18,7 @@ namespace EasySave.Model
         public ArgsLogDaily(string alogname, string alogfilesource, string alogfiletarget, long alogsize, double alogduration)
         {
             logname = alogname;
-            logduration = alogduration;
+            logfilesource = alogfilesource;
             logfiletarget = alogfiletarget;
             logsize = alogsize;
             logduration = alogduration;
