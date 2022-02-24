@@ -9,18 +9,17 @@
     <sys:String x:Key="Modify">Modifier</sys:String>
     <sys:String x:Key="Delete">Supprimer</sys:String>
     <sys:String x:Key="Execute">Éxécuter</sys:String>
-    <sys:String x:Key="ExecuteAll">Éxécuter tout</sys:String>
+    <sys:String x:Key="ExecuteAll">Tout éxécuter</sys:String>
     <sys:String x:Key="Pause">Pause</sys:String>
     <sys:String x:Key="Play">Play</sys:String>
     <sys:String x:Key="Stop">Stop</sys:String>
     <sys:String x:Key="US">Anglais</sys:String>
     <sys:String x:Key="FR">Français</sys:String>
     <sys:String x:Key="Quit">Quitter</sys:String>
-    <sys:String x:Key="Settings">Options</sys:String>
+    <sys:String x:Key="Settings">Réglages</sys:String>
     <sys:String x:Key="Cancel">Annuler</sys:String>
     <sys:String x:Key="Save">Sauvegarder</sys:String>
     <sys:String x:Key="SettingsTitle">EasySave Options</sys:String>
-    
 
 
 </ResourceDictionary>

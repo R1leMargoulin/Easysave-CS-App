@@ -24,9 +24,13 @@ namespace EasySave.View
         {
             InitializeComponent();
             initializeValue(backup);
+            LocUtils.SetDefaultLanguage(this);
+            LanguesSettings();
             Backup = backup;
 
         }
+
+
 
         public void initializeValue(Backup backup)
         {
@@ -43,7 +47,26 @@ namespace EasySave.View
             }
 
         }
-        private void UpdateBackupadd(object sender, RoutedEventArgs e)
+
+        public void LanguesSettings()
+        {
+            Model.Settings settings = new Model.Settings();
+            settings.FileSettings();
+            var lang = settings.setting_language;
+            if (lang == Model.Language.fr)
+            {
+                MainWindow mainWindow = MainWindow.GetMainWindow();
+                var t = "fr-FR";
+                LocUtils.SwitchLanguage(this, t);
+            }
+            if (lang == Model.Language.en)
+            {
+                MainWindow mainWindow = MainWindow.GetMainWindow();
+                var t = "en-US";
+                LocUtils.SwitchLanguage(this, t);
+            }
+        }
+            private void UpdateBackupadd(object sender, RoutedEventArgs e)
         {
 
             Backup.Name = BackupName.Text;

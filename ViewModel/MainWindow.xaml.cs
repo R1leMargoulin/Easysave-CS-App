@@ -50,7 +50,6 @@ namespace EasySave
             Model.Settings settings = new Model.Settings();
             settings.FileSettings();
 
-
             ListBoxBackup.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(BackupName);
             Refresh();
 
@@ -58,17 +57,26 @@ namespace EasySave
           
         }
         
-        private void MenuItem_Click(Object sender, RoutedEventArgs e)
+        public  void  MenuItem_Click(Object sender, RoutedEventArgs e)
         {
             foreach (MenuItem item in menuItemLanguages.Items)
             {
                 item.IsChecked = false;
             }
-
             MenuItem mi = sender as MenuItem;
             mi.IsChecked = true ;
+            Model.Settings settings = new Model.Settings();
+            settings.FileSettings();
+            if (mi.Tag.ToString().Equals("fr-FR"))
+            {
+                settings.LangFR();
+            }
+            if (mi.Tag.ToString().Equals("en-US"))
+            {
+                settings.LangEN();
+            }
             LocUtils.SwitchLanguage(this, mi.Tag.ToString());
-
+           // return mi.Tag.ToString();
         }
 
 

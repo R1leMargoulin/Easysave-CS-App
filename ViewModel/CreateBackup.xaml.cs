@@ -27,7 +27,9 @@ namespace EasySave.View
         {
             createBackup = this;
             InitializeComponent();
-          
+            LocUtils.SetDefaultLanguage(this);
+            LanguesSettings();
+
         }
 
         public static CreateBackup GetCreateBackup()
@@ -40,7 +42,7 @@ namespace EasySave.View
         private void CreateBackupAdd( object sender, RoutedEventArgs e)
         {
             Backup backup = new Backup();
-            backup.Name = createBackup.Namee.Text;
+            backup.Name = createBackup.Name.Text;
             backup.DirectorySource = createBackup.Source.Text;
             backup.DirectoryTarget = createBackup.Target.Text;
             backup.IsEncrypted = Encrypted.IsChecked.Value;
@@ -52,7 +54,7 @@ namespace EasySave.View
             {
                 backup.BackupType = BackupType.Differentielle;
             }
-            if (createBackup.Namee.Text == "" || createBackup.Source.Text =="" || createBackup.Target.Text=="" || RadioComplet.IsChecked == false && RadioDiff.IsChecked == false)
+            if (createBackup.Name.Text == "" || createBackup.Source.Text =="" || createBackup.Target.Text=="" || RadioComplet.IsChecked == false && RadioDiff.IsChecked == false)
             {
                 System.Windows.MessageBox.Show(messageError());
             }
@@ -71,6 +73,26 @@ namespace EasySave.View
 
             
             
+
+        }
+
+        public void LanguesSettings()
+        {
+            Model.Settings settings = new Model.Settings();
+            settings.FileSettings();
+            var lang = settings.setting_language;
+            if (lang == Model.Language.fr)
+            {
+                MainWindow mainWindow = MainWindow.GetMainWindow();
+                var t = "fr-FR";
+                LocUtils.SwitchLanguage(this, t);
+            }
+            if (lang == Model.Language.en)
+            {
+                MainWindow mainWindow = MainWindow.GetMainWindow();
+                var t = "en-US";
+                LocUtils.SwitchLanguage(this, t);
+            }
 
         }
         private void BrowseSourceButton(object sender, RoutedEventArgs e)
