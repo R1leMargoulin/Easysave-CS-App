@@ -27,6 +27,7 @@ namespace EasySave
             {
                 //new MainWindow();
                 new MainWindow().Show();
+
             }
         }
 

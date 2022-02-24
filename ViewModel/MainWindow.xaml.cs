@@ -33,7 +33,7 @@ namespace EasySave
 
         public MainWindow()
         {
-
+           
             InitializeComponent();
             home = this;
 
@@ -52,6 +52,8 @@ namespace EasySave
 
             ListBoxBackup.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(BackupName);
             Refresh();
+            SetUPServer();
+        }
 
            
           
@@ -314,12 +316,26 @@ namespace EasySave
             _settings.Show();
         }
 
-        private void StartConnection(object sender, RoutedEventArgs e)
+        void Startconnection(object sender, DoWorkEventArgs e)
         {
-            Server server = new Server();
-            server.RunNetwork();
+            //var str = ListBackup().Name;
+            Model.Server server = new Model.Server();
+            //Thread thread = new Thread(new ThreadStart(delegate { server.RunNetwork(Name); }));
+            Thread thread = new Thread(new ThreadStart(server.RunNetwork));
+            thread.Start();
         }
 
+
+        public void SetUPServer()
+        {
+            BackgroundWorker backgroundWorker = new BackgroundWorker
+            {
+                WorkerReportsProgress = true,
+                WorkerSupportsCancellation = true
+            };
+            backgroundWorker.DoWork += Startconnection;
+            backgroundWorker.RunWorkerAsync();
+        }
 
         public void ProcessRunningError()
         {
