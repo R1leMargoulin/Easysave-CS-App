@@ -23,10 +23,12 @@ namespace EasySave.ViewModel
             settingspage = this;
             
             InitializeComponent();
+            LanguesSettings();
             LogFormat.ItemsSource = new List<string>() { "json", "xml" };
             RefreshProcess();
             RefreshImportantFile();
             RefreshEncrypt();
+            
         }
 
 

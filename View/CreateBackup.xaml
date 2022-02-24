@@ -25,7 +25,7 @@
         <Label Content="{DynamicResource ResourceKey=Target}" HorizontalAlignment="Left" Margin="116,181,0,0" VerticalAlignment="Top"/>
         <RadioButton Name="RadioComplet" Content="{DynamicResource ResourceKey=Complete}" HorizontalAlignment="Left" Margin="73,266,0,0" VerticalAlignment="Top"/>
         <RadioButton Name="RadioDiff" Content="{DynamicResource ResourceKey=Diff}" HorizontalAlignment="Left" Margin="236,266,0,0" VerticalAlignment="Top"/>
-        <CheckBox Content="{DynamicResource ResourceKey=Cryptage}" HorizontalAlignment="Left" Margin="340,71,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked" Width="111" Height="21"/>
+        <CheckBox Name="Encrypted" Content="{DynamicResource ResourceKey=Cryptage}" HorizontalAlignment="Left" Margin="340,71,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked" Width="111" Height="21"/>
         <Button x:Name="TargetPathButton" Content="{DynamicResource ResourceKey=Browse}" Click="BrowseTargetButton" HorizontalAlignment="Left" Margin="18,213,0,0" VerticalAlignment="Top" Width="80"/>
         <Button x:Name="SourcePathButton" Content="{DynamicResource ResourceKey=Browse}" Click="BrowseSourceButton" HorizontalAlignment="Left" Margin="18,139,0,0" VerticalAlignment="Top" Width="80"/>
 
