@@ -100,12 +100,12 @@ namespace EasySave.Model
             catch (Exception)
             {
 
-                }
+            }
             }
 
-        }
+        
 
-        private void SendTo(Socket client, string name)
+        /*private void SendTo(Socket client, string name)
         {
             while (true)
             {
@@ -113,7 +113,7 @@ namespace EasySave.Model
                 buffer = Encoding.UTF8.GetBytes(name.ToString());
                 client.Send(buffer);
             }
-        }
+        }*/
         public void SendToTo(Socket client, string name)
         {
                 //if (client != null)
@@ -121,29 +121,28 @@ namespace EasySave.Model
                 //string msg = "action : play";
                 byte[] bmsg = new byte[1024];
                 bmsg = Encoding.ASCII.GetBytes(name);
-                    try
-                    {
-                while (true)
-                {
-                    client.Send(bmsg);
-                    Thread.Sleep(500);
+        try
+        {
+            while (true)
+            {
+                client.Send(bmsg);
+                Thread.Sleep(500);
 
-                }
-                catch (Exception)
-                {
-                    //Thread.Sleep(10000);
-                }
-                    }
-                    catch (Exception ex)
-                    {
-
-                    }
-            
+            }
         }
+        catch (Exception)
+        {
+            //Thread.Sleep(10000);
+        }
+        }
+
+            
+        
         private static void Deconnecter(Socket socket)
         {
             socket.Close();
         }
     }
 }
+
 
