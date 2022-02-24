@@ -36,9 +36,9 @@
             <Button  Click="AddEncryptFile" x:Name="BtnAddJobApp"  Content="+" HorizontalAlignment="Left" Margin="300,169,0,35" Width="44" Height="25"/>
             <Button  Click="DeleteEncryptFile" x:Name="BtnRemoveJobApp" Content="-" HorizontalAlignment="Left" Margin="370,169,0,35" Width="44" Height="25"/>
             <TextBox x:Name="TextBoxToAdd" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-            <Label x:Name="ExtentionNotCopyLabel" Content="Label" HorizontalAlignment="Left" Margin="10,18,0,0" VerticalAlignment="Top" />
-            <Label x:Name="ExtentionImpFilesLabel" Content="Label" HorizontalAlignment="Left" Margin="155,18,0,0" VerticalAlignment="Top" />
-            <Label x:Name="JobsAppLabel" Content="Label" HorizontalAlignment="Left" Margin="300,18,0,0" VerticalAlignment="Top" Width="233"/>
+            <Label Content="{DynamicResource ResourceKey=JobApp}"  HorizontalAlignment="Left" Margin="10,18,0,0" VerticalAlignment="Top" />
+            <Label x:Name="ExtentionImpFilesLabel" Content="{DynamicResource ResourceKey=PrioriFile}" HorizontalAlignment="Left" Margin="155,18,0,0" VerticalAlignment="Top" />
+            <Label x:Name="JobsAppLabel" Content="{DynamicResource ResourceKey=ExtensionEncrypt}" HorizontalAlignment="Left" Margin="300,18,0,0" VerticalAlignment="Top" Width="233"/>
             <ListBox x:Name="ListExtentionProcess" HorizontalAlignment="Left" Margin="10,40,0,95" Width="115"/>
             <ListBox x:Name="ListExtensionImportantFiles" HorizontalAlignment="Left" Margin="155,40,0,95" Width="115"/>
             <ListBox x:Name="ListEncrypt" HorizontalAlignment="Left" Margin="300,40,0,95" Width="115"/>

@@ -10,7 +10,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/i18N/MainWindow.en-US.xaml"/>
-                <ResourceDictionary Source="/i18N/MainWindow.fr-FR.xaml"/>
+                
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -151,13 +151,13 @@
                 <Grid Margin="-3,0,3,0">
                     <TextBox Name="BackupNameMenu" HorizontalAlignment="Left" Margin="36,70,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="206" IsReadOnly="True"/>
                     <TextBox Name="BackupSourceMenu"  HorizontalAlignment="Left" Margin="36,130,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" IsReadOnly="True"/>
-                    <Label Content="Répertoire Source" HorizontalAlignment="Left" Margin="36,100,0,0" VerticalAlignment="Top"/>
-                    <Label Content="Répertoire cible&#xD;&#xA;" HorizontalAlignment="Left" Margin="36,160,0,0" VerticalAlignment="Top" Height="29"/>
+                    <Label Content="{DynamicResource ResourceKey=Source}" HorizontalAlignment="Left" Margin="36,100,0,0" VerticalAlignment="Top"/>
+                    <Label Content="{DynamicResource ResourceKey=Target}" HorizontalAlignment="Left" Margin="36,160,0,0" VerticalAlignment="Top" Height="29"/>
                     <TextBox Name="BackupTargetMenu" HorizontalAlignment="Left" Margin="36,190,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" IsReadOnly="True"/>
-                    <Label Content="Nom"  HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="36,40,0,0" />
-                    <RadioButton Name="CompleteMenu" Content="Sauvegarde Complète" HorizontalAlignment="Left" Margin="191,250,0,0" VerticalAlignment="Top" IsEnabled="False"/>
-                    <RadioButton Name="DiffMenu" Content="Sauvegarde Différentielle" HorizontalAlignment="Left" Margin="21,250,0,0" VerticalAlignment="Top" IsEnabled="False"/>
-                    <CheckBox Content="Crypté" HorizontalAlignment="Left" Margin="259,70,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+                    <Label Content="{DynamicResource ResourceKey=Backup}"  HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="36,40,0,0" />
+                    <RadioButton Name="CompleteMenu" Content="{DynamicResource ResourceKey=Complete}" HorizontalAlignment="Left" Margin="191,250,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+                    <RadioButton Name="DiffMenu" Content="{DynamicResource ResourceKey=Diff}" HorizontalAlignment="Left" Margin="21,250,0,0" VerticalAlignment="Top" IsEnabled="False"/>
+                    <CheckBox Content="{DynamicResource ResourceKey=Crypted}" HorizontalAlignment="Left" Margin="259,70,0,0" VerticalAlignment="Top" IsEnabled="False"/>
 
 
                 </Grid>

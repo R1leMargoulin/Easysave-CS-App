@@ -19,7 +19,13 @@
     <sys:String x:Key="Cancel">Cancel</sys:String>
     <sys:String x:Key="Save">Save</sys:String>
     <sys:String x:Key="SettingsTitle">EasySave Settings</sys:String>
+    <sys:String x:Key="Backup">Name of the Backup</sys:String>
+    <sys:String x:Key="Source">Source Directorie</sys:String>
+    <sys:String x:Key="Target">Target Directorie</sys:String>
     <sys:String x:Key="Settings">Settings</sys:String>
+    <sys:String x:Key="Crypted">Crypted</sys:String>
+    <sys:String x:Key="Complete">Full Backup</sys:String>
+    <sys:String x:Key="Diff">Differential Backup</sys:String>
     
     
     
