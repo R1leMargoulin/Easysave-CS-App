@@ -52,7 +52,12 @@ namespace EasySave.Model
             public double FileTransferTime;
             public string time;
         }
-   
+
+        public static LogDaily InstanceState()
+        {
+            return _instance;
+        }
+
 
         private LogDaily(ArgsLogDaily arg)
         {

@@ -20,6 +20,7 @@
     <sys:String x:Key="Cancel">Annuler</sys:String>
     <sys:String x:Key="Save">Sauvegarder</sys:String>
     <sys:String x:Key="SettingsTitle">EasySave Options</sys:String>
+    <sys:String x:Key="MaxFile">Taille maximale</sys:String>
 
 
 </ResourceDictionary>

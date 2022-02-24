@@ -182,6 +182,25 @@ namespace EasySave.ViewModel
         }
 
 
+        public void AddMaxFileSize(object sender, RoutedEventArgs e)
+        {
+            Model.Settings settings = new Model.Settings();
+            settings.FileSettings();
+            var i = int.Parse(MaxSize.Text);
+            settings.AddMaxSize(i);
+            
+            if(settings.setting_language == Model.Language.fr)
+            {
+                MessageBox.Show("La taille des fichiers max a été modifié");
+            }
+            if (settings.setting_language == Model.Language.en)
+            {
+                MessageBox.Show("the max file size has been modified");
+            }
+
+
+        }
+
         private void Cancel(object sender, RoutedEventArgs e)
         {
             Close();
