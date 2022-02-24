@@ -12,7 +12,8 @@ namespace EasySave.Model
         public Log_Format setting_log { get; set; }
         public List<String> setting_process { get; set; }
         public  List<String> setting_importantfile { get; set; }
-        public List<String> setting_encryptfile { get; set; }   
+        public List<String> setting_encryptfile { get; set; }
+        public int setting_maxsize { get; set; }    
 
 
 
@@ -38,6 +39,7 @@ namespace EasySave.Model
                 setting_process = allsettings.setting_process;
                 setting_encryptfile = allsettings.setting_encryptfile;
                 setting_importantfile = allsettings.setting_importantfile;
+                setting_maxsize = allsettings.setting_maxsize;
 
 
 
@@ -53,6 +55,7 @@ namespace EasySave.Model
                 settings.setting_process = new List<string>() { "notepad" };
                 settings.setting_importantfile = new List<string>() { ".pdf" };
                 settings.setting_encryptfile = new List<string>() { ".txt" };
+                settings.setting_maxsize = 3000;
                 var data = JsonConvert.SerializeObject(settings, Formatting.Indented);
                 File.WriteAllText(path, data);
 
@@ -71,6 +74,7 @@ namespace EasySave.Model
             settings.setting_process = allsettings.setting_process;
             settings.setting_importantfile = allsettings.setting_importantfile;
             settings.setting_encryptfile = allsettings.setting_encryptfile;
+            settings.setting_maxsize = allsettings.setting_maxsize;
             var data = JsonConvert.SerializeObject(settings, Formatting.Indented);
             File.WriteAllText(path, data);
         }
@@ -86,6 +90,7 @@ namespace EasySave.Model
             settings.setting_process = allsettings.setting_process;
             settings.setting_importantfile = allsettings.setting_importantfile;
             settings.setting_encryptfile = allsettings.setting_encryptfile;
+            settings.setting_maxsize = allsettings.setting_maxsize;
             var data = JsonConvert.SerializeObject(settings, Formatting.Indented);
             File.WriteAllText(path, data);
         }
@@ -103,6 +108,7 @@ namespace EasySave.Model
             settings.setting_process = allsettings.setting_process;
             settings.setting_importantfile = allsettings.setting_importantfile;
             settings.setting_encryptfile = allsettings.setting_encryptfile;
+            settings.setting_maxsize = allsettings.setting_maxsize;
             var data = JsonConvert.SerializeObject(settings, Formatting.Indented);
             File.WriteAllText(path, data);
         }
@@ -118,6 +124,7 @@ namespace EasySave.Model
             settings.setting_process = process;
             settings.setting_importantfile = allsettings.setting_importantfile;
             settings.setting_encryptfile = allsettings.setting_encryptfile;
+            settings.setting_maxsize = allsettings.setting_maxsize;
             var data = JsonConvert.SerializeObject(settings, Formatting.Indented);
             File.WriteAllText(path, data);
         }
@@ -134,6 +141,7 @@ namespace EasySave.Model
             allsettings.setting_importantfile.Add(importantfile);
             settings.setting_importantfile = allsettings.setting_importantfile;
             settings.setting_encryptfile = allsettings.setting_encryptfile;
+            settings.setting_maxsize = allsettings.setting_maxsize;
             var data = JsonConvert.SerializeObject(settings, Formatting.Indented);
             File.WriteAllText(path, data);
         }
@@ -149,6 +157,7 @@ namespace EasySave.Model
             settings.setting_process = allsettings.setting_process;
             settings.setting_importantfile = importantfile;
             settings.setting_encryptfile = allsettings.setting_encryptfile;
+            settings.setting_maxsize = allsettings.setting_maxsize;
             var data = JsonConvert.SerializeObject(settings, Formatting.Indented);
             File.WriteAllText(path, data);
         }
@@ -166,6 +175,7 @@ namespace EasySave.Model
             settings.setting_importantfile = allsettings.setting_importantfile;
             allsettings.setting_encryptfile.Add(importantfile);
             settings.setting_encryptfile = allsettings.setting_encryptfile;
+            settings.setting_maxsize = allsettings.setting_maxsize;
             var data = JsonConvert.SerializeObject(settings, Formatting.Indented);
             File.WriteAllText(path, data);
         }
@@ -181,6 +191,7 @@ namespace EasySave.Model
             settings.setting_process = allsettings.setting_process;
             settings.setting_importantfile = allsettings.setting_importantfile;
             settings.setting_encryptfile = encryptfile;
+            settings.setting_maxsize = allsettings.setting_maxsize;
             var data = JsonConvert.SerializeObject(settings, Formatting.Indented);
             File.WriteAllText(path, data);
         }
@@ -195,6 +206,7 @@ namespace EasySave.Model
             settings.setting_process = allsettings.setting_process;
             settings.setting_importantfile = allsettings.setting_importantfile;
             settings.setting_encryptfile = allsettings.setting_encryptfile;
+            settings.setting_maxsize = allsettings.setting_maxsize;
             var data = JsonConvert.SerializeObject(settings, Formatting.Indented);
             File.WriteAllText(path, data);
         }
@@ -210,6 +222,23 @@ namespace EasySave.Model
             settings.setting_process = allsettings.setting_process;
             settings.setting_importantfile = allsettings.setting_importantfile;
             settings.setting_encryptfile = allsettings.setting_encryptfile;
+            settings.setting_maxsize = allsettings.setting_maxsize;
+            var data = JsonConvert.SerializeObject(settings, Formatting.Indented);
+            File.WriteAllText(path, data);
+        }
+
+        public void AddMaxSize(int max)
+        {
+            string path = @"Settings.json";
+            var settingss = File.ReadAllText(path);
+            var allsettings = JsonConvert.DeserializeObject<Settings>(settingss);
+            var settings = new Settings();
+            settings.setting_language = Language.en;
+            settings.setting_log = allsettings.setting_log;
+            settings.setting_process = allsettings.setting_process;
+            settings.setting_importantfile = allsettings.setting_importantfile;
+            settings.setting_encryptfile = allsettings.setting_encryptfile;
+            settings.setting_maxsize = max;
             var data = JsonConvert.SerializeObject(settings, Formatting.Indented);
             File.WriteAllText(path, data);
         }
