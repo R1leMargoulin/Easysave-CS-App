@@ -63,6 +63,11 @@ namespace EasySave.Model
 
         }
 
+        public static LogState InstanceState()
+        {
+            return _instance;
+        }
+
         public LogState(ArgsLogState arg)
         {
             Namelog = arg.logname;

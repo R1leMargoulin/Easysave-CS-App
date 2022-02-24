@@ -28,6 +28,9 @@ namespace EasySave.Model
 
         public List<FileInfo> priori = new List<FileInfo>();
 
+        public List<Thread> listThread = new List<Thread>();
+        public List<Thread> listTPaused = new List<Thread>();
+
         public string Name { get; set; }
         public string DirectorySource { get; set; }
         public string DirectoryTarget { get; set; }
@@ -178,11 +181,12 @@ namespace EasySave.Model
 
         public void BackupExecuteThread()
         {
-            Thread t = new Thread(()=>BackupExecute(this));
-            t.Start();
+            listThread.Add(new Thread(() => BackupExecute(this, listThread.Count - 1)));
+            listThread[listThread.Count - 1].Start();
+            
            
         }
-        public void BackupExecute(Backup dir)
+        public void BackupExecute(Backup dir, int indexCurrentThread)
         {
             var sourceDirectory = new DirectoryInfo(dir.DirectorySource);
             var test = new DirectoryInfo(dir.DirectoryTarget);
@@ -203,6 +207,25 @@ namespace EasySave.Model
                 if (file.Length < (3 * 10 ^ 6))
                 {
                     lenght += file.Length;
+
+                }
+                else
+                {
+                    for(int i = 0; i < listThread.Count; i++)
+                    {
+                        int verif = 0;
+                        while (verif != 1)
+                        {
+                            if (LogState.InstanceState() == null & LogDaily.InstanceState() == null) {
+                                if (i != indexCurrentThread)
+                                {
+                                    listThread[i].Interrupt();
+                                    listTPaused.Add(listThread[i]);
+
+                                }
+                            }
+                        }
+                    }
                 }
             }
 
@@ -315,6 +338,16 @@ namespace EasySave.Model
             }
             ArgsLogState o = new ArgsLogState(Name, "", "", 0, 0, 0, "END", 0, 0);
             LogState.GetInstance(o);
+
+            if(listTPaused != null)
+            {
+                foreach(Thread pausedT in listTPaused)
+                {
+                    pausedT.Resume();
+                }
+
+            }
         }
+
     }
 }
