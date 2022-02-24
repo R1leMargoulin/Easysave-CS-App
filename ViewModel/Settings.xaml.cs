@@ -23,7 +23,7 @@ namespace EasySave.ViewModel
             settingspage = this;
             InitializeComponent();
             LocUtils.SetDefaultLanguage(this);
-            test();
+            LanguesSettings();
 
             
 
@@ -33,7 +33,7 @@ namespace EasySave.ViewModel
 
       
 
-        public void test()
+        public void LanguesSettings()
         {
             Model.Settings settings =  new Model.Settings();
             settings.FileSettings();

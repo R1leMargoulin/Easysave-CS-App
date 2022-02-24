@@ -5,22 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EasySave.View"
         mc:Ignorable="d"
-        Title="UpdateBackup" Height="400" Width="500">
+        Title="{DynamicResource ResourceKey=WindowTitle}" Height="400" Width="500">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/i18N/UpdateBackup.en-US.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
 
     <Grid Background="#FFFFC107">
         <TextBox Name="BackupName" HorizontalAlignment="Left" Margin="116,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Height="27"/>
-        <Label Content="Nom de la Sauvegarde" HorizontalAlignment="Left" Margin="116,37,0,0" VerticalAlignment="Top" Width="152"/>
+        <Label Content="{DynamicResource ResourceKey=Backup}" HorizontalAlignment="Left" Margin="116,37,0,0" VerticalAlignment="Top" Width="152"/>
         <TextBox Name="DirectorySource"  IsReadOnly="True" HorizontalAlignment="Left" Margin="116,136,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="206" Height="26"/>
         <TextBox Name="DirectoryTarget"  IsReadOnly="True" HorizontalAlignment="Left" Margin="116,207,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="206" Height="31"/>
-        <Button Click="UpdateBackupadd" Content="Sauvegarder"  HorizontalAlignment="Left" Margin="186,307,0,0" VerticalAlignment="Top" Height="26" Width="66"/>
-        <Button Content="Annuler" Click="Cancel" HorizontalAlignment="Left" Margin="362,307,0,0" VerticalAlignment="Top" Height="26" Width="66"/>
-        <Label Content="Répertoire Source&#xD;&#xA;" HorizontalAlignment="Left" Margin="116,107,0,0" VerticalAlignment="Top"/>
-        <Label Content="Répertoire cible&#xD;&#xA;" HorizontalAlignment="Left" Margin="116,181,0,0" VerticalAlignment="Top"/>
-        <RadioButton Name="RadioComplete" Content="Sauvegarde Complète&#xD;&#xA;" HorizontalAlignment="Left" Margin="73,266,0,0" VerticalAlignment="Top"/>
-        <RadioButton Name="RadioDiffe" Content="Sauvegarde Différentielle&#xD;&#xA;" HorizontalAlignment="Left" Margin="236,266,0,0" VerticalAlignment="Top"/>
-        <CheckBox Content="Encryptage" HorizontalAlignment="Left" Margin="340,71,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked" Width="111" Height="21"/>
-        <Button x:Name="TargetPathButton" Content="Parcourir" Click="BrowseTargetButton" HorizontalAlignment="Left" Margin="18,213,0,0" VerticalAlignment="Top" Width="80"/>
-        <Button x:Name="SourcePathButton" Content="Parcourir" Click="BrowseSourceButton" HorizontalAlignment="Left" Margin="18,139,0,0" VerticalAlignment="Top" Width="80"/>
+        <Button Click="UpdateBackupadd" Content="{DynamicResource ResourceKey=Add}"  HorizontalAlignment="Left" Margin="186,307,0,0" VerticalAlignment="Top" Height="26" Width="66"/>
+        <Button Content="{DynamicResource ResourceKey=Cancel}" Click="Cancel" HorizontalAlignment="Left" Margin="362,307,0,0" VerticalAlignment="Top" Height="26" Width="66"/>
+        <Label Content="{DynamicResource ResourceKey=Source}" HorizontalAlignment="Left" Margin="116,107,0,0" VerticalAlignment="Top"/>
+        <Label Content="{DynamicResource ResourceKey=Target}" HorizontalAlignment="Left" Margin="116,181,0,0" VerticalAlignment="Top"/>
+        <RadioButton Name="RadioComplete" Content="{DynamicResource ResourceKey=Complete}" HorizontalAlignment="Left" Margin="73,266,0,0" VerticalAlignment="Top"/>
+        <RadioButton Name="RadioDiffe" Content="{DynamicResource ResourceKey=Diff}" HorizontalAlignment="Left" Margin="236,266,0,0" VerticalAlignment="Top"/>
+        <CheckBox Content="{DynamicResource ResourceKey=Cryptage}" HorizontalAlignment="Left" Margin="340,71,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked" Width="111" Height="21"/>
+        <Button x:Name="TargetPathButton" Content="{DynamicResource ResourceKey=Browse}" Click="BrowseTargetButton" HorizontalAlignment="Left" Margin="18,213,0,0" VerticalAlignment="Top" Width="80"/>
+        <Button x:Name="SourcePathButton" Content="{DynamicResource ResourceKey=Browse}" Click="BrowseSourceButton" HorizontalAlignment="Left" Margin="18,139,0,0" VerticalAlignment="Top" Width="80"/>
 
 
     </Grid>
