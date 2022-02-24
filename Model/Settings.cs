@@ -184,6 +184,36 @@ namespace EasySave.Model
             var data = JsonConvert.SerializeObject(settings, Formatting.Indented);
             File.WriteAllText(path, data);
         }
+        public void LangFR()
+        {
+            string path = @"Settings.json";
+            var settingss = File.ReadAllText(path);
+            var allsettings = JsonConvert.DeserializeObject<Settings>(settingss);
+            var settings = new Settings();
+            settings.setting_language = Language.fr;
+            settings.setting_log = allsettings.setting_log;
+            settings.setting_process = allsettings.setting_process;
+            settings.setting_importantfile = allsettings.setting_importantfile;
+            settings.setting_encryptfile = allsettings.setting_encryptfile;
+            var data = JsonConvert.SerializeObject(settings, Formatting.Indented);
+            File.WriteAllText(path, data);
+        }
+
+        public void LangEN()
+        {
+            string path = @"Settings.json";
+            var settingss = File.ReadAllText(path);
+            var allsettings = JsonConvert.DeserializeObject<Settings>(settingss);
+            var settings = new Settings();
+            settings.setting_language = Language.en;
+            settings.setting_log = allsettings.setting_log;
+            settings.setting_process = allsettings.setting_process;
+            settings.setting_importantfile = allsettings.setting_importantfile;
+            settings.setting_encryptfile = allsettings.setting_encryptfile;
+            var data = JsonConvert.SerializeObject(settings, Formatting.Indented);
+            File.WriteAllText(path, data);
+        }
+
 
     }
 

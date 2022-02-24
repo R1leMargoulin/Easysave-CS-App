@@ -5,15 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EasySave.ViewModel"
         mc:Ignorable="d"
-        Title="Settings" Height="550" Width="800">
+        Title="{DynamicResource ResourceKey=SettingsTitle}" Height="550" Width="800">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/i18N/Settings.en-US.xaml"/>
+                <ResourceDictionary Source="/i18N/Settings.fr-FR.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+
     <Grid Background="#FFFFC107" Margin="0,0,0,0">
 
-        <Label Content="Settings" HorizontalAlignment="Left" Margin="25,10,0,0" VerticalAlignment="Top" Width="152"/>
+        <Label  Content="{DynamicResource ResourceKey=SettingsTitle}" HorizontalAlignment="Left" Margin="25,10,0,0" VerticalAlignment="Top" Width="152"/>
         <Label x:Name="MaxSizeLabel" Content="Label" HorizontalAlignment="Left" Margin="25,40,0,0" VerticalAlignment="Top" Width="575"/>
         <TextBox x:Name="MaxSize" HorizontalAlignment="Left" Margin="30,65,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="MaxSizeLabel_Invalid" Content="Label" HorizontalAlignment="Left" Margin="181,61,0,0" VerticalAlignment="Top" Width="121"/>
-        <Button Content="Cancel" x:Name="CancelButton" Click="Cancel"  HorizontalAlignment="Left" Margin="30,170,0,0" VerticalAlignment="Top" Height="37" Width="76"/>
-        <Button Content="Save" x:Name="Save"  HorizontalAlignment="Left" Margin="130,170,0,0" VerticalAlignment="Top" Height="37" Width="114"/>
+        <Button Content="{DynamicResource ResourceKey=Cancel}" x:Name="CancelButton" Click="Cancel"  HorizontalAlignment="Left" Margin="30,170,0,0" VerticalAlignment="Top" Height="37" Width="76"/>
+        <Button Content="{DynamicResource ResourceKey=Save}" x:Name="Save"  HorizontalAlignment="Left" Margin="130,170,0,0" VerticalAlignment="Top" Height="37" Width="114"/>
         <Label x:Name="LogFormatLabel" Content="Label" HorizontalAlignment="Left" Margin="25,98,0,0" VerticalAlignment="Top" Width="575"/>
         <ComboBox x:Name="LogFormat" HorizontalAlignment="Left" Margin="30,129,0,0" VerticalAlignment="Top" Width="120"/>
         <Grid Margin="20,215,10,20">
@@ -32,8 +42,9 @@
             <ListBox x:Name="ListJobsApp" HorizontalAlignment="Left" Margin="300,40,0,95" Width="115"/>
 
         </Grid>
-
+        
 
 
     </Grid>
+
 </Window>

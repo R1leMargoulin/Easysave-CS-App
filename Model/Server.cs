@@ -49,7 +49,7 @@ namespace EasySave.Model
                     return distant;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -66,14 +66,13 @@ namespace EasySave.Model
         {
             byte[] bytes = new Byte[1024];
             int i = 0;
-
             try
             {
                 string msg = "name : SAVENAME";
                 byte[] bmsg = Encoding.UTF8.GetBytes(msg);
                 client.Send(bmsg);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -91,7 +90,7 @@ namespace EasySave.Model
                     Thread.Sleep(500);
 
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
 
                 }

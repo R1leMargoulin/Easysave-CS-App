@@ -23,10 +23,12 @@ namespace EasySave.ViewModel
             settingspage = this;
             
             InitializeComponent();
+            LanguesSettings();
             LogFormat.ItemsSource = new List<string>() { "json", "xml" };
             RefreshProcess();
             RefreshImportantFile();
             RefreshEncrypt();
+            
         }
 
 
@@ -78,6 +80,35 @@ namespace EasySave.ViewModel
             settings.ProcessDelete(list);
             
             RefreshProcess();
+
+            LocUtils.SetDefaultLanguage(this);
+            LanguesSettings();
+
+            
+
+            
+            
+        }
+
+      
+
+        public void LanguesSettings()
+        {
+            Model.Settings settings =  new Model.Settings();
+            settings.FileSettings();
+            var lang = settings.setting_language;
+            if(lang == Model.Language.fr)
+            {
+                MainWindow mainWindow = MainWindow.GetMainWindow();
+                var t = "fr-FR";
+                LocUtils.SwitchLanguage(this, t);
+            }
+            if (lang == Model.Language.en)
+            {
+                MainWindow mainWindow = MainWindow.GetMainWindow();
+                var t = "en-US";
+                LocUtils.SwitchLanguage(this, t);
+            }
 
         }
         internal void RefreshImportantFile()

@@ -1,0 +1,25 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <sys:String x:Key="ResoureDictionaryName">Loc-en-US</sys:String>
+
+    <sys:String x:Key="WindowTitle">EasySave Backup Creation</sys:String>
+    <sys:String x:Key="Backup">Name of the Backup </sys:String>
+    <sys:String x:Key="Source">Source Directorie</sys:String>
+    <sys:String x:Key="Target">Target Directorie</sys:String>
+    <sys:String x:Key="Browse">Browse</sys:String>
+    <sys:String x:Key="Complete">Full Backup</sys:String>
+    <sys:String x:Key="Diff">Differential Backup</sys:String>
+    <sys:String x:Key="Cryptage">Encryption</sys:String>
+    <sys:String x:Key="Cancel">Cancel</sys:String>
+    <sys:String x:Key="Add">Add</sys:String>
+    
+    
+    
+    
+
+    
+    
+
+</ResourceDictionary>

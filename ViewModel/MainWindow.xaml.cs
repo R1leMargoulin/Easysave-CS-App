@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using EasySave.ViewModel;
+using System.Windows.Controls;
 
 namespace EasySave
 {
@@ -36,14 +37,47 @@ namespace EasySave
             InitializeComponent();
             home = this;
 
+            LocUtils.SetDefaultLanguage(this);
+
+            foreach (MenuItem item in menuItemLanguages.Items) 
+            {
+                if (item.Tag.ToString().Equals(LocUtils.GetCurrentCultureName(this)))
+                    item.IsChecked = true;
+            }
+            
+            
+            
             Model.Settings settings = new Model.Settings();
             settings.FileSettings();
 
-
             ListBoxBackup.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(BackupName);
             Refresh();
-        }
 
+           
+          
+        }
+        
+        public  void  MenuItem_Click(Object sender, RoutedEventArgs e)
+        {
+            foreach (MenuItem item in menuItemLanguages.Items)
+            {
+                item.IsChecked = false;
+            }
+            MenuItem mi = sender as MenuItem;
+            mi.IsChecked = true ;
+            Model.Settings settings = new Model.Settings();
+            settings.FileSettings();
+            if (mi.Tag.ToString().Equals("fr-FR"))
+            {
+                settings.LangFR();
+            }
+            if (mi.Tag.ToString().Equals("en-US"))
+            {
+                settings.LangEN();
+            }
+            LocUtils.SwitchLanguage(this, mi.Tag.ToString());
+           // return mi.Tag.ToString();
+        }
 
 
 
