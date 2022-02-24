@@ -199,12 +199,13 @@ namespace EasySave.Model
             Process cryptoProcess = new Process();
             cryptoProcess.StartInfo.UseShellExecute = false;
             cryptoProcess.StartInfo.FileName = "../../../CryptoSoft/CryptoSoft.exe";
-
+            Model.Settings settings = new Settings();
+            settings.FileSettings();
 
             long lenght = 0;
             foreach (var file in fileList)
             {
-                if (file.Length < (3 * 10 ^ 6)) 
+                if (file.Length < (settings.setting_maxsize * 1000))
                 {
                     lenght += file.Length;
 
