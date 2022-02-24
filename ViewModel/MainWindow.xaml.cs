@@ -335,14 +335,7 @@ namespace EasySave
             Thread thread = new Thread(new ThreadStart(server.RunNetwork));
             thread.Start();
         }
-        /*public void StartconnectionClick(object sender, RoutedEventArgs e)
-        {
-            
-            Model.Server server = new Model.Server();
-            Thread thread = new Thread(new ThreadStart(server.RunNetwork));
-            thread.Start();
-            //server.RunNetwork();
-        }*/
+
 
         public void SetUPServer()
         {
