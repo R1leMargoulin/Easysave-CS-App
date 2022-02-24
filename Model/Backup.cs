@@ -204,28 +204,32 @@ namespace EasySave.Model
             long lenght = 0;
             foreach (var file in fileList)
             {
-                if (file.Length < (3 * 10 ^ 6))
+                if (file.Length < (3 * 10 ^ 6)) 
                 {
                     lenght += file.Length;
 
                 }
-                else
+                else //if the file is eavier than the defined size
                 {
-                    for(int i = 0; i < listThread.Count; i++)
+                    Thread.Sleep(1000); //in the case of an ExecuteAll we let a second to get sure that all other threads have been created
+                    for(int i = 0; i < listThread.Count; i++) //for each threads in our list of threads
                     {
                         int verif = 0;
-                        while (verif != 1)
+                        while (verif != 1) 
                         {
-                            if (LogState.InstanceState() == null & LogDaily.InstanceState() == null) {
-                                if (i != indexCurrentThread)
+                            if (LogState.InstanceState() == null & LogDaily.InstanceState() == null) //this is the verif, we dont want to interrupt a thread that was using ur log singleton because it will be an interlocking
+                            {
+                                if (i != indexCurrentThread) //if that is not our current thread (cith the big file)
                                 {
-                                    listThread[i].Interrupt();
+                                    listThread[i].Interrupt(); //we interrupt and add at in a kind of waitlist
                                     listTPaused.Add(listThread[i]);
 
                                 }
+                                verif = 1;
                             }
                         }
                     }
+                    lenght += file.Length;
                 }
             }
 
@@ -347,8 +351,10 @@ namespace EasySave.Model
                 {
                     pausedT.Resume();
                 }
+                listTPaused.Clear();
 
             }
+            listThread.Remove(listThread[indexCurrentThread]);
         }
 
     }
