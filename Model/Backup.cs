@@ -358,5 +358,14 @@ namespace EasySave.Model
             listThread.Remove(listThread[indexCurrentThread]);
         }
 
+        public void StopThreads()
+        {
+            foreach(Thread t in listThread)
+            {
+                t.Abort();
+            }
+            listThread.Clear();
+        }
+
     }
 }
