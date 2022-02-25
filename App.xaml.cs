@@ -25,13 +25,13 @@ namespace EasySave
             }
             else
             {
-                //new MainWindow();
-                new MainWindow().Show();
+                
+                new MainWindow().Show(); //launch the main windows
 
             }
         }
 
-        public static bool TestIfExist()
+        public static bool TestIfExist() //Check if the process easysave is running
         {
             Process[] processes = Process.GetProcessesByName(Process.GetCurrentProcess().ProcessName);
             if (processes.Length == 1)
@@ -47,7 +47,7 @@ namespace EasySave
 
         public static string messageErrorProcess()
         {
-            return "L'application est déja lancée";
+            return "L'application est déja lancée";  //Launch a message error for the application
 
         }
         public static string messageError()
