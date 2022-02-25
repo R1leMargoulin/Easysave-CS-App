@@ -234,7 +234,7 @@ namespace EasySave.Model
                 }
             }
 
-            if(priori != null)
+            if(priori != null) //If the list is not null and if the list has file, the list is prioritory
             {
                 foreach( var file in priori)
                 {
@@ -294,7 +294,7 @@ namespace EasySave.Model
             foreach (var file in fileList)
             {
 
-                while (IsProcessRunning() == true)
+                while (IsProcessRunning() == true) // While the process is running,  the Thread is pause
                 {
                     waitHandle.Reset();
                     MainWindow mainWindow = MainWindow.GetMainWindow();
@@ -356,6 +356,15 @@ namespace EasySave.Model
 
             }
             listThread.Remove(listThread[indexCurrentThread]);
+        }
+
+        public void StopThreads()
+        {
+            foreach(Thread t in listThread)
+            {
+                t.Abort();
+            }
+            listThread.Clear();
         }
 
     }
