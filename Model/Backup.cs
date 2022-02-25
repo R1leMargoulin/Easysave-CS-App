@@ -360,10 +360,10 @@ namespace EasySave.Model
 
         public void StopThreads()
         {
-            foreach(Thread t in listThread)
+           /* foreach(Thread t in listThread)
             {
-                t.Abort();
-            }
+                t.Suspend();
+            }*/
             listThread.Clear();
         }
 

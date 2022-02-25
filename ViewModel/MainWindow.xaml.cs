@@ -305,7 +305,7 @@ namespace EasySave
             {
                 foreach (var item in BackupList)
                 {
-                    item.StopThreads();
+                    item.Pause();
                 }
             }
         }
