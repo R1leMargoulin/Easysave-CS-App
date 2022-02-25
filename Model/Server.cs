@@ -27,7 +27,7 @@ namespace EasySave.Model
             this.SendToTo(client,name);
 
         }*/
-        public void RunNetwork()
+        public void RunNetwork() //Launh the connection and send to the client a string
         {
             Socket socket = SeConnecter();
             Socket client = AccepterConnection(socket);
@@ -38,15 +38,15 @@ namespace EasySave.Model
         }
         private static Socket SeConnecter()
         {
-            int port = 11000;
-            IPHostEntry ipHostName = Dns.GetHostEntry(Dns.GetHostName());
-            IPAddress ipAddress = IPAddress.Any;
-            IPEndPoint ipEP = new IPEndPoint(ipAddress, port);
+            int port = 11000;                                                   // Initialise the port need to be the same port on client
+            IPHostEntry ipHostName = Dns.GetHostEntry(Dns.GetHostName());       // Get the dns name of the server
+            IPAddress ipAddress = IPAddress.Any;                                // Set at an IPAddress all the IP of the server
+            IPEndPoint ipEP = new IPEndPoint(ipAddress, port);                  // Set the endpoint with the IP address and the port
 
             // Create a TCP/IP socket.
             Socket socket = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
-            try
+            try          //try to launch the connection and listen on the port
             {
                 socket.Bind(ipEP);
                 socket.Listen(port);
@@ -87,24 +87,6 @@ namespace EasySave.Model
 
         }
 
-        private static void Send(Socket client)
-        {
-            byte[] bytes = new Byte[1024];
-            int i = 0;
-            try
-            {
-                string msg = "name : SAVENAME";
-                byte[] bmsg = Encoding.UTF8.GetBytes(msg);
-                client.Send(bmsg);
-            }
-            catch (Exception)
-            {
-
-            }
-            }
-
-        
-
         /*private void SendTo(Socket client, string name)
         {
             while (true)
@@ -114,11 +96,9 @@ namespace EasySave.Model
                 client.Send(buffer);
             }
         }*/
-        public void SendToTo(Socket client, string name)
+        public void SendToTo(Socket client, string name)   //sent a string to the client
         {
-                //if (client != null)
-                //{
-                //string msg = "action : play";
+
                 byte[] bmsg = new byte[1024];
                 bmsg = Encoding.ASCII.GetBytes(name);
         try
@@ -132,13 +112,12 @@ namespace EasySave.Model
         }
         catch (Exception)
         {
-            //Thread.Sleep(10000);
         }
         }
 
             
         
-        private static void Deconnecter(Socket socket)
+        private static void Deconnecter(Socket socket)  //Permit to close the socket connection
         {
             socket.Close();
         }
