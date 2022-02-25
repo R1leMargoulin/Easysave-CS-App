@@ -39,6 +39,7 @@ namespace EasySave
 
             LocUtils.SetDefaultLanguage(this);
 
+            // Adjust Checked Language menu Item
             foreach (MenuItem item in menuItemLanguages.Items) 
             {
                 if (item.Tag.ToString().Equals(LocUtils.GetCurrentCultureName(this)))
@@ -52,12 +53,13 @@ namespace EasySave
 
             ListBoxBackup.SelectionChanged += new System.Windows.Controls.SelectionChangedEventHandler(BackupName);
             Refresh();
-            SetUPServer();
+            SetUPServer(); // launch the background task who launch the RunNetwork function
         }
 
            
           
-        
+        // Select the Language with the MenuItem and then Write down on the settings files
+        // wich language is selected in order to change it in all the other windows.
         
         public  void  MenuItem_Click(Object sender, RoutedEventArgs e)
         {
@@ -326,14 +328,14 @@ namespace EasySave
         }
 
 
-        public void SetUPServer()
+        public void SetUPServer() //Launch a background task, she will always run automatically when the app is launchw
         {
             BackgroundWorker backgroundWorker = new BackgroundWorker
             {
                 WorkerReportsProgress = true,
                 WorkerSupportsCancellation = true
             };
-            backgroundWorker.DoWork += Startconnection;
+            backgroundWorker.DoWork += Startconnection; //assigned the Startconnection function
             backgroundWorker.RunWorkerAsync();
         }
 
