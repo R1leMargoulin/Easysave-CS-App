@@ -39,6 +39,7 @@ namespace EasySave
 
             LocUtils.SetDefaultLanguage(this);
 
+            // Adjust Checked Language menu Item
             foreach (MenuItem item in menuItemLanguages.Items) 
             {
                 if (item.Tag.ToString().Equals(LocUtils.GetCurrentCultureName(this)))
@@ -57,7 +58,8 @@ namespace EasySave
 
            
           
-        
+        // Select the Language with the MenuItem and then Write down on the settings files
+        // wich language is selected in order to change it in all the other windows.
         
         public  void  MenuItem_Click(Object sender, RoutedEventArgs e)
         {

@@ -76,6 +76,9 @@ namespace EasySave.View
 
         }
 
+
+        // Use the Language options write down on the settings files
+        // to change all the text in the window.
         public void LanguesSettings()
         {
             Model.Settings settings = new Model.Settings();
