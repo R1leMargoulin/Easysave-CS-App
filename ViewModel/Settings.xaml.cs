@@ -50,13 +50,13 @@ namespace EasySave.ViewModel
 
         internal void RefreshProcess()
         {
-            Model.Settings settings = new Model.Settings();
-            settings.FileSettings();
+            Model.Settings settings = new Model.Settings(); 
+            settings.FileSettings();    //Init a new settings from the settings file 
             var list = settings.setting_process;
-            ListExtentionProcess.Items.Clear();
+            ListExtentionProcess.Items.Clear(); //Clear the ListBox 
             foreach(var item in list)
             {
-                ListExtentionProcess.Items.Add(item);
+                ListExtentionProcess.Items.Add(item);       //Add the list of process in listbox Process to refresh
             }
         }
 
@@ -73,13 +73,13 @@ namespace EasySave.ViewModel
         public void DeleteProcess(object sender, RoutedEventArgs e)
         {
             Model.Settings settings = new Model.Settings();
-            settings.FileSettings();
+            settings.FileSettings();                 //Init a new settings from the settings file 
             var list = settings.setting_process;
-            int i = ListExtentionProcess.SelectedIndex;
-            list.RemoveAt(i);
-            settings.ProcessDelete(list);
+            int i = ListExtentionProcess.SelectedIndex; //Check the selected index
+            list.RemoveAt(i);       //Remove the backup from the list
+            settings.ProcessDelete(list);  //Write the list of process in settings file
             
-            RefreshProcess();
+            RefreshProcess(); //Refresh the listbox
 
             LocUtils.SetDefaultLanguage(this);
             LanguesSettings();
@@ -95,9 +95,9 @@ namespace EasySave.ViewModel
         public void LanguesSettings()
         {
             Model.Settings settings =  new Model.Settings();
-            settings.FileSettings();
+            settings.FileSettings(); //Set a new string with the value of the settings file
             var lang = settings.setting_language;
-            if(lang == Model.Language.fr)
+            if(lang == Model.Language.fr) //Check the language and switch the language of the page
             {
                 MainWindow mainWindow = MainWindow.GetMainWindow();
                 var t = "fr-FR";
